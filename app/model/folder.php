@@ -1,7 +1,7 @@
 <?php
 namespace Model;
 
-class User extends Base {
+class Folder extends Base {
 	protected $_dbtable = "folders";
 
 	public function __construct( $id=false ) {

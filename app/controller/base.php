@@ -7,6 +7,9 @@ abstract class Base {
 	protected $response;
 
 	public function beforeroute($f3) {
+		if( ! \Controller\Auth::isLoggedIn() ) {
+			$f3->reroute( '/login' );
+		}
 		$this->response = new \View\Frontend();
 	}
 

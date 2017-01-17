@@ -14,6 +14,7 @@
 
     <!-- Css -->
     <link href="<?php echo $BASE; ?>/ui/css/style.css" type="text/css" rel="stylesheet">
+    <link href="<?php echo $BASE; ?>/ui/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
         
 </head>
 <body>
@@ -31,12 +32,15 @@
       </div>
       <div class="navbar-collapse collapse" id="navbar">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="<?php echo $BASE; ?>">Home</a></li>
-          <?php if ($page=='dashboard'): ?>
-            
-              <li><a href="<?php echo $BASE; ?>logout">Abmelden</a></li>
-            
-          <?php endif; ?>
+          <li><a href="<?php echo $BASE; ?>"><?php echo $L['home']; ?></a></li>
+          <li><a href="<?php echo $BASE; ?>settings">Settings</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Sprache <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Englisch</a></li>
+              <li><a href="#">Deutsch</a></li>
+            </ul>
+          </li>
         </ul>
       </div>
     </div>
@@ -48,8 +52,10 @@
     </div>
   </div>
 
-  <script src="<?php echo $BASE; ?>/ui/js/bootstrap.js"></script>
   <script src="<?php echo $BASE; ?>/ui/js/jquery.js"></script>
+  <script src="<?php echo $BASE; ?>/ui/js/bootstrap.js"></script>
+  <script src="<?php echo $BASE; ?>/ui/js/dropdown.js"></script>
+  <script src="<?php echo $BASE; ?>/ui/js/collapse.js"></script>
 
 </body>
 </html>
