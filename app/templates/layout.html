@@ -19,6 +19,12 @@
 </head>
 <body>
 
+  <script type="text/javascript">
+  setTimeout(function(){
+  $(".droptext").fadeOut();
+  }, 5000);
+  </script>
+
   <div class="navbar navbar-default">
     <div class="container">
       <div class="navbar-header">
@@ -33,12 +39,12 @@
       <div class="navbar-collapse collapse" id="navbar">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="{{@BASE}}">{{@L.home}}</a></li>
-          <li><a href="{{@BASE}}settings">Settings</a></li>
+          <li><a href="{{@BASE}}settings">{{@L.settings}}</a></li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Sprache <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> {{@L.language}} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="#">Englisch</a></li>
-              <li><a href="#">Deutsch</a></li>
+              <li><a href="#">{{@L.german}}</a></li>
+              <li><a href="#">{{@L.english}}</a></li>
             </ul>
           </li>
         </ul>
@@ -48,6 +54,11 @@
 
   <div class="container">
     <div class="row">
+      <div class="col-lg-12 droptext">
+        <repeat group="{{ @messages }}" value="{{ @message }}">
+          <p>Absatz {{ @message[0] }}</p>
+        </repeat>
+      </div>
       <include href="{{@content}}">  
     </div>
   </div>

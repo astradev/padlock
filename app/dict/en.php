@@ -1,12 +1,12 @@
 <?php
 
 return array(
-  'language' => 'Sprache',
-  'german' => 'Deutsch',
-  'english' => 'Englisch',
-  'settings' => 'Einstellungen',
+  'language' => 'Language',
+  'german' => 'German',
+  'english' => 'English',
+  'settings' => 'Settings',
   'home' => 'Home',
-  'logout' => 'Abmelden',
+  'logout' => 'Logout',
   'foldername' => 'folder name',
   'addfolder' => 'add folder',
   'newfolder' => 'new folder',

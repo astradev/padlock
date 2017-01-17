@@ -19,6 +19,12 @@
 </head>
 <body>
 
+  <script type="text/javascript">
+  setTimeout(function(){
+  $(".droptext").fadeOut();
+  }, 5000);
+  </script>
+
   <div class="navbar navbar-default">
     <div class="container">
       <div class="navbar-header">
@@ -33,12 +39,12 @@
       <div class="navbar-collapse collapse" id="navbar">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="<?php echo $BASE; ?>"><?php echo $L['home']; ?></a></li>
-          <li><a href="<?php echo $BASE; ?>settings">Settings</a></li>
+          <li><a href="<?php echo $BASE; ?>settings"><?php echo $L['settings']; ?></a></li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Sprache <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <?php echo $L['language']; ?> <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="#">Englisch</a></li>
-              <li><a href="#">Deutsch</a></li>
+              <li><a href="#"><?php echo $L['german']; ?></a></li>
+              <li><a href="#"><?php echo $L['english']; ?></a></li>
             </ul>
           </li>
         </ul>
@@ -48,6 +54,11 @@
 
   <div class="container">
     <div class="row">
+      <div class="col-lg-12 droptext">
+        <?php foreach (($messages?:array()) as $message): ?>
+          <p>Absatz <?php echo $message['0']; ?></p>
+        <?php endforeach; ?>
+      </div>
       <?php echo $this->render($content,$this->mime,get_defined_vars()); ?>  
     </div>
   </div>

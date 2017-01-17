@@ -16,9 +16,10 @@ class Folders extends Base {
       }
       $folder->save();
       $f3->messages[] = array( "Folder was successfully created.", 0 );
-      $f3->reroute('/dashboard');
+      $f3->set( 'content', 'dashboard.html');
+    } else {
+      $f3->set( 'content', 'newfolder.html' );
     }
-    $f3->set( 'content', 'newfolder.html' );
   }
 
   public function manage( $f3, $params ) {

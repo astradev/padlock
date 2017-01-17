@@ -1,19 +1,7 @@
-<script type="text/javascript">
-setTimeout(function(){
-$(".droptext").fadeOut();
-}, 5000);
-</script>
-
-<div class="col-lg-12">
-  <div class="alert alert-dismissible alert-success droptext">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <p>Das ist ein Test</p>
-  </div>
-</div>
-
 <div class="col-lg-4">
 <div class="panel panel-default">
   <div class="panel-body">
+    <p class="text-right"><a href="{{@BASE}}/folder/new"><i class="fa fa-plus"></i></a></p>
     Treeview
   </div>
 </div>
@@ -27,7 +15,7 @@ $(".droptext").fadeOut();
         <tr>
           <th>#</th>
           <th>Passwort</th>
-          <th></th>
+          <th class="text-right"><a href="{{@BASE}}/password/new"><i class="fa fa-plus"></i></a></th>
         </tr>
       </thead>
       <tbody>
