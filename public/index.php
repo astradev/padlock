@@ -21,5 +21,6 @@ if( is_readable( '../config/config.ini' ) ) {
 $f3->set( 'DB', new \DB\SQL( 'mysql:host=localhost;port=3306;dbname=padlock', 'padlock', 'Schlagbohrumschwunggewicht' ) );
 
 $f3->route( 'GET /', 'Controller\Test->main' );
+$f3->route( 'GET /login', 'Controller\Auth->login' );
 
 $f3->run();

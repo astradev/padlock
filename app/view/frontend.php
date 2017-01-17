@@ -3,10 +3,13 @@
 namespace View;
 
 class Frontend {
+	protected $template = 'layout.html';
+
+	public function setTemplate( $file ) {
+		$this->template = $file;
+	}
+
 	public function render() {
-          //echo file_get_contents('../app/ui/templates/layout.html');
-	  //return \Template::instance()->render('../app/ui/templates/layout.html');
-          return \Template::instance()->render('layout.html');
-          //return $e;
+		return \Template::instance()->render( $this->template );
 	}
 }
