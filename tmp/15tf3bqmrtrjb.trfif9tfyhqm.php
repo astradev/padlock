@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<h1>App</h1>
+  <h1><?php echo $TESTVAR; ?></h1>
+  <p>Neuer Absatz</p>
 </body>
 </html>
