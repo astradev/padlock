@@ -2,18 +2,9 @@
 
 namespace Controller;
 
-class Test {
-	protected $response;
-
-	public function beforeroute( $f3 ) {
-		$this->response = new \View\Frontend();
-	}
-
+class Test extends Base {
 	public function main( \Base $f3, $params ) {
-		$f3->set( 'TESTVAR', "Variableninhalt"  );
-	}
-
-	public function afterroute( $f3 ) {
-		echo $this->response->render();
+		$myUser = new \Model\User( 'admin' );
+		$f3->set( 'TESTVAR', $myUser->email );
 	}
 }
