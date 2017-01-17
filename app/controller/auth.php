@@ -38,7 +38,7 @@ class Auth extends Base {
                 }
             }
         }
-        $this->response->setTemplate( 'login.html' );
+        $f3->set('content', 'login.html');
     }
 
     public function logout( $f3, $params ) {

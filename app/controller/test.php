@@ -7,8 +7,9 @@ class Test extends Base {
 		if( ! \Controller\Auth::isLoggedIn() ) {
 			$f3->reroute( '/login' );
 		} else {
-			$myUser = new \Model\User( 'admin' );
-			$f3->set( 'TESTVAR', $myUser->email );
+                        $myUser = new \Model\User( 'SESSION.login' );
+                        $f3->set( 'fullname', $myUser->name );
+                        $f3->set( 'content', 'dashboard.html' );
 		}
 	}
 }
