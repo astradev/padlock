@@ -61,9 +61,6 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 droptext">
-        <?php foreach (($messages?:array()) as $message): ?>
-          <p>Absatz <?php echo $message['0']; ?></p>
-        <?php endforeach; ?>
       </div>
       <?php echo $this->render($content,$this->mime,get_defined_vars()); ?>  
     </div>

@@ -12,9 +12,9 @@ class Auth {
 
   static public function isLoggedIn() {
     $f3 = \Base::instance();
-    if ($f3->exists('SESSION.user_id')) {
+    if ($f3->exists('SESSION.user.id')) {
       $user = new \Model\User();
-      $user->load( array( 'id=?', $f3->get( 'SESSION.user_id' ) ) );
+      $user->load( array( 'id=?', $f3->get( 'SESSION.user.id' ) ) );
       if( !$user->dry() ) {
         return true;
       }
@@ -30,7 +30,8 @@ class Auth {
       if( ! $user->dry() ) {
         if( $user->password == password_hash( $f3->get( 'POST.password' ), PASSWORD_BCRYPT, array( "salt" => $f3->get( 'global_salt' ) ) ) ) {
           @$f3->clear( 'SESSION' ); //recreate session id
-          $f3->set( 'SESSION.user_id', $user->id );
+          $f3->set( 'SESSION.user.id', $user->id );
+          $f3->set( 'SESSION.user.name', $user->name );
           $f3->reroute('/dashboard');
         }
       }
