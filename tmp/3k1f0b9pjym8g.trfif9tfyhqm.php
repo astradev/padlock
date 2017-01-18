@@ -25,6 +25,12 @@
   }, 5000);
   </script>
 
+  <script type="text/javascript"> 
+  $(document).ready(function(){     
+    $('[data-toggle="tooltip"]').tooltip();   
+  });
+  </script>
+
   <div class="navbar navbar-default">
     <div class="container">
       <div class="navbar-header">
@@ -46,7 +52,7 @@
               <li><a href="#"><?php echo $L['german']; ?></a></li>
               <li><a href="#"><?php echo $L['english']; ?></a></li>
             </ul>
-          </li>
+            </li>
         </ul>
       </div>
     </div>
@@ -67,6 +73,7 @@
   <script src="<?php echo $BASE; ?>/ui/js/bootstrap.js"></script>
   <script src="<?php echo $BASE; ?>/ui/js/dropdown.js"></script>
   <script src="<?php echo $BASE; ?>/ui/js/collapse.js"></script>
+  <script src="<?php echo $BASE; ?>/ui/js/tooltip.js"></script>
 
 </body>
 </html>

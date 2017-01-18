@@ -10,4 +10,8 @@ return array(
   'foldername' => 'folder name',
   'addfolder' => 'add folder',
   'newfolder' => 'new folder',
+  'folders' => 'Folder',
+  'password' => 'Password',
+  'addpassword' => 'add password',
+  'newpassword' => 'new password'
 );
