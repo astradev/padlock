@@ -52,7 +52,12 @@
               <li><a href="#"><?php echo $L['german']; ?></a></li>
               <li><a href="#"><?php echo $L['english']; ?></a></li>
             </ul>
-            </li>
+          </li>
+          <?php if ($SESSION['user']['id']): ?>
+            
+              <li><a href="<?php echo $BASE; ?>/logout"><?php echo $L['logout']; ?></a></li>
+            
+          <?php endif; ?>
         </ul>
       </div>
     </div>
