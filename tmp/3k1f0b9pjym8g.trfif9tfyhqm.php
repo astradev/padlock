@@ -15,7 +15,7 @@
     <!-- Css -->
     <link href="<?php echo $BASE; ?>/ui/css/style.css" type="text/css" rel="stylesheet">
     <link href="<?php echo $BASE; ?>/ui/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
-        
+
 </head>
 <body>
 
@@ -73,7 +73,32 @@
   <script src="<?php echo $BASE; ?>/ui/js/bootstrap.js"></script>
   <script src="<?php echo $BASE; ?>/ui/js/dropdown.js"></script>
   <script src="<?php echo $BASE; ?>/ui/js/collapse.js"></script>
+  <script src="<?php echo $BASE; ?>/ui/js/bootstrap-treeview.js"></script>
   <script src="<?php echo $BASE; ?>/ui/js/tooltip.js"></script>
+
+  <script  type="text/javascript">
+  $(function() {
+  
+  var defaultData = [
+
+  {
+    text: 'Drop1',
+    href: '#drop1',
+    nodes: [
+    {
+      text: 'Unterdrop1',
+      href: '#unterdrop1'
+    }
+    ]
+  }
+
+  ];
+
+  $('#treeview1').treeview({
+    data: defaultData
+  });
+
+  </script>
 
 </body>
 </html>
