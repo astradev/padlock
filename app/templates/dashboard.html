@@ -3,6 +3,11 @@
   <div class="panel-body">
     <p class="text-right"><a href="{{@BASE}}/folder/new" data-toggle="tooltip" data-placement="bottom" title="{{@L.addfolder}}"><i class="fa fa-plus"></i></a></p>
     <h4>{{ @L.folders }}</h4>
+	<ul>
+	<repeat group="{{ @folders }}" value="{{ @currentFolder }}">
+	    <p>{{ @currentFolder.id }} - {{ @currentFolder.name }}</p>
+	</repeat>
+	</ul>
   </div>
 </div>
 </div>
