@@ -15,7 +15,7 @@
     <!-- Css -->
     <link href="<?php echo $BASE; ?>/ui/css/style.css" type="text/css" rel="stylesheet">
     <link href="<?php echo $BASE; ?>/ui/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
-        
+
 </head>
 <body>
 
@@ -52,7 +52,12 @@
               <li><a href="#"><?php echo $L['german']; ?></a></li>
               <li><a href="#"><?php echo $L['english']; ?></a></li>
             </ul>
-            </li>
+          </li>
+          <?php if ($SESSION['user']['id']): ?>
+            
+              <li><a href="<?php echo $BASE; ?>/logout"><?php echo $L['logout']; ?></a></li>
+            
+          <?php endif; ?>
         </ul>
       </div>
     </div>
@@ -61,9 +66,6 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 droptext">
-        <?php foreach (($messages?:array()) as $message): ?>
-          <p>Absatz <?php echo $message['0']; ?></p>
-        <?php endforeach; ?>
       </div>
       <?php echo $this->render($content,$this->mime,get_defined_vars()); ?>  
     </div>
@@ -73,7 +75,32 @@
   <script src="<?php echo $BASE; ?>/ui/js/bootstrap.js"></script>
   <script src="<?php echo $BASE; ?>/ui/js/dropdown.js"></script>
   <script src="<?php echo $BASE; ?>/ui/js/collapse.js"></script>
+  <script src="<?php echo $BASE; ?>/ui/js/bootstrap-treeview.js"></script>
   <script src="<?php echo $BASE; ?>/ui/js/tooltip.js"></script>
+
+  <script  type="text/javascript">
+  $(function() {
+  
+  var defaultData = [
+
+  {
+    text: 'Drop1',
+    href: '#drop1',
+    nodes: [
+    {
+      text: 'Unterdrop1',
+      href: '#unterdrop1'
+    }
+    ]
+  }
+
+  ];
+
+  $('#treeview1').treeview({
+    data: defaultData
+  });
+
+  </script>
 
 </body>
 </html>
