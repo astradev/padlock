@@ -15,4 +15,5 @@ return array(
   'addpassword' => 'add password',
   'newpassword' => 'new password',
   'passwordrepeat' => 'Repeat Password',
+  'dashboard' => 'Dashboard',
 );

@@ -8,6 +8,7 @@ class Auth {
 
   public function beforeroute($f3) {
     $this->response = new \View\Frontend();
+    $f3->set( 'pagetitle', 'PADLOCK - Login' );
   }
 
   static public function isLoggedIn() {

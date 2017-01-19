@@ -18,7 +18,8 @@ class Folders extends Base {
 			$f3->push( "SESSION.messages", array( "content" => "Folder was successfully created.", "code" => 0 ) );
 			$f3->reroute( '/dashboard' );
 		} else {
-			$f3->set( 'content', 'newfolder.html' );
+                        $f3->set( 'content', 'newfolder.html' );
+                        $f3->set( 'pagetitle', 'PADLOCK - New Folder' );
 		}
 	}
 
