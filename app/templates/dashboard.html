@@ -1,16 +1,9 @@
 <div class="col-lg-4">
 <div class="panel panel-default">
-  <div class="panel-body">
+  <div class="panel-body folderwrapper">
     <p class="text-right"><a href="{{@BASE}}/folder/new" style="position:absolute;right:40px;top:25px;" data-toggle="modal" data-target=""><i class="fa fa-plus"></i></a></p>
     <h4>{{ @L.folders }}</h4>
-    <table class="tree">
-      <tr class="treegrid-1">
-        <td>1</td>
-      </tr>
-      <tr class="treegrid-3 treegrid-parent-1">
-        <td>1.1</td>
-      </tr>
-    </table>
+	{{ @folders | raw }}
   </div>
 </div>
 </div>

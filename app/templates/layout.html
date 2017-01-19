@@ -20,18 +20,6 @@
 </head>
 <body>
 
-  <script type="text/javascript">
-  setTimeout(function(){
-	  $(".droptext").fadeOut();
-  }, 5000);
-  </script>
-
-  <script type="text/javascript"> 
-  $(document).ready(function(){     
-    $('[data-toggle="tooltip"]').tooltip();   
-  });
-  </script>
-
   <div class="navbar navbar-default">
     <div class="container">
       <div class="navbar-header">
@@ -92,9 +80,14 @@
 
   <script type="text/javascript">
     $(document).ready(function() {
-      $('.tree').treegrid();
+      $('.folderwrapper ul').treegrid();
     });
+
+  setTimeout(function(){
+	  $(".droptext").fadeOut();
+  }, 5000);
   </script>
+
 
 </body>
 </html>
