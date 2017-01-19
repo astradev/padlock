@@ -36,7 +36,7 @@ class Auth {
         }
       }
     }
-    $f3->set('content', 'login.html');
+    $this->response->setTemplate( 'login.html' );
   }
 
   public function logout( $f3, $params ) {

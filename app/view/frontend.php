@@ -10,6 +10,9 @@ class Frontend {
 	}
 
 	public function render() {
-		return \Template::instance()->render( $this->template );
+		$f3 = \BASE::instance();
+		$ret = \Template::instance()->render( $this->template );
+		$f3->clear( 'SESSION.messages' );
+		return $ret;
 	}
 }
