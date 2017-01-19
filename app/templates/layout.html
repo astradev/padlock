@@ -21,7 +21,7 @@
 
   <script type="text/javascript">
   setTimeout(function(){
-  $(".droptext").fadeOut();
+	  $(".droptext").fadeOut();
   }, 5000);
   </script>
 
@@ -69,8 +69,11 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-lg-12 droptext">
-      </div>
+	<div class="col-lg-12 droptext">
+		<repeat group="{{ @SESSION.messages }}" value="{{ @myMess }}">
+			<p>{{ @myMess.content }}</p>
+		</repeat>	
+	</div>
       <include href="{{@content}}">  
     </div>
   </div>

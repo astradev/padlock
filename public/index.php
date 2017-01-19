@@ -17,6 +17,12 @@ if( is_readable( '../config/config.ini' ) ) {
 
 // check tmp dir
 
+// logger
+$f3->set( 'logger', new \Log('debug.log') );
+
+//messages
+if( ! $f3->get( 'SESSION.messages' ) ) $f3->set( 'SESSION.messages', array() );
+
 // set db
 $f3->set( 'DB', new \DB\SQL( 'mysql:host=localhost;port=3306;dbname=padlock', 'padlock', 'Schlagbohrumschwunggewicht' ) );
 

@@ -5,10 +5,7 @@ class Permissions {
 
 	public function getFolders() {
 		$f3 = \BASE::instance();
-		return $f3->DB->exec(
-				"select * from folders where id IN ( SELECT folder_id FROM permissions where r=true and role_id in ( SELECT role_id FROM users_roles WHERE user_id = ? ) ) ORDER BY parent_id",
-				$f3->get( 'SESSION.user.id' )
-				);
+		return array();
 	}
 
 	public static function instance()
