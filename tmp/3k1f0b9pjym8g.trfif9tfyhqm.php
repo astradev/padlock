@@ -45,7 +45,11 @@
       <div class="navbar-collapse collapse" id="navbar">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="<?php echo $BASE; ?>"><?php echo $L['home']; ?></a></li>
-          <li><a href="<?php echo $BASE; ?>settings"><?php echo $L['settings']; ?></a></li>
+          <?php if ($SESSION['user']['id']): ?>
+            
+             <li><a href="<?php echo $BASE; ?>settings"><?php echo $L['settings']; ?></a></li>
+            
+          <?php endif; ?>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <?php echo $L['language']; ?> <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
@@ -100,6 +104,7 @@
     data: defaultData
   });
 
+  }
   </script>
 
 </body>

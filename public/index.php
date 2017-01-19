@@ -24,5 +24,7 @@ $f3->route( 'GET /', 'Controller\Test->main' );
 $f3->route( 'GET|POST /login', 'Controller\Auth->login' );
 $f3->route( 'GET /dashboard', 'Controller\Dashboard->show' );
 $f3->route( 'GET|POST /folder/new', 'Controller\Folders->newfolder' );
+$f3->route( 'GET /logout', 'Controller\Auth->logout' );
+$f3->route( 'GET /password/new', 'Controller\Password->newpassword' );
 
 $f3->run();

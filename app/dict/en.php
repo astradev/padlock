@@ -13,5 +13,6 @@ return array(
   'folders' => 'Folder',
   'password' => 'Password',
   'addpassword' => 'add password',
-  'newpassword' => 'new password'
+  'newpassword' => 'new password',
+  'passwordrepeat' => 'Repeat Password',
 );
