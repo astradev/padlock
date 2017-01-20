@@ -9,6 +9,8 @@ abstract class Base {
 	public function beforeroute($f3) {
 		if( ! \Controller\Auth::isLoggedIn() ) {
 			$f3->reroute( '/login' );
+		} elseif( $f3->get( 'PATH' ) == "/" ) {
+			$f3->reroute( '/dashboard' );
 		}
 		$this->response = new \View\Frontend();
 	}
