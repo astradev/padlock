@@ -62,7 +62,7 @@
 	  <repeat group="{{ @SESSION.messages }}" value="{{ @myMess }}">
 	    <div class="alert alert-dismissible alert-info">
               <button type="button" class="close" data-dismiss="alert">&times;</button>
-              {{ @myMess.content }}
+              {{ @myMess[0] }}
             </div>
 	  </repeat>	
 	</div>
