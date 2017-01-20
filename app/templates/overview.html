@@ -1,9 +1,11 @@
 <div class="col-lg-4">
 <div class="panel panel-default">
   <div class="panel-body folderwrapper">
-    <p class="text-right"><a style="position:absolute;right:40px;top:25px;" data-toggle="modal" data-target="#addfolder"><i class="fa fa-plus"></i></a></p>
-    <h4>{{ @L.folders }}</h4>
-	{{ @folders | raw }}
+    <p class="text-right"><a style="position:absolute;right:40px;top:25px;cursor:pointer;" data-toggle="modal" data-target="#addfolder"><i class="fa fa-plus"></i></a></p>
+    <h4 class="text-left">{{@L.folders}}</h4>
+    <div id="tree">
+      {{ @folders | raw }}
+    </div>
   </div>
 </div>
 </div>
@@ -11,7 +13,7 @@
 <div class="col-lg-8">
 <div class="panel panel-default">
   <div class="panel-body">
-    <p class="text-right"><a style="position:absolute;right:40px;top:25px;" data-toggle="modal" data-target="#addpassword"><i class="fa fa-plus"></i></a></p>
+    <p class="text-right"><a style="position:absolute;right:40px;top:25px;cursor:pointer;" data-toggle="modal" data-target="#addpassword"><i class="fa fa-plus"></i></a></p>
     <table class="table table-striped table-hover">
       <thead>
         <tr>

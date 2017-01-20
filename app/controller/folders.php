@@ -38,4 +38,9 @@ class Folders extends Base {
 		}
 	}
 
-} 
+        public function show( \Base $f3, $params ) {
+          $f3->set( 'folders', \TreeBuilder::instance()->generateTree() );
+          $f3->set( 'content', 'overview.html' );
+        }
+}
+

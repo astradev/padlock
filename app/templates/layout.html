@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html dir="{{ @_DIR_?:'ltr' }}" lang="{{ @LANGUAGE }}">
 <head>
 
     <meta charset="utf-8">
@@ -15,7 +15,7 @@
     <!-- Css -->
     <link href="{{@BASE}}/ui/css/style.css" type="text/css" rel="stylesheet">
     <link href="{{@BASE}}/ui/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
-    <link href="{{@BASE}}/ui/css/jquery.treegrid.css" type="text/css" rel="stylesheet">
+    <link href="{{@BASE}}/ui/css/ui.easytree.css" type="text/css" rel="stylesheet">
 
 </head>
 <body>
@@ -42,8 +42,8 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> {{@L.language}} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="#">{{@L.german}}</a></li>
-              <li><a href="#">{{@L.english}}</a></li>
+              <li><a href="{{@BASE}}/de">{{@L.german}}</a></li>
+              <li><a href="{{@BASE}}/en">{{@L.english}}</a></li>
             </ul>
           </li>
           <check if="{{ @SESSION.user.id }}">
@@ -75,8 +75,8 @@
   <script src="{{@BASE}}/ui/js/dropdown.js"></script>
   <script src="{{@BASE}}/ui/js/collapse.js"></script>
   <script src="{{@BASE}}/ui/js/tooltip.js"></script>
-  <script src="{{@BASE}}/ui/js/jquery.treegrid.js"></script>
-  <script src="{{@BASE}}/ui/js/jqeury.treegrid.bootstrap3.js"></script>
+  <script src="{{@BASE}}/ui/js/jquery.easytree.js"></script>
+  <script src="{{@BASE}}/ui/js/jquery.cookie.js"></script>
 
   <script type="text/javascript">
     $(document).ready(function() {
@@ -86,6 +86,18 @@
   setTimeout(function(){
 	  $(".droptext").fadeOut();
   }, 5000);
+
+
+
+  function stateChanged(nodes, nodesJson) {
+    var t = nodes[0].text;
+    $.cookie('padlock-tree', nodesJson);
+  }
+  
+  var easyTree = $('#tree').easytree({
+    data: $.cookie('padlock-tree'),
+    stateChanged: stateChanged
+  });
   </script>
 
 
