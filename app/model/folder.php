@@ -36,9 +36,11 @@ class Folder extends Base {
 
 			} else
 				trigger_error( "Saving changed failed: parent folder could not be found. ID=".$this->parent_id );
-		} else {
+		} elseif( ! empty( trim( $this->name ) ) ) {
 			$maxid = $f3->DB->exec( "SELECT MAX(rgt) as maxid FROM folders" );
 			return $f3->DB->exec( "INSERT INTO folders SET name=:name, lft=:lft, rgt=:rgt", array( 'name' => $this->name, 'lft' => $maxid[0]['maxid']+1, 'rgt' => $maxid[0]['maxid']+2 ) );
+		} else {
+			return false;
 		}
 	}
 

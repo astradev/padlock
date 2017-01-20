@@ -17,4 +17,6 @@ return array(
   'newpassword' => 'new password',
   'passwordrepeat' => 'Repeat Password',
   'dashboard' => 'Dashboard',
+  'foldercreatesuccessful' => 'Folder was successfully created.',
+  'foldercreateerror' => 'Folder could not be created successfully.',
 );

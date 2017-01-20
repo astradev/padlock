@@ -14,14 +14,15 @@ class Folders extends Base {
 			$f3->logger->write( "POST parent_id exists: ".$f3->get( 'POST.parent_id' ) );
 			if( $f3->exists( 'POST.parent_id' ) && is_numeric( $f3->get( 'POST.parent_id' ) ) ) {
 				$folder->parent_id = $f3->get( 'POST.parent_id' );
-				$f3->logger->write(" controller set folder parent_id to: ".$folder->parent_id);
-				$f3->logger->write(" controller post.parent_id was: ".$f3->get( 'POST.parent_id'));
 			}
-			$folder->save();
-			$f3->push( "SESSION.messages", array( "Folder was successfully created.", 0 ) );
+			if( $folder->save() ) {
+				$f3->push( "SESSION.messages", array( $f3->get( 'L.foldercreatesuccessful' ), 0 ) );
+			} else {
+				$f3->push( "SESSION.messages", array( $f3->get( 'L.foldercreateerror' ), 1 ) );
+			}
 			$f3->reroute( '/dashboard' );
 		} else {
-                        $f3->set( 'content', 'newfolder.html' );
+			$f3->set( 'content', 'newfolder.html' );
 		}
 	}
 
