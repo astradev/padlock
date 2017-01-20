@@ -7,6 +7,5 @@ class Dashboard extends Base {
 		$f3->set( 'folders', \TreeBuilder::instance()->generateTree() );
 		// template information
 		$f3->set( 'content', 'dashboard.html' );
-		$f3->set( 'pagetitle', 'PADLOCK - Dashboard' );
 	}
 }

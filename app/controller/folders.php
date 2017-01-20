@@ -22,7 +22,6 @@ class Folders extends Base {
 			$f3->reroute( '/dashboard' );
 		} else {
                         $f3->set( 'content', 'newfolder.html' );
-                        $f3->set( 'pagetitle', 'PADLOCK - New Folder' );
 		}
 	}
 
