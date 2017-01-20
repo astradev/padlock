@@ -24,7 +24,7 @@ class Auth {
 
   public function login( $f3,$params ) {
     if( $f3->exists( 'POST.login' ) && $f3->exists( 'POST.password' ) ) {
-      sleep( 3 ); // login should take a while to kick-ass brute force attacks
+      //sleep( 3 ); // login should take a while to kick-ass brute force attacks
       $user = new \Model\User();
       $user->load( array( 'login = ?', $f3->get( 'POST.login' ) ) );
       if( ! $user->dry() ) {
@@ -35,6 +35,7 @@ class Auth {
           $f3->reroute('/dashboard');
         }
       }
+	  $f3->push( 'SESSION.messages', array( $f3->get( 'L.loginfailed' ), 1 ) );
     }
     $this->response->setTemplate( 'login.html' );
   }

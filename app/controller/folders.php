@@ -18,7 +18,7 @@ class Folders extends Base {
 				$f3->logger->write(" controller post.parent_id was: ".$f3->get( 'POST.parent_id'));
 			}
 			$folder->save();
-			$f3->push( "SESSION.messages", array( "content" => "Folder was successfully created.", "code" => 0 ) );
+			$f3->push( "SESSION.messages", array( "Folder was successfully created.", 0 ) );
 			$f3->reroute( '/dashboard' );
 		} else {
                         $f3->set( 'content', 'newfolder.html' );
@@ -36,7 +36,7 @@ class Folders extends Base {
 			$f3->SESSION->messages[] = array( "Folder was successfully deleted", 0 );
 			$f3->reroute( '/dashboard' );
 		} else {
-			$f3->SESSION->messages[] = array("Could not delete folder: No valid folder id given", 1 );
+			$f3->SESSION->messages[] = array( "Could not delete folder: No valid folder id given", 1 );
 			$f3->reroute( '/dashboard' );
 		}
 	}
