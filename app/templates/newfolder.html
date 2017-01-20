@@ -1,12 +1,11 @@
-<div class="col-lg-6 col-lg-offset-3">
-<h3 class="text-left">{{@L.newfolder}}</h3><hr>
-<form action="" method="post">
+<a style="float:right;" href="#" data-dismiss="modal"><i class="fa fa-times"></i></a>
+<h3 class="text-left">{{@L.newfolder}}</h3>
+<form action="folder/new" method="post">
 
-  <input type="text" name="name" class="form-control" placeholder="{{@L.foldername}}">
+  <input type="text" name="name" class="form-control" style="color:#000;" placeholder="{{@L.foldername}}">
    <br>
   <input type="text" name="parent_id" class="form-control" placeholder="parent_id">
    <br>
   <button type="submit" class="btn btn-default btn-block">{{@L.addfolder}}</button>
 
 </form>
-</div>
