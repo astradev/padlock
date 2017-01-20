@@ -21,12 +21,12 @@ class TreeBuilder {
 		while( ! empty( $tree ) ) {
 			$currNode = array_shift( $tree );
 			if( $currNode['depth'] > $currDepth ) {
-				$result .= '<ul>';
+				$result .= '<ul >';
 			}
 			if( $currNode['depth'] < $currDepth ) {
 				$result .= str_repeat( '</ul>', $currDepth - $currNode['depth'] );
 			}
-			$result .= '<li>' . $currNode['name'] . '</li>';
+			$result .= '<li><a>' . $currNode['name'] . '</a></li>';
 			$currDepth = $currNode['depth'];
 			if( empty( $tree ) ) {
 				$result .= str_repeat( '</ul>', $currDepth + 1 );
