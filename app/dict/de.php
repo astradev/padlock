@@ -6,6 +6,7 @@ return array(
   'english' => 'Englisch',
   'settings' => 'Einstellungen',
   'home' => 'Home',
+  'name' => 'Name',
   'loginfailed' => 'Login fehlgeschlagen. Dein Username oder Passwort war falsch.',
   'logout' => 'Logout',
   'foldername' => 'Ordnername',
