@@ -36,7 +36,7 @@ CREATE TABLE `folders` (
   `lft` int(10) unsigned NOT NULL,
   `rgt` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `folders` (
 
 LOCK TABLES `folders` WRITE;
 /*!40000 ALTER TABLE `folders` DISABLE KEYS */;
-INSERT INTO `folders` VALUES (1,'Allgemein',1,2),(4,'foobar',3,4),(5,'foobar2',5,6),(6,'test2',7,8),(7,'test5',9,10),(8,'poasdf',11,12),(9,'sdf jkashdf jkh',13,14),(10,'asdfghj',15,16),(11,'hhhgtr',17,18),(12,'popopopopo',19,20),(14,'penis',23,24),(15,'horst',25,26),(16,'asdfertg',27,28),(17,'mathias',29,30),(18,'nautilus',31,32);
+INSERT INTO `folders` VALUES (1,'Allgemein',1,8),(2,'Generell',9,12),(3,'Universal',13,14),(4,'normal',6,7),(5,'abstrakt',2,5),(6,'extravagant',3,4),(7,'usbekisch',10,11);
 /*!40000 ALTER TABLE `folders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,7 +103,7 @@ CREATE TABLE `permissions` (
 
 LOCK TABLES `permissions` WRITE;
 /*!40000 ALTER TABLE `permissions` DISABLE KEYS */;
-INSERT INTO `permissions` VALUES (1,1,2),(1,2,2),(1,3,2),(1,4,2),(1,5,2),(1,6,2),(1,7,2),(1,8,2),(1,9,2),(1,10,2);
+INSERT INTO `permissions` VALUES (1,1,2),(1,2,2),(1,3,2),(1,4,2),(1,5,2),(1,6,2),(1,7,2);
 /*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -195,4 +195,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-20  0:52:11
+-- Dump completed on 2017-01-20  2:29:48

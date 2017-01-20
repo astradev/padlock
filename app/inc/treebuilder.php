@@ -7,10 +7,9 @@ class TreeBuilder {
 		$f3 = \BASE::instance();
 		$query = "SELECT folders.id, folders.name, (COUNT(parent.name) - 1) as depth FROM folders"
 				." CROSS JOIN folders AS parent WHERE folders.lft BETWEEN parent.lft AND parent.rgt"
-				." AND folders.id IN (SELECT folder_id from permissions WHERE role_id IN ( SELECT role_id FROM users WHERE id=? ) )"
-				." GROUP BY folders.name ORDER BY folders.id";
+				." AND folders.id IN (SELECT folder_id from permissions WHERE perm > 0 AND role_id IN ( SELECT role_id FROM users WHERE id=? ) )"
+				." GROUP BY folders.name ORDER BY folders.lft";
 		$tree = $f3->DB->exec( $query, $f3->get( 'SESSION.user.id' ) );
-		$f3->logger->write( "tree: ".print_r($tree, true));
 
 		$result = '';
 		$currDepth = -1;

@@ -3,32 +3,34 @@ namespace Model;
 
 class Folder extends Base {
 	protected $_dbtable = "folders";
-	protected $parent_id;
+	public $parent_id;
 
 	public function __construct( $id=false ) {
 		parent::__construct();
-		if( is_int( $id ) ) {
+		if( is_numeric( $id ) ) {
 			$this->load( array( 'id=?', $id ) );
 		}
 	}
 
 	public function save() {
 		$f3 = \BASE::instance();
+		$f3->logger->write("model parent_id: ".$this->parent_id);
 		if( ! empty( $this->id ) && ! empty( $this->lft ) && ! empty( $this->rgt ) ) {
 			return $ret = $f3->DB->exec( "UPDATE folders SET name=? WHERE id=?", array( $this->name, $this->id ) );
-		} elseif( is_int( $this->parent_id ) ) {
+		} elseif( is_numeric( $this->parent_id ) ) {
+			$f3->logger->write("model parent_id is set");
 			$parentFolder = new \Model\Folder( $this->parent_id );
 			if( ! $parentFolder->dry() ) {
 				return $f3->DB->exec(
 						array(
-							"UPDATE folders SET rgt=rgt+2 WHERE rgt>:start",
-							"UPDATE folders SET lft=lft+2 WHERE lft>:start",
-							"INSERT INTO folders SET name=:name, lft=:lft, rgt=:rgt",
+							"UPDATE folders SET rgt = rgt+2 WHERE rgt > :start",
+							"UPDATE folders SET lft = lft+2 WHERE lft > :start",
+							"INSERT INTO folders SET name = :name, lft = :lft, rgt = :rgt",
 							),
 						array(
-							"start" => $parentFolder->rgt,
-							"lft" => $parentFolder->rgt + 1,
-							"rgt" => $parentFolder->rgt + 2,
+							array( "start" => $parentFolder->lft ),
+							array( "start" => $parentFolder->lft ),
+							array( "name" => $this->name, "lft" => ( $parentFolder->lft + 1 ), "rgt" => ( $parentFolder->lft + 2 ) )
 							)
 						);
 

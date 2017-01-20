@@ -11,8 +11,11 @@ class Folders extends Base {
 			$folder = new \Model\Folder();
 			$folder->reset();
 			$folder->name = $f3->get( 'POST.name' );
-			if( $f3->exists( 'POST.parent_id' ) && is_int( $f3->get( 'POST.parent_id' ) ) ) {
+			$f3->logger->write( "POST parent_id exists: ".$f3->get( 'POST.parent_id' ) );
+			if( $f3->exists( 'POST.parent_id' ) && is_numeric( $f3->get( 'POST.parent_id' ) ) ) {
 				$folder->parent_id = $f3->get( 'POST.parent_id' );
+				$f3->logger->write(" controller set folder parent_id to: ".$folder->parent_id);
+				$f3->logger->write(" controller post.parent_id was: ".$f3->get( 'POST.parent_id'));
 			}
 			$folder->save();
 			$f3->push( "SESSION.messages", array( "content" => "Folder was successfully created.", "code" => 0 ) );
