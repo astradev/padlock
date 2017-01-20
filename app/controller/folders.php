@@ -6,7 +6,7 @@ class Folders extends Base {
 
 	protected $response;
 
-	public function newfolder( $f3, $params ) {
+	public function add( $f3, $params ) {
 		if( $f3->exists( 'POST.name' ) ) {
 			$folder = new \Model\Folder();
 			$folder->reset();
@@ -24,10 +24,6 @@ class Folders extends Base {
 		} else {
 			$f3->set( 'content', 'newfolder.html' );
 		}
-	}
-
-	public function manage( $f3, $params ) {
-
 	}
 
 	public function delete( $f3, $params ) {
