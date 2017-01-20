@@ -1,7 +1,7 @@
 <div class="col-lg-4">
 <div class="panel panel-default">
   <div class="panel-body folderwrapper">
-    <p class="text-right"><a href="{{@BASE}}/folder/new" style="position:absolute;right:40px;top:25px;" data-toggle="modal" data-target=""><i class="fa fa-plus"></i></a></p>
+    <p class="text-right"><a href="#" style="position:absolute;right:40px;top:25px;" data-toggle="modal" data-target="#folder"><i class="fa fa-plus"></i></a></p>
     <h4>{{ @L.folders }}</h4>
 	{{ @folders | raw }}
   </div>
@@ -32,14 +32,14 @@
 </div>
 </div>
 
-<div class="modal fade" id="test" role="dialog" aria-hidden="true">
+<div class="modal fade" id="folder" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body">
-      
+        <include href="newfolder.html">
       </div>
     </div>
   </div>
