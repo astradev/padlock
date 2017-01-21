@@ -8,7 +8,7 @@ return array(
   'home' => 'Home',
   'name' => 'Name',
   'loginfailed' => 'Login fehlgeschlagen. Dein Username oder Passwort war falsch.',
-  'logout' => 'Logout',
+  'logout' => 'Abmelden',
   'foldername' => 'Ordnername',
   'addfolder' => 'Ordner hinzufügen',
   'newfolder' => 'Neuer Ordner',

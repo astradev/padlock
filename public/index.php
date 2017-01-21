@@ -22,15 +22,14 @@ if( is_readable( '../config/config.ini' ) ) {
 
 // lang switch
 
-if( $f3->get( 'SESSION.lang' ) ) {
-  $f3->set( 'LANGUAGE', $f3->get( 'SESSION.lang' ) );
+if( $f3->get( 'COOKIE.padlock-language' ) ) {
+    $f3->set( 'LANGUAGE', $f3->get( 'COOKIE.padlock-language' ) );
 }
 
 $f3->route( 'GET /lang/@lang', 
   function($f3) { 
-     $f3->set( 'SESSION.lang', $f3->get( 'PARAMS.lang' ) );
-     $f3->set( 'LANGUAGE', $f3->get( 'SESSION.lang' ) );
-     $f3->reroute( '/dashboard' );
+      $f3->set( 'COOKIE.padlock-language', $f3->get( 'PARAMS.lang' ), time() + (86400 *30) );
+      $f3->reroute( '/dashboard' );
   }
 );
 
