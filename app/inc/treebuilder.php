@@ -58,7 +58,7 @@ class TreeBuilder {
                   if( $currNode['depth'] < $currDepth ) {
                       $result .= str_repeat( '</optgroup>', $currDepth - $currNode['depth'] );
                   }
-                  $result .= '<option>'. $currNode['name'] .'</option>';
+                  $result .= '<option>'. $currNode['name'] .'</option><div class="divider"></div>';
                   $currDepth = $currNode['depth'];
                   if( empty( $tree ) ) {
                     $result .= str_repeat( '</optgroup>', $currDepth + 1);

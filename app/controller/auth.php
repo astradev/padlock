@@ -37,7 +37,7 @@ class Auth {
       }
 	  $f3->push( 'SESSION.messages', array( $f3->get( 'L.loginfailed' ), 1 ) );
     }
-    $f3->set( 'content', 'login.html' );
+    $this->response->setTemplate( 'login.html' );
   }
 
   public function logout( $f3, $params ) {
