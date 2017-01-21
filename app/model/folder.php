@@ -14,7 +14,7 @@ class Folder extends Base {
 
 	public function save() {
 		$f3 = \BASE::instance();
-		$f3->logger->write("model parent_id: ".$this->parent_id);
+		$f3->clear( 'COOKIE.padlock-tree' );
 		if( ! empty( $this->id ) && ! empty( $this->lft ) && ! empty( $this->rgt ) ) {
 			return $ret = $f3->DB->exec( "UPDATE folders SET name=? WHERE id=?", array( $this->name, $this->id ) );
 		} elseif( is_numeric( $this->parent_id ) ) {
