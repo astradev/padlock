@@ -20,4 +20,7 @@ return array(
   'dashboard' => 'Dashboard',
   'foldercreatesuccessful' => 'Folder was successfully created.',
   'foldercreateerror' => 'Folder could not be created successfully.',
+  'installsetup' => 'Install setup',
+  'login' => 'Login',
+  'username' => 'Username',
 );

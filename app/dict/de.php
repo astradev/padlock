@@ -20,4 +20,7 @@ return array(
   'dashboard' => 'Dashboard',
   'foldercreatesuccessful' => 'Ordner wurde erfolgreich angelegt.',
   'foldercreateerror' => 'Ordner konnte nicht angelegt werden.',
+  'installsetup' => 'Installation',
+  'login' => 'Anmelden',
+  'username' => 'Benutzername',
 );

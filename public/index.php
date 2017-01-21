@@ -8,12 +8,31 @@
 */
 $f3 = require( '../lib/base.php' );
 
+/* For the installer */
+//if( file_exists( '../app/controller/install.php' )) {
+//        $f3->route( 'GET /install', 'Controller\Installer->start' );
+//} else { 
+
 // check config
 if( is_readable( '../config/config.ini' ) ) {
 	$f3->config( '../config/config.ini' );
 } else {
 	trigger_error( 'Could not load configuration: ' . dirname( __FILE__) . '/../config/config.ini' );
 }
+
+// lang switch
+
+if( $f3->get( 'SESSION.lang' ) ) {
+  $f3->set( 'LANGUAGE', $f3->get( 'SESSION.lang' ) );
+}
+
+$f3->route( 'GET /lang/@lang', 
+  function($f3) { 
+     $f3->set( 'SESSION.lang', $f3->get( 'PARAMS.lang' ) );
+     $f3->set( 'LANGUAGE', $f3->get( 'SESSION.lang' ) );
+     $f3->reroute( '/dashboard' );
+  }
+);
 
 // check tmp dir
 
@@ -37,3 +56,5 @@ $f3->route( 'GET /folder', 'Controller\Folders->show' );
 $f3->route( 'GET /dashboard', 'Controller\Folders->show' );
 
 $f3->run();
+
+//}
