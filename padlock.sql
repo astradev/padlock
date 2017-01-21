@@ -36,7 +36,7 @@ CREATE TABLE `folders` (
   `lft` int(10) unsigned NOT NULL,
   `rgt` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `folders` (
 
 LOCK TABLES `folders` WRITE;
 /*!40000 ALTER TABLE `folders` DISABLE KEYS */;
-INSERT INTO `folders` VALUES (1,'Allgemein',1,20),(2,'Generell',21,30),(3,'Universal',31,38),(4,'normal',14,19),(5,'abstrakt',4,13),(6,'extravagant',7,12),(7,'usbekisch',28,29),(8,'ddd',26,27),(9,'asdfertg',5,6),(10,'',39,40);
+INSERT INTO `folders` VALUES (1,'Allgemein',1,22),(2,'Generell',23,32),(3,'Universal',33,40),(4,'normal',14,21),(5,'abstrakt',4,13),(6,'extravagant',7,12),(7,'usbekisch',30,31),(8,'ddd',28,29),(31,'vollley',15,16);
 /*!40000 ALTER TABLE `folders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,7 +67,7 @@ CREATE TABLE `passwords` (
   PRIMARY KEY (`id`),
   KEY `folder_id` (`folder_id`),
   CONSTRAINT `passwords_ibfk_1` FOREIGN KEY (`folder_id`) REFERENCES `folders` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,6 +76,7 @@ CREATE TABLE `passwords` (
 
 LOCK TABLES `passwords` WRITE;
 /*!40000 ALTER TABLE `passwords` DISABLE KEYS */;
+INSERT INTO `passwords` VALUES (1,'Google','example@gmail.com','w8h4q.asd',NULL,'Das ist die Beschreibung. Sher sinnvoll',2),(2,'Yahoo','example@yahoo.com','urstgeil',NULL,'weniger text',1);
 /*!40000 ALTER TABLE `passwords` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,6 +184,7 @@ CREATE TABLE `users_roles` (
 
 LOCK TABLES `users_roles` WRITE;
 /*!40000 ALTER TABLE `users_roles` DISABLE KEYS */;
+INSERT INTO `users_roles` VALUES (1,1);
 /*!40000 ALTER TABLE `users_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -195,4 +197,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-21 20:40:20
+-- Dump completed on 2017-01-21 23:04:00
