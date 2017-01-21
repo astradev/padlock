@@ -24,4 +24,7 @@ return array(
   'login' => 'Login',
   'username' => 'Username',
   'upperfolder' => 'Select parent folder',
+  'label' => 'Label',
+  'description' => 'Description',
+  'editpassword' => 'Edit password',
 );

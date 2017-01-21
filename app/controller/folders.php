@@ -6,7 +6,7 @@ class Folders extends Base {
 
 	protected $response;
 
-	public function add( $f3, $params ) {
+	public function edit( $f3, $params ) {
 		if( $f3->exists( 'POST.name' ) ) {
 			$folder = new \Model\Folder();
 			$folder->reset();
@@ -22,7 +22,7 @@ class Folders extends Base {
 			}
 			$f3->reroute( '/dashboard' );
 		} else {
-			$f3->set( 'content', 'newfolder.html' );
+			$f3->set( 'content', 'folderform.html' );
 		}
 	}
 

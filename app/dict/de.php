@@ -23,5 +23,8 @@ return array(
   'installsetup' => 'Installation',
   'login' => 'Anmelden',
   'username' => 'Benutzername',
-  'upperfolder' => 'Übergeordneten Ordner wählen'
+  'upperfolder' => 'Übergeordneten Ordner wählen',
+  'label' => 'Bezeichnung',
+  'description' => 'Beschreibung',
+  'editpassword' => 'Passwort bearbeiten',
 );
