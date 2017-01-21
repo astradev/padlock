@@ -10,5 +10,4 @@ class Password extends Base {
 			$this->load( array( 'id=?', $pw_id ) );
 		}
 	}
-
 }
