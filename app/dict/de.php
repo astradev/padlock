@@ -23,4 +23,5 @@ return array(
   'installsetup' => 'Installation',
   'login' => 'Anmelden',
   'username' => 'Benutzername',
+  'upperfolder' => 'Übergeordneten Ordner wählen'
 );

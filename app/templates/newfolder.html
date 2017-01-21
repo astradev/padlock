@@ -4,10 +4,10 @@
 
   <input type="text" name="name" class="form-control" style="color:#000;" placeholder="{{@L.foldername}}">
    <br>
-  <select class="form-control selectpicker show-tick show-menu-arrow">
+   <select class="form-control selectpicker" multiple-title="{{@L.upperfolder}}" name="parent_id">
     {{ @optionFolders | raw }}
   </select>
-   <br>
+  <br><br>
   <button type="submit" class="btn btn-default btn-block">{{@L.addfolder}}</button>
 
 </form>

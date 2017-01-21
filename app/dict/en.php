@@ -23,4 +23,5 @@ return array(
   'installsetup' => 'Install setup',
   'login' => 'Login',
   'username' => 'Username',
+  'upperfolder' => 'Select parent folder',
 );

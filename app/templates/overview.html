@@ -14,7 +14,26 @@
 <div class="panel panel-default">
   <div class="panel-body">
     <p class="text-right"><a style="position:absolute;right:40px;top:25px;cursor:pointer;" data-toggle="modal" data-target="#addpassword"><i class="fa fa-plus"></i></a></p>
-    <!-- include passwordtable -->
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Login</th>
+          <th>Passwort</th>
+          <th>Beschreibung</th>
+        </tr>
+      </thead>
+      <tbody>
+	  <repeat group="{{ @passwords }}" value="{{ @pw }}">
+            <tr>
+              <td>{{ @pw.name }}</td>
+              <td>{{ @pw.login }}</td>
+              <td>{{ @pw.password }}</td>
+              <td>{{ @pw.description }}</td>
+            </tr>
+	  </repeat>	
+      </tbody>
+    </table>
   </div>
 </div>
 </div>

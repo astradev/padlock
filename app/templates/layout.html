@@ -97,11 +97,11 @@
 
   function stateChanged(nodes, nodesJson) {
     var t = nodes[0].text;
-    $.cookie('padlock-tree', nodesJson);
+    $.cookie('padlock_tree', nodesJson);
   }
   
   var easyTree = $('#tree').easytree({
-    data: $.cookie('padlock-tree'),
+    data: $.cookie('padlock_tree'),
     stateChanged: stateChanged
   });
   </script>
