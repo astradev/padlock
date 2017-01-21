@@ -58,7 +58,7 @@ DROP TABLE IF EXISTS `passwords`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `passwords` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
+  `label` varchar(255) DEFAULT NULL,
   `login` text,
   `password` text,
   `attachments` text,
@@ -67,7 +67,7 @@ CREATE TABLE `passwords` (
   PRIMARY KEY (`id`),
   KEY `folder_id` (`folder_id`),
   CONSTRAINT `passwords_ibfk_1` FOREIGN KEY (`folder_id`) REFERENCES `folders` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +76,7 @@ CREATE TABLE `passwords` (
 
 LOCK TABLES `passwords` WRITE;
 /*!40000 ALTER TABLE `passwords` DISABLE KEYS */;
-INSERT INTO `passwords` VALUES (1,'Google','example@gmail.com','w8h4q.asd',NULL,'Das ist die Beschreibung. Sher sinnvoll',2),(2,'Yahoo','example@yahoo.com','urstgeil',NULL,'weniger text',1);
+INSERT INTO `passwords` VALUES (1,'Google','example@gmail.com','w8h4q.asd',NULL,'Das ist die Beschreibung. Sher sinnvoll',2),(2,'Yahoo','example@yahoo.com','urstgeil',NULL,'weniger text',1),(3,'123','423423','423','NULL','31312',2);
 /*!40000 ALTER TABLE `passwords` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -197,4 +197,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-21 23:04:00
+-- Dump completed on 2017-01-22  0:10:36
