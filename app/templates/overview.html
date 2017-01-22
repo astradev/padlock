@@ -1,4 +1,4 @@
-<div class="col-lg-4">
+<div class="col-lg-3">
 <div class="panel panel-default">
   <div class="panel-body folderwrapper">
     <p class="text-right"><a style="position:absolute;right:40px;top:25px;cursor:pointer;" data-toggle="modal" data-target="#folderform"><i class="fa fa-plus"></i></a></p>
@@ -10,7 +10,7 @@
 </div>
 </div>
 
-<div class="col-lg-8">
+<div class="col-lg-9">
   <div class="panel panel-default">
     <div class="panel-body">
       <p class="text-right"><a style="position:absolute;right:40px;top:25px;cursor:pointer;" data-toggle="modal" data-target="#passwordform"><i class="fa fa-plus"></i></a></p>
@@ -31,7 +31,7 @@
             <td>{{ @pw.login }}</td>
             <td>{{ @pw.password }}</td>
             <td>{{ @pw.description }}</td>
-            <td><a style="color:#000;" data-toggle="modal" data-target="#passwordform" href="{{@BASE}}/password/edit"><i class="fa fa-cog"></i></a></td>
+            <td><a data-toggle="modal" style="cursor:pointer;color:#000;" data-target="#passwordform-{{@pw.id}}"><i class="fa fa-cog"></i></a></td>
           </tr>
           </repeat>	
         </tbody>
@@ -40,21 +40,25 @@
   </div>
 </div>
 
+<repeat group="{{ @passwords }}" value="{{ @pw }}">
 <div class="modal fade" id="folderform" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
+        <a style="cursor:pointer;float:right;" data-dismiss="modal"><i class="fa fa-times"></i></a>
         <include href="folderform.html">
       </div>
     </div>
   </div>
 </div>
-<div class="modal fade" id="passwordform" role="dialog" aria-hidden="true">
+<div class="modal fade" id="passwordform-{{@pw.id}}" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-body">
+      <div class="modal-body"> 
+        <a style="cursor:pointer;float:right;" data-dismiss="modal"><i class="fa fa-times"></i></a>
         <include href="passwordform.html">
       </div>
     </div>
   </div>
 </div>
+</repeat>
