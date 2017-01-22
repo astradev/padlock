@@ -11,7 +11,6 @@ class Folders extends Base {
 			$folder = new \Model\Folder();
 			$folder->reset();
 			$folder->name = $f3->get( 'POST.name' );
-			$f3->logger->write( "POST parent_id exists: ".$f3->get( 'POST.parent_id' ) );
 			if( $f3->exists( 'POST.parent_id' ) && is_numeric( $f3->get( 'POST.parent_id' ) ) ) {
 				$folder->parent_id = $f3->get( 'POST.parent_id' );
 			}
@@ -48,7 +47,7 @@ class Folders extends Base {
 
 		$f3->set( 'folders', \TreeBuilder::instance()->generateTree() );
 		$f3->set( 'passwords', $folder->getPasswords() );
-		$f3->set( 'optionFolders', \TreeBuilder::instance()->generateOptionTree() );
+		$f3->set( 'optionFolders', \TreeBuilder::instance()->generateOptionTree( $params['id'] ) );
 		$f3->set( 'content', 'overview.html' );
 	}
 }

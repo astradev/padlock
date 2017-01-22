@@ -58,6 +58,9 @@ $f3->route( 'GET /folder/@id', 'Controller\Folders->show' );
 $f3->route( 'GET /folder', 'Controller\Folders->show' );
 $f3->route( 'GET /dashboard', 'Controller\Folders->show' );
 
+// API
+$f3->route( 'GET /api/foldertree', 'Controller\API->foldertree' );
+
 $f3->run();
 
 //}

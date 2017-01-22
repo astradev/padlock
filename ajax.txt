@@ -1,0 +1,15 @@
+			$.ajax({
+				url: ifm.IFM_SCFN,
+				type: "POST",
+				data: ({
+					api: "getRealpath",
+					dir: ifm.pathCombine(ifm.currentDir, newdir)
+				}),
+				dataType: "json",
+				success: function(data){
+						ifm.currentDir = data.realpath;
+						ifm.refreshFileTable();
+						$("#currentDir").val(ifm.currentDir);
+					},
+				error: function() { ifm.showMessage("General error occured: No or broken response", "e"); }
+			});

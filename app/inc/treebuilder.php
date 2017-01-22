@@ -39,14 +39,16 @@ class TreeBuilder {
 		return $result;
 	}
 
-	public function generateOptionTree() {
+	public function generateOptionTree( $selected = false ) {
 		$f3 = \BASE::instance();
 		$tree = $this->loadTree();
 
 		$result='';
 		while( !empty( $tree ) ) {
 			$currNode = array_shift( $tree );
-			$result .= '<option value="'.$currNode['id'].'">'.str_repeat( '–', $currNode['depth']).' '.$currNode['name'].'</option>';
+                        $result .= '<option value="'.$currNode['id'].'"';
+                        if( $selected == $currNode['id'] ) $result .= ' selected="selected"';
+                        $result .= '>'.str_repeat( '–', $currNode['depth']).' '.$currNode['name'].'</option>';
 		}
 		return $result;
 	}

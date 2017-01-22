@@ -30,7 +30,7 @@ class Folder extends Base {
 		$f3 = \BASE::instance();
 		if( ! empty( $this->id ) && ! empty( $this->lft ) && ! empty( $this->rgt ) ) {
 			return $ret = $f3->DB->exec( "UPDATE folders SET name=? WHERE id=?", array( $this->name, $this->id ) );
-		} elseif( is_numeric( $this->parent_id ) ) {
+		} elseif( is_numeric( $this->parent_id ) && ! empty( trim( $this->name ) ) ) {
 			$f3->logger->write("model parent_id is set");
 			$parentFolder = new \Model\Folder( $this->parent_id );
 			if( ! $parentFolder->dry() ) {
@@ -49,7 +49,7 @@ class Folder extends Base {
 
 			} else
 				trigger_error( "Saving changed failed: parent folder could not be found. ID=".$this->parent_id );
-		} elseif( ! empty( trim( $this->name ) ) ) {
+		} elseif( empty( $this->parent_id ) && ! empty( trim( $this->name ) ) ) {
 			$maxid = $f3->DB->exec( "SELECT MAX(rgt) as maxid FROM folders" );
 			return $f3->DB->exec( "INSERT INTO folders SET name=:name, lft=:lft, rgt=:rgt", array( 'name' => $this->name, 'lft' => $maxid[0]['maxid']+1, 'rgt' => $maxid[0]['maxid']+2 ) );
 		} else {
