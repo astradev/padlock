@@ -1,22 +1,11 @@
-/*
- * easytree Win8 styles
+/*******************************************************************************
+ * Tree container
 
-Borders have NO radius and NO gradients are used!
+ Lion colors:
+	gray highlight bar: #D4D4D4
+	blue highlight-bar and -border #3875D7
 
-both:
-   unselected background: white
-   hover bar (unselected, inactive): #E5F3FB (border: #70C0E7) 'very light blue'
-   active node: #CBE8F6 (border: #26A0DA)  'light blue'
-   active node with hover: wie active node
 
-Tree view:
-   active node, tree inactive: #F7F7F7 (border: #DEDEDE) 'light gray, selected, but tree not active'
-
-List view:
-   selected bar: --> active bar
-   focus  bar: transparent(white) + border 1px solid #3399FF  ()
-
-   table left/right border: #EDEDED 'light gray'
  */
 .ui-helper-hidden {
 	display: none;
@@ -85,13 +74,6 @@ ul.easytree-no-connector > li
 }
 
 
-span.easytree-node
-{
-	display: inline-block;
-	width: 100%;
-	border: 1px solid transparent;
-}
-
 /*******************************************************************************
  * Common icon definitions
  */
@@ -107,9 +89,7 @@ span.easytree-drag-helper-img,
 {
 	width: 16px;
 	height: 16px;
-/*	display: -moz-inline-box; /* @ FF 1+2 removed for issue 221*/
-/*	-moz-box-align: start; /* issue 221 */
-	display: inline-block; /* Required to make a span sizeable */
+	display: inline-block; /* Required to make a span sizable */
 	vertical-align: top;
 	background-repeat: no-repeat;
 	background-position: left;
@@ -155,10 +135,7 @@ span.easytree-expander
 	background-position: 0px -80px;
 	cursor: pointer;
 }
-span.easytree-expander:hover
-{
-	background-position: -16px -80px;
-}
+span.easytree-expander:hover { 	background-position: -16px -80px; }
 .easytree-exp-n span.easytree-expander:hover /* Collapsed, not delayed, not last sibling */
 {
 	background-position: -16px -80px;
@@ -203,67 +180,28 @@ span.easytree-expander:hover
 /*******************************************************************************
  * Checkbox icon
  */
-span.easytree-checkbox
-{
+span.easytree-checkbox {
 	margin-left: 3px;
 	background-position: 0px -32px;
 }
-span.easytree-checkbox:hover
-{
-	background-position: -16px -32px;
-}
-
-.easytree-partsel span.easytree-checkbox
-{
-	background-position: -64px -32px;
-}
-.easytree-partsel span.easytree-checkbox:hover
-{
-	background-position: -80px -32px;
-}
-
-.easytree-selected span.easytree-checkbox
-{
-	background-position: -32px -32px;
-}
-.easytree-selected span.easytree-checkbox:hover
-{
-	background-position: -48px -32px;
-}
+span.easytree-checkbox:hover { background-position: -16px -32px; }
+.easytree-partsel span.easytree-checkbox { background-position: -64px -32px; }
+.easytree-partsel span.easytree-checkbox:hover { background-position: -80px -32px; }
+.easytree-selected span.easytree-checkbox { background-position: -32px -32px; }
+.easytree-selected span.easytree-checkbox:hover { background-position: -48px -32px; }
 
 /*******************************************************************************
  * Radiobutton icon
- * This is a customization, that may be activated by overriding the 'checkbox'
- * class name as 'easytree-radio' in the tree options.
  */
-.easytree-radio span.easytree-checkbox
-{
+.easytree-radio span.easytree-checkbox {
 	margin-left: 3px;
 	background-position: 0px -48px;
 }
-.easytree-radio span.easytree-checkbox:hover
-{
-	background-position: -16px -48px;
-}
-
-.easytree-radio .easytree-partsel span.easytree-checkbox
-{
-	background-position: -64px -48px;
-}
-.easytree-radio .easytree-partsel span.easytree-checkbox:hover
-{
-	background-position: -80px -48px;
-}
-
-.easytree-radio .easytree-selected span.easytree-checkbox
-{
-	background-position: -32px -48px;
-}
-.easytree-radio .easytree-selected span.easytree-checkbox:hover
-{
-	background-position: -48px -48px;
-}
-
+.easytree-radio span.easytree-checkbox:hover { background-position: -16px -48px; }
+.easytree-radio .easytree-partsel span.easytree-checkbox { background-position: -64px -48px; }
+.easytree-radio .easytree-partsel span.easytree-checkbox:hover { background-position: -80px -48px; }
+.easytree-radio .easytree-selected span.easytree-checkbox { background-position: -32px -48px; }
+.easytree-radio .easytree-selected span.easytree-checkbox:hover { background-position: -48px -48px; }
 
 /*******************************************************************************
  * Node type icon
@@ -274,106 +212,53 @@ span.easytree-checkbox:hover
  * 1st character: 'e': expanded, 'c': collapsed
  * 2nd character (optional): 'f': folder
  */
-
 span.easytree-icon /* Default icon */
 {
 	margin-left: 3px;
 	background-position: 0px 0px;
 }
-
-.easytree-has-children span.easytree-icon /* Default icon */
-{
-/*    background-position: 0px -16px; */
-}
-
-.easytree-ico-cf span.easytree-icon  /* Collapsed Folder */
-{
-	background-position: 0px -16px;
-}
-
-.easytree-ico-ef span.easytree-icon  /* Expanded Folder */
-{
-	background-position: -64px -16px;
-}
-
-/* Status node icons */
-
-.easytree-statusnode-wait span.easytree-icon
-{
-	background-image: url("loading.gif");
-}
-
-.easytree-statusnode-error span.easytree-icon
-{
-	background-position: 0px -112px;
-/*	background-image: url("ltError.gif");*/
-}
+.easytree-ico-cf span.easytree-icon { background-position: 0px -16px; } /* Collapsed Folder */
+.easytree-ico-ef span.easytree-icon { background-position: -64px -16px; } /* Expanded Folder */
+.easytree-statusnode-wait span.easytree-icon { background-image: url("loading.gif"); } /* Status node icons */
+.easytree-statusnode-error span.easytree-icon { background-position: 0px -112px; }
 
 /*******************************************************************************
  * Node titles
  */
-
-span.easytree-title
-{
-	display: inline-block;
-}
-/* Remove blue color and underline from title links */
-a.easytree-title
-{
-	text-decoration: none;
-}
-
-.easytree-title
-{
+.easytree-title {
 	display: inline-block; /* Better alignment, when title contains <br> */
-/*	vertical-align: top;*/
 	padding-left: 3px;
 	padding-right: 3px; /* Otherwise italic font will be outside bounds */
-	/*	line-height: 16px; /* should be the same as img height, in case 16 px */
 	color: black; /* inherit doesn't work on IE */
 	vertical-align: top;
 	margin: 0px;
 	margin-left: 3px;
-/*  outline: 0; /* @ Firefox, prevent dotted border after click */
-	/* Set transparent border to prevent jumping when active node gets a border
-	   (we can do this, because this theme doesn't use vertical lines)
-	   */
-/*	border: 1px solid white; /* Note: 'transparent' would not work in IE6 */
+/*    border: 1px solid white; /* reserve some space for status borders (Note: 'transparent' would not work in IE6) */
+	border: 1px solid transparent; /* reserve some space for status borders */
+	border-radius: 0;
+	text-decoration: none;
 	cursor: pointer;
 }
 .easytree-title a {
     text-decoration: none;
     color: inherit;
 }
-span.easytree-node:hover
-{
-	background-color: #E5F3FB;
-	border-color: #70C0E7;
+span.easytree-focused .easytree-title {
+	outline: 1px dotted black;
+	color: white;
 }
-.easytree-container.easytree-focused span.easytree-node.easytree-focused
-{
-	border-color: #3399FF;
-/*	outline: 1px solid #3399FF; */
+span.easytree-selected .easytree-title,
+span.easytree-active .easytree-title {
+	background-color: #D4D4D4; /*gray*/
 }
-span.easytree-node.easytree-active,
-span.easytree-node.easytree-selected
-{ /* active/selcted nodes inside inactive tree */
-	background-color: #F7F7F7;
-	border-color: #DEDEDE;
-}
-.easytree-container.easytree-focused span.easytree-node.easytree-active,
-.easytree-container.easytree-focused span.easytree-node.easytree-selected,
-span.easytree-node.easytree-active:hover,
-span.easytree-node.easytree-selected:hover
-{
-	background-color: #CBE8F6;
-	border-color: #26A0DA;
-}
-span.easytree-node.easytree-selected
-{
+span.easytree-selected .easytree-title {
 	font-style: italic;
 }
-
+.easytree-focused span.easytree-selected .easytree-title,
+.easytree-focused span.easytree-active .easytree-title {
+	color: white;
+	background-color: #3875D7; /*blue*/
+}
 
 /*******************************************************************************
  * 'table' extension
@@ -394,28 +279,14 @@ table.easytree-ext-table tbody tr td {
 table.easytree-ext-table {
 	border-collapse: collapse;
 }
-table.easytree-ext-table tbody tr:hover {
-	background-color: #E5F3FB;
-	outline: 1px solid #70C0E7;
+table.easytree-ext-table tbody tr.easytree-focused {
+	background-color: #99DEFD;
 }
-table.easytree-ext-table.easytree-container.easytree-focused span.easytree-node.easytree-focused
-{
-	outline: 1px solid #3399FF;
+table.easytree-ext-table tbody tr.easytree-active {
+	background-color: royalblue;
 }
-table.easytree-ext-table.easytree-focused tbody tr.easytree-focused {
-	outline: 1px solid #26A0DA;
-}
-table.easytree-ext-table.easytree-focused tbody tr.easytree-active,
-table.easytree-ext-table.easytree-focused tbody tr.easytree-selected
-{
-	background-color: #CBE8F6;
-	outline: 1px solid #26A0DA;
-}
-table.easytree-ext-table tbody tr.easytree-active,
-table.easytree-ext-table tbody tr.easytree-selected
-{
-	background-color: #F7F7F7;
-	outline: 1px solid #DEDEDE;
+table.easytree-ext-table tbody tr.easytree-selected {
+	background-color: #99FDDE;
 }
 
 /*******************************************************************************
@@ -428,10 +299,6 @@ table.easytree-ext-columnview {
 	width: 100%;
 }
 */
-table.easytree-ext-columnview td
-{
-	position: relative;
-}
 table.easytree-ext-columnview td >ul
 {
 	padding: 0;
@@ -464,21 +331,26 @@ table.easytree-ext-columnview tbody tr td {
 	overflow: auto;
 }
 table.easytree-ext-columnview span.easytree-node {
+	display: inline-block;
 	position: relative; /* allow positioning of embedded spans*/
+	width: 100%;
+}
+table.easytree-ext-columnview span.easytree-node a{
+	border: 1px solid transparent;
+	background-color: transparent;
 }
 table.easytree-ext-columnview span.easytree-node.easytree-expanded {
-	background-color: #CBE8F6;
+	background-color: #ccc;
 }
-/*
 table.easytree-ext-columnview span.easytree-node.easytree-active {
 	background-color: royalblue;
 }
-*/
 table.easytree-ext-columnview span.easytree-cv-right {
 	background-position: 0px -80px;
 	position: absolute;
 	right: 3px;
 }
+
 
 /*******************************************************************************
  * 'filter' extension

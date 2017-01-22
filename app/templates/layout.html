@@ -82,10 +82,6 @@
   <script src="{{@BASE}}/ui/js/jquery.cookie.js"></script>
 
   <script type="text/javascript">
-  $(document).ready(function() {
-    $('.folderwrapper ul').treegrid();
-  });
-
   $('[rel="tooltip"]').tooltip();
 
   setTimeout(function(){
@@ -96,26 +92,34 @@
     var t = nodes[0].text;
     $.cookie('padlock_tree', nodesJson);
   }
-  
+
   var easyTree = $('#tree').easytree({
     data: $.cookie('padlock_tree'),
     stateChanged: stateChanged
   });
-  </script>
-  <script type="text/javascript">
-  $( function(){
-    $.ajaxSetup ({
-      cache: false
-    });
-    var ajax_load = "<img src='{{@BASE}}/ui/img/reload.gif' alt='loading...' />";
-
-    var loadUrl = "{{@BASE}}/folder/add";
-    $( "#load" ).click( function(){
-      $( "#tree" ).html( ajax_load ).load( loadUrl );
-    });
 
 
-  });
+//   $( function(){
+//    $.ajaxSetup ({
+//      cache: false
+//    });
+//    var ajax_load = "<img style='margin-left:35%;' src='{{@BASE}}/ui/img/reload.gif' alt='loading...' />";
+//    var loadUrl = "{{@BASE}}/dashboard";
+//    $( "#load" ).click( function(){
+//      $.removeCookie('padlock_tree');
+//      function stateChanged(nodes, nodesJson) {
+//        var t = nodes[0].text;
+//        $.cookie('padlock_tree', nodesJson);
+//      }
+//      var easyTree2 = $('#tree').easytree({
+//        data: $.cookie('padlock_tree'),
+//        stateChanged: stateChanged
+//      });
+//      $( "#tree" ).html( ajax_load ).load( loadUrl );
+//    });
+//
+//  });
+
   </script>
 
 </body>
