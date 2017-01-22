@@ -30,4 +30,7 @@ return array(
   'nopermissions' => 'You have no permissions to do this',
   'nolabelset' => 'No label was set. This is mandatory.',
   'nopasswordset' => 'No password was set. This is mandatory.',
+  'users' => 'Users',
+  'permissions' => 'Permissions',
+  'refreshfolder' => 'Refresh folders',
 );

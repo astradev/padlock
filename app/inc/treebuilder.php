@@ -39,7 +39,7 @@ class TreeBuilder {
 		return $result;
 	}
 
-	public function marcoOptionTree() {
+	public function generateOptionTree() {
 		$f3 = \BASE::instance();
 		$tree = $this->loadTree();
 
@@ -50,32 +50,6 @@ class TreeBuilder {
 		}
 		return $result;
 	}
-
-        public function generateOptionTree() {
-                $f3 = \BASE::instance();
-                $tree = $this->loadTree();
-
-                $result = '';
-                $currDepth = 0;
-                while( ! empty( $tree ) ) {
-                  $currNode = array_shift( $tree );
-
-                  if( $currNode['depth'] > $currDepth ) {
-                    $newLine = '&nbsp;&nbsp;&nbsp;&nbsp&nbsp;';
-                  }
-                  if( $currNode['depth'] < $currDepth ) {
-                    $newLine = str_repeat( '', $currDepth - $currNode['depth'] );
-                  }
-
-                  $result .= '<option value="'. $currNode['id'] .'">' . $newLine . $currNode['name'] .'</option>';
-                  $currDepth = $currNode['depth'];
-
-                  if( empty( $tree ) ) {
-                    $result .= str_repeat( '<option></option><option></option><option>Neuer Ordner</option>', $currDepth + 1);
-                  }
-                } 
-                return $result;
-        }
 
 	public static function instance()
 	{

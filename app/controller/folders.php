@@ -45,11 +45,10 @@ class Folders extends Base {
 		}
 		$folder = new \Model\Folder( $params['id'] );
 		$pws = $folder->getPasswords();
-		$f3->logger->write( 'marcoOtionTree: '.print_r(\TreeBuilder::instance()->marcoOptionTree(), true));
 
 		$f3->set( 'folders', \TreeBuilder::instance()->generateTree() );
 		$f3->set( 'passwords', $folder->getPasswords() );
-		$f3->set( 'optionFolders', \TreeBuilder::instance()->marcoOptionTree() );
+		$f3->set( 'optionFolders', \TreeBuilder::instance()->generateOptionTree() );
 		$f3->set( 'content', 'overview.html' );
 	}
 }

@@ -30,4 +30,7 @@ return array(
   'nopermissions' => 'Sie haben keine Berechtigung das zu tun.',
   'nolabelset' => 'Es wurde keine Bezeichnung angegeben. Das ist ein Pflichtfeld.',
   'nopasswordset' => 'Es wurde kein Passwort angegeben. Das ist ein Pflichtfeld.',
+  'users' => 'Benutzer',
+  'permissions' => 'Rechte',
+  'refreshfolder' => 'Ordner aktualisieren',
 );

@@ -62,38 +62,35 @@
 
   <div class="container">
     <div class="row">
-	<div class="col-lg-12">
-	  <repeat group="{{ @SESSION.messages }}" value="{{ @myMess }}">
-           <div class="droptext">
-            <div class="alert alert-dismissible alert-<?php echo ($myMess[1]==0)?'success':(($myMess[1]==1)?'danger':'info');?>">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              {{ @myMess[0] }}
-            </div>
-           </div>
-	  </repeat>	
-	</div>
+      <repeat group="{{ @SESSION.messages }}" value="{{ @myMess }}">
+      <div class="<?php echo ($myMess[2])?'':'droptext'; ?>">
+        <div class="col-lg-12">
+         <div class="alert alert-dismissible alert-<?php echo ($myMess[1]==0)?'success':(($myMess[1]==1)?'danger':'info');?>">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          {{ @myMess[0] }}
+        </div>
+        </div>
+      </div>
+      </repeat>	
       <include href="{{@content}}">  
     </div>
   </div>
 
   <script src="{{@BASE}}/ui/js/jquery.js"></script>
   <script src="{{@BASE}}/ui/js/bootstrap.js"></script>
-  <script src="{{@BASE}}/ui/js/dropdown.js"></script>
-  <script src="{{@BASE}}/ui/js/collapse.js"></script>
-  <script src="{{@BASE}}/ui/js/tooltip.js"></script>
   <script src="{{@BASE}}/ui/js/jquery.easytree.js"></script>
   <script src="{{@BASE}}/ui/js/jquery.cookie.js"></script>
 
   <script type="text/javascript">
-    $(document).ready(function() {
-      $('.folderwrapper ul').treegrid();
-    });
+  $(document).ready(function() {
+    $('.folderwrapper ul').treegrid();
+  });
+
+  $('[rel="tooltip"]').tooltip();
 
   setTimeout(function(){
 	  $(".droptext").fadeOut();
   }, 5000);
-
-
 
   function stateChanged(nodes, nodesJson) {
     var t = nodes[0].text;
@@ -105,7 +102,5 @@
     stateChanged: stateChanged
   });
   </script>
-
-
 </body>
 </html>
