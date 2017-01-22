@@ -39,6 +39,18 @@ class TreeBuilder {
 		return $result;
 	}
 
+	public function marcoOptionTree() {
+		$f3 = \BASE::instance();
+		$tree = $this->loadTree();
+
+		$result='';
+		while( !empty( $tree ) ) {
+			$currNode = array_shift( $tree );
+			$result .= '<option value="'.$currNode['id'].'">'.str_repeat( '–', $currNode['depth']).' '.$currNode['name'].'</option>';
+		}
+		return $result;
+	}
+
         public function generateOptionTree() {
                 $f3 = \BASE::instance();
                 $tree = $this->loadTree();
