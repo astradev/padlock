@@ -38,16 +38,19 @@ class Folders extends Base {
 		}
 	}
 
-        public function show( \Base $f3, $params ) {
-          $folderList = \TreeBuilder::instance()->loadTree();
-          if( ! is_numeric( $params['id'] ) ) $params['id'] = $folderList[0]['id'];
-          $folder = new \Model\Folder( $params['id'] );
-          $pws = $folder->getPasswords();
+	public function show( \Base $f3, $params ) {
+		if( ! isset( $params['id'] ) || ! is_numeric( $params['id'] ) ) {
+			$folderList = \TreeBuilder::instance()->loadTree();
+			$params['id'] = $folderList[0]['id'];
+		}
+		$folder = new \Model\Folder( $params['id'] );
+		$pws = $folder->getPasswords();
+		$f3->logger->write( 'controller, getpaswords: '.print_r($pws, true));
 
-          $f3->set( 'folders', \TreeBuilder::instance()->generateTree() );
-          $f3->set( 'passwords', $folder->getPasswords() );
-          $f3->set( 'optionFolders', \TreeBuilder::instance()->generateOptionTree() );
-          $f3->set( 'content', 'overview.html' );
-        }
+		$f3->set( 'folders', \TreeBuilder::instance()->generateTree() );
+		$f3->set( 'passwords', $folder->getPasswords() );
+		$f3->set( 'optionFolders', \TreeBuilder::instance()->generateOptionTree() );
+		$f3->set( 'content', 'overview.html' );
+	}
 }
 
