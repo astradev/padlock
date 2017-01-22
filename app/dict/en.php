@@ -33,4 +33,11 @@ return array(
   'users' => 'Users',
   'permissions' => 'Permissions',
   'refreshfolder' => 'Refresh folders',
+  'languageandtime' => 'Language and time',
+  'time' => 'Time',
+  'timezone' => 'Timezone',
+  'normallanguage' => 'Normal Language',
+  'languagepath' => 'Path to languages',
+  'paths' => 'Paths',
+  'designpath' => 'Designs',
 );

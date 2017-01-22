@@ -33,4 +33,10 @@ return array(
   'users' => 'Benutzer',
   'permissions' => 'Rechte',
   'refreshfolder' => 'Ordner aktualisieren',
+  'languageandtime' => 'Sprache und Zeit',
+  'timezone' => 'Zeitzone',
+  'normallanguage' => 'Standard Sprache',
+  'languagepath' => 'Sprachpfad',
+  'paths' => 'Pfade',
+  'designpath' => 'Designs',
 );

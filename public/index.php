@@ -56,7 +56,7 @@ $f3->route( 'GET|POST /password/edit/@id', 'Controller\Passwords->edit' );
 $f3->route( 'GET /settings', 'Controller\Settings->all' );
 $f3->route( 'GET /folder/@id', 'Controller\Folders->show' );
 $f3->route( 'GET /folder', 'Controller\Folders->show' );
-$f3->route( 'GET /folder/refresh', function($f3) { setcookie( 'padlock_tree', '', 1, '/' ); $f3->reroute( '/dashboard' ); } );
+$f3->route( 'GET /folder/refresh', function($f3) { $f3->clear( 'COOKIE.padlock_tree' ); $f3->reroute( '/dashboard' ); } );
 $f3->route( 'GET /dashboard', 'Controller\Folders->show' );
 
 $f3->run();

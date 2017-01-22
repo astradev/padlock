@@ -1,7 +1,7 @@
 <div class="col-lg-3">
 <div class="panel panel-default">
   <div class="panel-body folderwrapper">
-    <p class="text-right"><a href="{{@BASE}}/folder/refresh" rel="tooltip" title="{{@L.refreshfolder}}" data-placement="bottom" style="position:absolute;right:60px;top:25px;cursor:pointer"><i class="fa fa-refresh"></i></a><a style="position:absolute;right:40px;top:25px;cursor:pointer;" data-toggle="modal" data-target="#folderform" rel="tooltip" title="{{@L.addfolder}}" data-placement="bottom"><i class="fa fa-plus"></i></a></p>
+    <p class="text-right"><a id="load" rel="tooltip" title="{{@L.refreshfolder}}" data-placement="bottom" style="position:absolute;right:60px;top:25px;cursor:pointer"><i class="fa fa-refresh"></i></a><a style="position:absolute;right:40px;top:25px;cursor:pointer;" data-toggle="modal" data-target="#folderform" rel="tooltip" title="{{@L.addfolder}}" data-placement="bottom"><i class="fa fa-plus"></i></a></p>
     <h4 class="text-left">{{@L.folders}}</h4>
     <div id="tree">
       {{ @folders | raw }}
