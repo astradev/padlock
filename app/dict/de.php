@@ -27,4 +27,7 @@ return array(
   'label' => 'Bezeichnung',
   'description' => 'Beschreibung',
   'editpassword' => 'Passwort bearbeiten',
+  'nopermissions' => 'Sie haben keine Berechtigung das zu tun.',
+  'nolabelset' => 'Es wurde keine Bezeichnung angegeben. Das ist ein Pflichtfeld.',
+  'nopasswordset' => 'Es wurde kein Passwort angegeben. Das ist ein Pflichtfeld.',
 );

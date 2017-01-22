@@ -32,29 +32,26 @@ class Passwords extends Base {
 
 				$password->save();
 				$f3->reroute( '/dashboard' );
-			} else {
-				$f3->set( 'content', 'passwordform.html' );
 			}
-		} else {
-			$password = new \Model\Password();
-			if( isset( $params['id'] ) && is_numeric( $params['id'] ) ) {
-				$password->load( array( 'id=?', $params['id'] ) );
-				if( ! $password->dry() ) {
-					if( \PermissionHelper::instance()->hasPermission( $password->folder_id ) < 2 ) {
-						$f3->push( 'SESSION.messages', array( $f3->get( 'L.nopermissions' ), 1 ) );
-						$f3->reroute( '/dashboard ');
-					}
-				} else {
-					$password->reset();
-					$f3->push( 'SESSION.messages', array( $f3->get( 'L.nopwid' ), 1 , true ) );
-				}
-			}
-			foreach( $password->fields() as $key ) {
-				$pw[$key] = $password->$key;
-			}
-			$f3->set( 'pw', $pw );
-			$f3->set( 'content', 'passwordform.html' );
 		}
+		$password = new \Model\Password();
+		if( isset( $params['id'] ) && is_numeric( $params['id'] ) ) {
+			$password->load( array( 'id=?', $params['id'] ) );
+			if( ! $password->dry() ) {
+				if( \PermissionHelper::instance()->hasPermission( $password->folder_id ) < 2 ) {
+					$f3->push( 'SESSION.messages', array( $f3->get( 'L.nopermissions' ), 1 ) );
+					$f3->reroute( '/dashboard ');
+				}
+			} else {
+				$password->reset();
+				$f3->push( 'SESSION.messages', array( $f3->get( 'L.nopwid' ), 1 , true ) );
+			}
+		}
+		foreach( $password->fields() as $key ) {
+			$pw[$key] = $password->$key;
+		}
+		$f3->set( 'pw', $pw );
+		$f3->set( 'content', 'passwordform.html' );
 	}
 
 }
