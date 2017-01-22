@@ -36,46 +36,25 @@ class Passwords extends Base {
 				$f3->set( 'content', 'passwordform.html' );
 			}
 		} else {
-			if( is_numeric( $params['id'] ) ) {
-				$password = new \Model\Password( $params['id'] );
-				if( ! $password->dry() &&  ) {
+			$password = new \Model\Password();
+			if( isset( $params['id'] ) && is_numeric( $params['id'] ) ) {
+				$password->load( array( 'id=?', $params['id'] ) );
+				if( ! $password->dry() ) {
 					if( \PermissionHelper::instance()->hasPermission( $password->folder_id ) < 2 ) {
 						$f3->push( 'SESSION.messages', array( $f3->get( 'L.nopermissions' ), 1 ) );
 						$f3->reroute( '/dashboard ');
-					} else {
-						foreach( $password->fields() as $key ) {
-							$pw[$key] = $password->$key;
-						}
-						$f3->set( 'pw', $pw );
 					}
 				} else {
+					$password->reset();
 					$f3->push( 'SESSION.messages', array( $f3->get( 'L.nopwid' ), 1 , true ) );
 				}
 			}
+			foreach( $password->fields() as $key ) {
+				$pw[$key] = $password->$key;
+			}
+			$f3->set( 'pw', $pw );
 			$f3->set( 'content', 'passwordform.html' );
 		}
 	}
 
-}
-
-
-
-public function edit( $f3, $params ) {
-	if( $f3->exists( 'POST.name' ) ) {
-		$folder = new \Model\Folder();
-		$folder->reset();
-		$folder->name = $f3->get( 'POST.name' );
-		$f3->logger->write( "POST parent_id exists: ".$f3->get( 'POST.parent_id' ) );
-		if( $f3->exists( 'POST.parent_id' ) && is_numeric( $f3->get( 'POST.parent_id' ) ) ) {
-			$folder->parent_id = $f3->get( 'POST.parent_id' );
-		}
-		if( $folder->save() ) {
-			$f3->push( "SESSION.messages", array( $f3->get( 'L.foldercreatesuccessful' ), 0 ) );
-		} else {
-			$f3->push( "SESSION.messages", array( $f3->get( 'L.foldercreateerror' ), 1 ) );
-		}
-		$f3->reroute( '/dashboard' );
-	} else {
-		$f3->set( 'content', 'folderform.html' );
-	}
 }
