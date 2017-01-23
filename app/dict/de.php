@@ -40,4 +40,6 @@ return array(
   'languagepath' => 'Sprachpfad',
   'paths' => 'Pfade',
   'designpath' => 'Designs',
+  'toggleall' => 'Alle aufklappen',
+  'deletefolder' => 'Ordner löschen',
 );

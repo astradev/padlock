@@ -13,6 +13,8 @@
     <link rel="icon" type="image/png" href="{{@BASE}}/ui/img/icon.png"> 
 
     <!-- Css -->
+    <link href="{{@BASE}}/ui/css/padlock.css" type="text/css" rel="stylesheet">
+    <!-- Bootstrap -->
     <link href="{{@BASE}}/ui/css/style.css" type="text/css" rel="stylesheet">
     <link href="{{@BASE}}/ui/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
     <link href="{{@BASE}}/ui/css/ui.easytree.css" type="text/css" rel="stylesheet">
@@ -34,16 +36,8 @@
       </div>
       <div class="navbar-collapse collapse" id="navbar">
         <ul class="nav navbar-nav navbar-right">
-          <check if="{{@SESSION.user.id}}">
-            <true>
-              <li><a href="{{@BASE}}/dashboard">{{@L.home}}</a></li>
-            </true>
-          </check>
-          <check if="{{@SESSION.user.id}}">
-            <true>
-             <li><a href="{{@BASE}}/settings">{{@L.settings}}</a></li>
-            </true>
-          </check>
+          <li><a href="{{@BASE}}/dashboard">{{@L.home}}</a></li>
+          <li><a href="{{@BASE}}/settings">{{@L.settings}}</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> {{@L.language}} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
@@ -51,11 +45,7 @@
               <li><a href="{{@BASE}}/lang/en">{{@L.english}}</a></li>
             </ul>
           </li>
-          <check if="{{ @SESSION.user.id }}">
-            <true>
-              <li><a href="{{@BASE}}/logout">{{@L.logout}}</a></li>
-            </true>
-          </check>
+          <li><a href="{{@BASE}}/logout">{{@L.logout}}</a></li>
         </ul>
       </div>
     </div>
@@ -84,6 +74,7 @@
   <script src="{{@BASE}}/ui/js/bootstrap-toggle.js"></script>
 
   <script type="text/javascript">
+  $.cookie.defaults.path = '{{@BASE}}/';
   function updateTree() {
     $.ajaxSetup ({
       cache: false
@@ -113,12 +104,47 @@
 
   function stateChanged(nodes, nodesJson) {
     var t = nodes[0].text;
-    $.cookie('padlock_tree', nodesJson, { path: '{{@BASE}}' });
+    $.cookie('padlock_tree', nodesJson, { path: '{{@BASE}}/' } );
   }
 
   var easyTree = $('#tree').easytree({
     data: $.cookie('padlock_tree'),
-    stateChanged: stateChanged
+    stateChanged: stateChanged,
+    enableDnd: true
+  });
+
+  function openAllNodes() {
+    var nodes = easyTree.getAllNodes();
+    toggleNodes(nodes, 'open');
+    easyTree.rebuildTree(nodes);
+  }
+
+  function closeAllNodes() {
+    var nodes = easyTree.getAllNodes();
+    toggleNodes(nodes, 'close');
+    easyTree.rebuildTree(nodes);
+  }
+
+  function toggleNodes(nodes, openOrClose){
+    var i = 0;
+    for (i = 0; i < nodes.length; i++) {
+      nodes[i].isExpanded = openOrClose == "open"; // either expand node or don't
+
+      // if has children open/close those as well
+      if (nodes[i].children && nodes[i].children.length > 0) {
+        toggleNodes(nodes[i].children, openOrClose);
+      }
+    }
+  }
+
+  $( ".toggleall" ).on( "click", function() {
+    if( this.ets ) {
+      closeAllNodes();
+      this.ets = false;
+    } else {
+      openAllNodes();
+      this.ets = true;
+    }
   });
 
   </script>
@@ -126,28 +152,6 @@
    $( function(){
      $('#loadTree').click( updateTree );
   });
-  </script>
-  <script type="text/javascript"> 
-  $( function() {
-      $( '.easytree-node' ).each( function( i, el ) {
-        link = $( this ).find( 'a' );
-        link.appendTo( $( this ) );
-        title = $( this ).find( '.easytree-title' );
-        title.text( link.text() );
-        link.text('');
-        title.prependTo( link );
-        icon = $( this ).find( '.easytree-icon' );
-        icon.prependTo( link );
-      });
-  });
-  $( "#tree ul" ).find( 'a:first-child' ).addClass( 'treecog' );
-  $( ".treecog" ).hover(
-    function() {
-      $( this ).after( $( '<span style="float:right;color:#93c54b;" class="fa fa-cog spancog"></span>' ) );
-    }, function() {
-      $( this ).parent().find( '.spancog' ).remove();
-    }
-    );
   </script>
 
 </body>

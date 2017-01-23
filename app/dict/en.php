@@ -41,4 +41,6 @@ return array(
   'languagepath' => 'Path to languages',
   'paths' => 'Paths',
   'designpath' => 'Designs',
+  'toggleall' => 'Toggle all',
+  'deletefolder' => 'Delete folder',
 );

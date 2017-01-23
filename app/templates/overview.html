@@ -1,10 +1,15 @@
 <div class="col-lg-3">
 <div class="panel panel-default">
   <div class="panel-body folderwrapper">
-    <p class="text-right"><a rel="tooltip" title="{{@L.editfolder}}" data-toggle="modal" data-target="folderform" data-placement="bottom" style="position:absolute;right:80px;top:25px;cursor:pointer;"><i class="fa fa-cog"></i></a><a id="loadTree" rel="tooltip" title="{{@L.refreshfolder}}" data-placement="bottom" style="position:absolute;right:60px;top:25px;cursor:pointer"><i class="fa fa-refresh"></i></a><a style="position:absolute;right:40px;top:25px;cursor:pointer;" data-toggle="modal" data-target="#folderform" rel="tooltip" title="{{@L.addfolder}}" data-placement="bottom"><i class="fa fa-plus"></i></a></p>
+    <p class="text-right">  
+      <a rel="tooltip" class="toggleall" title="{{@L.toggleall}}" data-placement="bottom" style="position:absolute;right:100px;top:25px;cursor:pointer"><i class="fa fa-expand"></i></a>
+      <a rel="tooltip" title="{{@L.editfolder}}" data-placement="bottom" style="position:absolute;right:80px;top:25px;cursor:pointer" data-toggle="modal" data-target="#folderform-{{ @folderID }}"><i class="fa fa-pencil-square-o"></i></a>
+      <a id="loadTree" rel="tooltip" title="{{@L.refreshfolder}}" data-placement="bottom" style="position:absolute;right:60px;top:25px;cursor:pointer"><i class="fa fa-refresh"></i></a>
+      <a rel="tooltip" title="{{@L.addfolder}}" data-placement="bottom" style="position:absolute;right:40px;top:25px;cursor:pointer;" data-toggle="modal" data-target="#folderform"><i class="fa fa-plus"></i></a>
+    </p>
     <h4 class="text-left">{{@L.folders}}</h4>
     <div id="tree">
-      {{ @folders | raw }}
+      {{ @folderTree | raw }}
     </div>
   </div>
 </div>
@@ -19,7 +24,7 @@
           <tr>
             <th>{{@L.label}}</th>
             <th>{{@L.username}}</th>
-            <th>{{@L.password}} <input data-size="mini" type="checkbox" data-toggle="toggle"></th>
+            <th>{{@L.password}}</th>
             <th>{{@L.description}}</th>
             <th></th>
           </tr>
@@ -31,7 +36,7 @@
             <td>{{ @pw.login }}</td>
             <td>{{ @pw.password }}</td>
             <td>{{ @pw.description }}</td>
-            <td><a data-toggle="modal" style="cursor:pointer;color:#000;" data-target="#passwordform-{{@pw.id}}" rel="tooltip" title="{{@L.editpassword}}" data-placement="bottom"><i class="fa fa-cog"></i></a></td>
+            <td><a data-toggle="modal" style="cursor:pointer;color:#000;" data-target="#passwordform-{{@pw.id}}" rel="tooltip" title="{{@L.editpassword}}" data-placement="bottom"><i class="fa fa-pencil-square-o"></i></a></td>
           </tr>
           </repeat>	
         </tbody>
@@ -40,28 +45,32 @@
   </div>
 </div>
 
-
-<div class="modal fade" id="folderform" role="dialog" aria-hidden="true">
+<repeat group="{{ @folderList }}" value="{{ @folder }}">
+<div class="modal fade" id="folderform-{{ @folder.id }}" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
         <a style="cursor:pointer;float:right;" data-dismiss="modal"><i class="fa fa-times"></i></a>        
         <h3 class="text-left">{{@L.editfolder}}</h3>
         <form action="{{@BASE}}/folder/edit" method="post" name="editfolder">
-
-          <input type="text" name="name" class="form-control" style="color:#000;" value="">
+          <input type="hidden" name="id" class="form-control" style="color:#000;" value="{{ @folder.id }}">
+          <input type="text" name="name" class="form-control" style="color:#000;" value="{{ @folder.name }}">
           <br>
           <select class="form-control selectpicker" multiple-title="{{@L.upperfolder}}" name="parent_id">
             {{ @optionFolders | raw }}
           </select>
           <br><br>
-          <button type="submit" name="new_folder" class="btn btn-default btn-block">{{@L.editfolder}}</button>
-
+          <button type="submit" class="btn btn-default btn-edit" name="edit">{{@L.editfolder}}</button>
+        <form>
+          <form action="{{@BASE}}/folder/delete" method="post" name="deletefolder">
+          <button type="submit" class="btn btn-danger btn-delete" name="delete">{{@L.deletefolder}}</button>
         </form>
       </div>
     </div>
   </div>
 </div>
+</repeat>
+
 <div class="modal fade" id="folderform" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -72,6 +81,7 @@
     </div>
   </div>
 </div>
+
 <div class="modal fade" id="passwordform" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -98,6 +108,7 @@
     </div>
   </div>
 </div>
+
 <repeat group="{{ @passwords }}" value="{{ @pw }}">
 <div class="modal fade" id="passwordform-{{@pw.id}}" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
