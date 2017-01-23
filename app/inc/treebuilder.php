@@ -30,7 +30,7 @@ class TreeBuilder {
 			if( $currNode['depth'] < $currDepth ) {
 				$result .= str_repeat( '</ul>', $currDepth - $currNode['depth'] );
 			}
-			$result .= '<li class="isFolder"><a href="' . $f3->get( 'BASE' ) . '/folder/' . $currNode['id'] . '">' . $currNode['name'] . '</a>';
+			$result .= '<a href="' . $f3->get( 'BASE' ) . '/folder/' . $currNode['id'] . '"><li class="isFolder">' . $currNode['name'] . '</a>';
 			$currDepth = $currNode['depth'];
 			if( empty( $tree ) ) {
 				$result .= str_repeat( '</ul>', $currDepth + 1 );

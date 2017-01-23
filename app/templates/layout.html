@@ -16,6 +16,7 @@
     <link href="{{@BASE}}/ui/css/style.css" type="text/css" rel="stylesheet">
     <link href="{{@BASE}}/ui/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
     <link href="{{@BASE}}/ui/css/ui.easytree.css" type="text/css" rel="stylesheet">
+    <link href="{{@BASE}}/ui/css/bootstrap-toggle.css" type="text/css" rel="stylesheet">
 
 </head>
 <body>
@@ -80,6 +81,7 @@
   <script src="{{@BASE}}/ui/js/bootstrap.js"></script>
   <script src="{{@BASE}}/ui/js/jquery.easytree.js"></script>
   <script src="{{@BASE}}/ui/js/jquery.cookie.js"></script>
+  <script src="{{@BASE}}/ui/js/bootstrap-toggle.js"></script>
 
   <script type="text/javascript">
   function updateTree() {
@@ -124,7 +126,28 @@
    $( function(){
      $('#loadTree').click( updateTree );
   });
-
+  </script>
+  <script type="text/javascript"> 
+  $( function() {
+      $( '.easytree-node' ).each( function( i, el ) {
+        link = $( this ).find( 'a' );
+        link.appendTo( $( this ) );
+        title = $( this ).find( '.easytree-title' );
+        title.text( link.text() );
+        link.text('');
+        title.prependTo( link );
+        icon = $( this ).find( '.easytree-icon' );
+        icon.prependTo( link );
+      });
+  });
+  $( "#tree ul" ).find( 'a:first-child' ).addClass( 'treecog' );
+  $( ".treecog" ).hover(
+    function() {
+      $( this ).after( $( '<span style="float:right;color:#93c54b;" class="fa fa-cog spancog"></span>' ) );
+    }, function() {
+      $( this ).parent().find( '.spancog' ).remove();
+    }
+    );
   </script>
 
 </body>

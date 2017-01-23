@@ -27,6 +27,7 @@ return array(
   'label' => 'Label',
   'description' => 'Description',
   'editpassword' => 'Edit password',
+  'editfolder' => 'Edit folder',
   'nopermissions' => 'You have no permissions to do this',
   'nolabelset' => 'No label was set. This is mandatory.',
   'nopasswordset' => 'No password was set. This is mandatory.',

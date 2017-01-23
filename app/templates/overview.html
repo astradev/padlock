@@ -1,7 +1,7 @@
 <div class="col-lg-3">
 <div class="panel panel-default">
   <div class="panel-body folderwrapper">
-    <p class="text-right"><a id="loadTree" rel="tooltip" title="{{@L.refreshfolder}}" data-placement="bottom" style="position:absolute;right:60px;top:25px;cursor:pointer"><i class="fa fa-refresh"></i></a><a style="position:absolute;right:40px;top:25px;cursor:pointer;" data-toggle="modal" data-target="#folderform" rel="tooltip" title="{{@L.addfolder}}" data-placement="bottom"><i class="fa fa-plus"></i></a></p>
+    <p class="text-right"><a rel="tooltip" title="{{@L.editfolder}}" data-toggle="modal" data-target="folderform" data-placement="bottom" style="position:absolute;right:80px;top:25px;cursor:pointer;"><i class="fa fa-cog"></i></a><a id="loadTree" rel="tooltip" title="{{@L.refreshfolder}}" data-placement="bottom" style="position:absolute;right:60px;top:25px;cursor:pointer"><i class="fa fa-refresh"></i></a><a style="position:absolute;right:40px;top:25px;cursor:pointer;" data-toggle="modal" data-target="#folderform" rel="tooltip" title="{{@L.addfolder}}" data-placement="bottom"><i class="fa fa-plus"></i></a></p>
     <h4 class="text-left">{{@L.folders}}</h4>
     <div id="tree">
       {{ @folders | raw }}
@@ -19,7 +19,7 @@
           <tr>
             <th>{{@L.label}}</th>
             <th>{{@L.username}}</th>
-            <th>{{@L.password}}</th>
+            <th>{{@L.password}} <input data-size="mini" type="checkbox" data-toggle="toggle"></th>
             <th>{{@L.description}}</th>
             <th></th>
           </tr>
@@ -40,6 +40,28 @@
   </div>
 </div>
 
+
+<div class="modal fade" id="folderform" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <a style="cursor:pointer;float:right;" data-dismiss="modal"><i class="fa fa-times"></i></a>        
+        <h3 class="text-left">{{@L.editfolder}}</h3>
+        <form action="{{@BASE}}/folder/edit" method="post" name="editfolder">
+
+          <input type="text" name="name" class="form-control" style="color:#000;" value="">
+          <br>
+          <select class="form-control selectpicker" multiple-title="{{@L.upperfolder}}" name="parent_id">
+            {{ @optionFolders | raw }}
+          </select>
+          <br><br>
+          <button type="submit" name="new_folder" class="btn btn-default btn-block">{{@L.editfolder}}</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="modal fade" id="folderform" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
