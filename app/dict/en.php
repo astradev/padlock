@@ -43,4 +43,5 @@ return array(
   'designpath' => 'Designs',
   'toggleall' => 'Toggle all',
   'deletefolder' => 'Delete folder',
+  'deletepassword' => 'Delete password',
 );

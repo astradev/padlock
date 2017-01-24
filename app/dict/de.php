@@ -42,4 +42,5 @@ return array(
   'designpath' => 'Designs',
   'toggleall' => 'Alle aufklappen',
   'deletefolder' => 'Ordner löschen',
+  'deletepassword' => 'Passwort löschen',
 );
