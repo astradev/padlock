@@ -6901,3 +6901,6 @@ input:focus,
 .panel-default .panel-footer {
   color: #98978b;
 }
+
+.easytree-title { padding: 0 !important; }
+.easytree-title a { padding: 3px; }
