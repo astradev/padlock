@@ -43,4 +43,6 @@ return array(
   'toggleall' => 'Alle aufklappen',
   'deletefolder' => 'Ordner löschen',
   'deletepassword' => 'Passwort löschen',
+  'yesdelete' => 'Ja, löschen',
+  'nodelete' => 'Nein, abbrechen',
 );

@@ -38,7 +38,7 @@
             <td>{{ @pw.description }}</td>
             <td>
               <a data-toggle="modal" style="cursor:pointer;color:#000;" data-target="#passwordform-{{@pw.id}}" rel="tooltip" title="{{@L.editpassword}}" data-placement="bottom"><i class="fa fa-pencil-square-o"></i></a>&nbsp;
-              <a style="cursor:pointer;color:#000;" rel="tooltip" title="{{@L.deletepassword}}" data-placement="bottom"><i class="fa fa-trash-o"></i></a>
+              <a data-toggle="confirmation" style="cursor:pointer;color:#000;" rel="tooltip" title="{{@L.deletepassword}}" data-placement="bottom"><i class="fa fa-trash-o"></i></a>
             </td>
           </tr>
           </repeat>	

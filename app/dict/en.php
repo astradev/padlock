@@ -44,4 +44,6 @@ return array(
   'toggleall' => 'Toggle all',
   'deletefolder' => 'Delete folder',
   'deletepassword' => 'Delete password',
+  'yesdelete' => 'Yes, delete',
+  'nodelete' => 'No, abort',
 );
