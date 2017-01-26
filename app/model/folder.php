@@ -57,4 +57,23 @@ class Folder extends Base {
     }
   }
 
+  public function delete() {
+    $f3 = \BASE::instance();
+    if( ! empty( $this->id ) ) {
+		return $f3->DB->exec(
+				array(
+				"DELETE FROM permissions WHERE folder_id IN ( SELECT id FROM ( SELECT id FROM folders WHERE lft >= :lft and rgt <= :rgt ) ids )",
+				"DELETE FROM passwords WHERE folder_id IN ( SELECT id FROM ( SELECT id FROM folders WHERE lft >= :lft and rgt <= :rgt ) ids )",
+				"DELETE FROM folders WHERE id IN ( SELECT id FROM ( SELECT id FROM folders WHERE lft >= :lft and rgt <= :rgt ) ids )"
+				),
+				array(
+					array( "lft" => $this->lft, "rgt" => $this->rgt ),
+					array( "lft" => $this->lft, "rgt" => $this->rgt ),
+					array( "lft" => $this->lft, "rgt" => $this->rgt )
+				)
+				);
+    }
+	return false;
+  }
+
 }

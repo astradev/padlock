@@ -56,6 +56,8 @@ $f3->route( 'GET /folder/@id', 'Controller\Folders->show' );
 $f3->route( 'GET|POST /folder/add', 'Controller\Folders->create_edit' );
 $f3->route( 'GET|POST /folder/edit', 'Controller\Folders->create_edit' );
 $f3->route( 'GET|POST /folder/edit/@id', 'Controller\Folders->create_edit' );
+$f3->route( 'GET|POST /folder/delete', 'Controller\Folders->delete' );
+$f3->route( 'GET|POST /folder/delete/@id', 'Controller\Folders->delete' );
 
 //Password routes
 $f3->route( 'GET|POST /password/add', 'Controller\Passwords->edit' );
