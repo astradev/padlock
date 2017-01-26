@@ -10,4 +10,25 @@ class Password extends Base {
 			$this->load( array( 'id=?', $pw_id ) );
 		}
 	}
+
+	public function save() {
+		if( \PermissionHelper::instance()->getFolderPermission( $this->folder_id ) < 2 ) {
+			$f3 = \BASE::instance();
+			$f3->push( 'SESSION.messages', array( $f3->get( 'L.nopermissions' ), 1 ) );
+			return false;			
+		} else {
+			return parent::save();
+		}
+	}
+
+	public function erase() {
+		if( \PermissionHelper::instance()->getFolderPermission( $this->folder_id ) < 2 ) {
+			$f3 = \BASE::instance();
+			$f3->push( 'SESSION.messages', array( $f3->get( 'L.nopermissions' ), 1 ) );
+			return false;			
+		} else {
+			return parent::save();
+		}
+	}
+
 }

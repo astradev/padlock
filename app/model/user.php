@@ -13,15 +13,6 @@ class User extends Base {
 
   public function getUsers() {
     $f3 = \BASE::instance();
-    if( ! $this->dry() ) {
-      if( \PermissionHelper::instance()->hasPermission( $this->id ) > 0 ) {
-        return $f3->DB->exec( "SELECT * FROM users WHERE id = ?", $this->id );
-      } else {
-        // evntl message
-        return false;
-      }
-    } else {
-      return false;
-    }
+	return false;
   }
 }
