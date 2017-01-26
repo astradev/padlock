@@ -11,13 +11,11 @@
 	<check if="{{@formFolder.id}}">
 		<true>
 			<form action="{{@BASE}}/folder/edit/{{@formFolder.id}}" method="post">
+			<input type="hidden" name="id" value="{{@formFolder.id}}">
 		</true>
 		<false>
 			<form action="{{@BASE}}/folder/add" method="post">
 		</false>
-	</check>
-	<check if="{{@formFolder.id}}">
-		<input type="hidden" name="id" value="{{@formFolder.id}}">
 	</check>
 	<input type="text" name="name" class="form-control" placeholder="{{@L.foldername}}" value="<?php if( isset($formFolder['name']) ) echo $formFolder['name']; ?>"><br>
 	<select class="form-control selectpicker" multiple-title="{{@L.upperfolder}}" name="parent_id">
@@ -35,3 +33,11 @@
 	</check>
 	</button>
 </form>
+<check if="{{@formFolder.name}}">
+	<check if="{{@formFolder.id}}">
+	<form action="{{@BASE}}/folder/delete" method="post" name="deletefolder">
+		<input type="hidden" name="id" value="{{@formFolder.id}}">
+		<button type="submit" class="btn btn-danger btn-delete" name="delete"><i class="fa fa-trash-o"></i></button>
+	</form>
+	</check>
+</check>
