@@ -68,7 +68,6 @@ class Folders extends Base {
 	}
 
 	public function delete( $f3, $params ) {
-		$f3->push( 'SESSION.messages', array( 'Last Position: ' . $_SERVER['HTTP_REFERER'] , 0 ) );
 		if( $f3->exists( 'POST.id' ) && is_numeric( $f3->get( 'POST.id' ) ) ) {
 			$folder = new \Model\Folder( $f3->get( 'POST.id' ) );
 			if( $folder->dry() ) {
@@ -81,10 +80,7 @@ class Folders extends Base {
 			$f3->push( 'SESSION.messages', array( "Could not delete folder: No valid folder id given", 1 ) );
 		}
 
-//		if( isset( $params['id'] ) )
-//			$f3->reroute( '/folder/' . $params['id'] );
-//		else
-			$f3->reroute( '/dashboard' );
+		$f3->reroute( '/dashboard' );
 	}
 
 	public function show( \Base $f3, $params ) {
