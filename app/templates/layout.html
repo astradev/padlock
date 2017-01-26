@@ -51,6 +51,12 @@
     </div>
   </div>
 
+  <script src="{{@BASE}}/ui/js/jquery.js"></script>
+  <script src="{{@BASE}}/ui/js/bootstrap.js"></script>
+  <script src="{{@BASE}}/ui/js/jquery.easytree.js"></script>
+  <script src="{{@BASE}}/ui/js/jquery.cookie.js"></script>
+  <script src="{{@BASE}}/ui/js/bootstrap-toggle.js"></script>
+
   <div class="container">
     <div class="row">
       <repeat group="{{ @SESSION.messages }}" value="{{ @myMess }}">
@@ -67,29 +73,13 @@
     </div>
   </div>
 
-  <script src="{{@BASE}}/ui/js/jquery.js"></script>
-  <script src="{{@BASE}}/ui/js/bootstrap.js"></script>
-  <script src="{{@BASE}}/ui/js/jquery.easytree.js"></script>
-  <script src="{{@BASE}}/ui/js/jquery.cookie.js"></script>
-  <script src="{{@BASE}}/ui/js/bootstrap-toggle.js"></script>
-  <script src="{{@BASE}}/ui/js/padlock.js"></script>
-
   <script type="text/javascript">
-  $( ".toggleall" ).on( "click", function() {
-    if( this.ets ) {
-      closeAllNodes();
-      this.ets = false;
-    } else {
-      openAllNodes();
-      this.ets = true;
-    }
-  });
+  setTimeout(function(){
+	  $(".droptext").fadeOut();
+  }, 5000);
 
-  $('[data-toggle="confirmation"]').confirmation('show')
+  //$('[data-toggle="confirmation"]').confirmation('show')
 
-  $( function(){
-     $('#loadTree').click( updateTree );
-  });
   </script>
 
 </body>
