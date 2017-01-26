@@ -9,17 +9,16 @@ class Folders extends Base {
 	public function __construct() {
 		$f3 = \BASE::instance();
 		$f3->set( 'formFolder', new \Model\Folder() );
+		$f3->set( 'formPassword', new \Model\Password() );
 	}
 
 	public function create_edit( $f3, $params ) {
 		$f3->set( 'content', 'folderform.html' );
 		$folder = new \Model\Folder();
-		$f3->logger->write("folder id at initialization: ".$folder->id);
 
 		if( isset( $params['id'] ) && is_numeric( $params['id'] ) ) {
 			$folder->load( array( "id=?", $params['id'] ) );
 			if( ! $folder->dry() ) {
-				$f3->logger->write("got folder by params");
 				$f3->set( 'formFolder', $folder );
 				$f3->set( 'optionFolders', \TreeBuilder::instance()->generateOptionTree( $params['id'] ) );
 			}
@@ -28,23 +27,17 @@ class Folders extends Base {
 		}
 
 		if( $f3->get( 'VERB' ) == "POST") {
-			$f3->logger->write("is post request");
 			if( $f3->exists( 'POST.id' ) && ! is_numeric( $f3->get( 'POST.id' ) ) ) {
-				$f3->logger->write("got id, but not valid");
-				print_r( $f3->get( 'POST.id' ) );
 				$f3->push( 'SESSION.messages', array( "FEHLER 1", 1 ) );
 				return;
 			} elseif ( $f3->exists( 'POST.id' ) && is_numeric( $f3->get( 'POST.id' ) ) ) {
 				$folder->reset();
 				$folder->load( array( 'id=?', $f3->get( 'POST.id' ) ) );
-				$f3->logger->write("got id, is valid: ".$f3->get( 'POST.id' ));
 				if( $folder->dry() ) {
-					$f3->logger->write("got id, is valid, exists");
 					$f3->push( 'SESSION.messages', array( "FEHLER 2", 1 ) );
 					$f3->clear( 'formFolder' );
 					$f3->set( 'formFolder', $folder );
 					$f3->set( 'optionFolders', \TreeBuilder::instance()->generateOptionTree( $f3->get( 'POST.id' ) ) );
-					$f3->logger->write("folderid: ".$folder->id);
 				}
 			}
 			if( ! $f3->exists( 'POST.parent_id' ) || ! is_numeric( $f3->get( 'POST.parent_id' ) ) ) {
@@ -56,7 +49,6 @@ class Folders extends Base {
 				}
 			}
 			if( ! $f3->exists( 'POST.name' ) || empty( trim( $f3->get( 'POST.name' ) ) ) ) {
-				$f3->logger->write("post name not exists or not filled: ".$folder->id);
 				$f3->push( 'SESSION.messages', array( $f3->get( 'L.invalidfoldername' ), 1 ) );
 				return;
 			} else {
@@ -105,7 +97,7 @@ class Folders extends Base {
 
 		$f3->set( 'folderTree', \TreeBuilder::instance()->generateTree() );
 		$f3->set( 'folderList', \TreeBuilder::instance()->loadTree() );
-		$f3->set( 'folderID', $folder->id );
+		$f3->set( 'folder', $folder );
 		$f3->set( 'passwords', $folder->getPasswords() );
 		$f3->set( 'optionFolders', \TreeBuilder::instance()->generateOptionTree( $params['id'] ) );
 		$f3->set( 'content', 'overview.html' );

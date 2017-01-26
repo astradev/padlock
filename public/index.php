@@ -60,9 +60,9 @@ $f3->route( 'GET|POST /folder/delete', 'Controller\Folders->delete' );
 $f3->route( 'GET|POST /folder/delete/@id', 'Controller\Folders->delete' );
 
 //Password routes
-$f3->route( 'GET|POST /password/add', 'Controller\Passwords->edit' );
-$f3->route( 'GET|POST /password/edit', 'Controller\Passwords->edit' );
-$f3->route( 'GET|POST /password/edit/@id', 'Controller\Passwords->edit' );
+$f3->route( 'GET|POST /password/add', 'Controller\Passwords->create_edit' );
+$f3->route( 'GET|POST /password/edit', 'Controller\Passwords->create_edit' );
+$f3->route( 'GET|POST /password/edit/@id', 'Controller\Passwords->create_edit' );
 
 //User routes
 $f3->route( 'GET|POST /user/add', 'Controller\Users->edit' );
