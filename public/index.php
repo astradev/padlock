@@ -47,9 +47,9 @@ $f3->set( 'DB', new \DB\SQL( 'mysql:host=localhost;port=3306;dbname=padlock', 'p
 $f3->route( 'GET /', 'Controller\Folders->show' );
 $f3->route( 'GET|POST /login', 'Controller\Auth->login' );
 $f3->route( 'GET /logout', 'Controller\Auth->logout' );
-$f3->route( 'GET|POST /folder/add', 'Controller\Folders->edit' );
-$f3->route( 'GET|POST /folder/edit', 'Controller\Folders->edit' );
-$f3->route( 'GET|POST /folder/edit/@id', 'Controller\Folders->edit' );
+$f3->route( 'GET|POST /folder/add', 'Controller\Folders->create_edit' );
+$f3->route( 'GET|POST /folder/edit', 'Controller\Folders->create_edit' );
+$f3->route( 'GET|POST /folder/edit/@id', 'Controller\Folders->create_edit' );
 $f3->route( 'GET|POST /password/add', 'Controller\Passwords->edit' );
 $f3->route( 'GET|POST /password/edit', 'Controller\Passwords->edit' );
 $f3->route( 'GET|POST /password/edit/@id', 'Controller\Passwords->edit' );

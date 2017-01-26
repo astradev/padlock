@@ -43,7 +43,9 @@ class TreeBuilder {
 		$f3 = \BASE::instance();
 		$tree = $this->loadTree();
 
-		$result='';
+		$result = '<option value="0"';
+		if( ! $selected ) $result .= ' selected="selected"';
+		$result .= '>- (kein)</option>';
 		while( !empty( $tree ) ) {
 			$currNode = array_shift( $tree );
                         $result .= '<option value="'.$currNode['id'].'"';

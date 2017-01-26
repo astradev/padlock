@@ -6,41 +6,73 @@ class Folders extends Base {
 
 	protected $response;
 
-        public function edit( $f3, $params ) {
-		if( $f3->exists( 'POST.id' ) && is_numeric( $f3->get( 'POST.id' ) ) ) {
-			$folder = new \Model\Folder( $f3->get( 'POST.id' ) );
-                        if( $folder->dry() || empty( trim( $f3->get( 'POST.name' ) ) ) ) {
-                          $f3->push( 'SESSION.messages', array( $f3->get( 'L.couldnoteditfolder' ), 1 ) );
-                          $f3->set( 'content', 'folderform.html' );
-                        } else {
-                          $folder->name = $f3->get( 'POST.name' );
-                          if( $folder->save() ) {
-                            $f3->push( 'SESSION.messages', array( $f3->get( 'L.folderedited' ), 0 ) );
-                            if( isset( $params['id'] ) )
-                              $f3->reroute( '/folder/' . $params['id'] );
-                            else
-                              $f3->reroute( '/dashboard' );
-                          } else {
-                            $f3->push( 'SESSION.messages', array( $f3->get( 'L.couldnoteditfolder' ), 1 ) );
-                            $f3->set( 'content', 'folderform.html' );
-                          }
-                        }
-                } elseif( $f3->exists( 'POST.name' ) ) {
-			$folder = new \Model\Folder();
-			$folder->reset();
-			$folder->name = $f3->get( 'POST.name' );
-			if( $f3->exists( 'POST.parent_id' ) && is_numeric( $f3->get( 'POST.parent_id' ) ) ) {
-				$folder->parent_id = $f3->get( 'POST.parent_id' );
+	public function __construct() {
+		$f3 = \BASE::instance();
+		$f3->set( 'formFolder', new \Model\Folder() );
+	}
+
+	public function create_edit( $f3, $params ) {
+		$f3->set( 'content', 'folderform.html' );
+		$folder = new \Model\Folder();
+		$f3->logger->write("folder id at initialization: ".$folder->id);
+
+		if( isset( $params['id'] ) && is_numeric( $params['id'] ) ) {
+			$folder->load( array( "id=?", $params['id'] ) );
+			if( ! $folder->dry() ) {
+				$f3->logger->write("got folder by params");
+				$f3->set( 'formFolder', $folder );
+				$f3->set( 'optionFolders', \TreeBuilder::instance()->generateOptionTree( $params['id'] ) );
 			}
-			if( $folder->save() ) {
-				$f3->push( "SESSION.messages", array( $f3->get( 'L.foldercreatesuccessful' ), 0 ) );
-			} else {
-				$f3->push( "SESSION.messages", array( $f3->get( 'L.foldercreateerror' ), 1 ) );
-			}
-			$f3->reroute( '/dashboard' );
 		} else {
-			$f3->set( 'content', 'folderform.html' );
-                }
+			$f3->set( 'optionFolders', \TreeBuilder::instance()->generateOptionTree() );
+		}
+
+		if( $f3->get( 'VERB' ) == "POST") {
+			$f3->logger->write("is post request");
+			if( $f3->exists( 'POST.id' ) && ! is_numeric( $f3->get( 'POST.id' ) ) ) {
+				$f3->logger->write("got id, but not valid");
+				print_r( $f3->get( 'POST.id' ) );
+				$f3->push( 'SESSION.messages', array( "FEHLER 1", 1 ) );
+				return;
+			} elseif ( $f3->exists( 'POST.id' ) && is_numeric( $f3->get( 'POST.id' ) ) ) {
+				$folder->reset();
+				$folder->load( array( 'id=?', $f3->get( 'POST.id' ) ) );
+				$f3->logger->write("got id, is valid: ".$f3->get( 'POST.id' ));
+				if( $folder->dry() ) {
+					$f3->logger->write("got id, is valid, exists");
+					$f3->push( 'SESSION.messages', array( "FEHLER 2", 1 ) );
+					$f3->clear( 'formFolder' );
+					$f3->set( 'formFolder', $folder );
+					$f3->set( 'optionFolders', \TreeBuilder::instance()->generateOptionTree( $f3->get( 'POST.id' ) ) );
+					$f3->logger->write("folderid: ".$folder->id);
+				}
+			}
+			if( ! $f3->exists( 'POST.parent_id' ) || ! is_numeric( $f3->get( 'POST.parent_id' ) ) ) {
+				$f3->push( 'SESSION.messages', array( "FEHLER 3", 1 ) );
+				return;
+			} else {
+				if( $f3->get( 'POST.parent_id' ) > 0 ) {
+					$folder->parent_id = $f3->get( 'POST.parent_id' );
+				}
+			}
+			if( ! $f3->exists( 'POST.name' ) || empty( trim( $f3->get( 'POST.name' ) ) ) ) {
+				$f3->logger->write("post name not exists or not filled: ".$folder->id);
+				$f3->push( 'SESSION.messages', array( $f3->get( 'L.invalidfoldername' ), 1 ) );
+				return;
+			} else {
+				$folder->name = $f3->get( 'POST.name' );
+			}
+
+			if( $folder->save() ) {
+				$f3->push( 'SESSION.messages', array( $f3->get( 'L.foldersaved' ), 0 ) );
+				if( isset( $params['id'] ) )
+					$f3->reroute( '/folder/' . $params['id'] );
+				else
+					$f3->reroute( '/dashboard' );
+			} else {
+				$f3->push( 'SESSION.messages', array( $f3->get( 'L.foldersaveerr' )."NANANANANANANANA", 1 ) );
+			}
+		}
 	}
 
 	public function delete( $f3, $params ) {
@@ -48,10 +80,10 @@ class Folders extends Base {
 			$folder = new \Model\Folder( $params['id'] );
 			$folder->delete();
 			$f3->SESSION->messages[] = array( "Folder was successfully deleted", 0 );
-                        if( isset( $params['id'] ) )
-                          $f3->reroute( '/folder/' . $params['id'] );
-                        else
-                          $f3->reroute( '/dashboard' );
+			if( isset( $params['id'] ) )
+				$f3->reroute( '/folder/' . $params['id'] );
+			else
+				$f3->reroute( '/dashboard' );
 		} else {
 			$f3->SESSION->messages[] = array( "Could not delete folder: No valid folder id given", 1 );
 			$f3->reroute( '/dashboard' );

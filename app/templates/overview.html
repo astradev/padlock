@@ -48,32 +48,6 @@
   </div>
 </div>
 
-<repeat group="{{ @folderList }}" value="{{ @folder }}">
-<div class="modal fade" id="folderform-{{ @folder.id }}" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-        <a style="cursor:pointer;float:right;" data-dismiss="modal"><i class="fa fa-times"></i></a>        
-        <h3 class="text-left">{{@L.editfolder}}</h3>
-        <form action="{{@BASE}}/folder/edit" method="post" name="editfolder">
-          <input type="hidden" name="id" class="form-control" style="color:#000;" value="{{ @folder.id }}">
-          <input type="text" name="name" class="form-control" style="color:#000;" value="{{ @folder.name }}">
-          <br>
-          <select class="form-control selectpicker" multiple-title="{{@L.upperfolder}}" name="parent_id">
-            {{ @optionFolders | raw }}
-          </select>
-          <br><br>
-          <button type="submit" class="btn btn-default btn-edit" name="edit">{{@L.editfolder}}</button>
-        <form>
-          <form action="{{@BASE}}/folder/delete" method="post" name="deletefolder">
-          <button type="submit" class="btn btn-danger btn-delete" name="delete">{{@L.deletefolder}}</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-</repeat>
-
 <div class="modal fade" id="folderform" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -84,6 +58,19 @@
     </div>
   </div>
 </div>
+
+<repeat group="{{ @folderList }}" value="{{ @formFolder }}">
+<div class="modal fade" id="folderform-{{ @formFolder.id }}" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <a style="cursor:pointer;float:right;" data-dismiss="modal"><i class="fa fa-times"></i></a>        
+        <include href="folderform.html">
+      </div>
+    </div>
+  </div>
+</div>
+</repeat>
 
 <div class="modal fade" id="passwordform" role="dialog" aria-hidden="true">
   <div class="modal-dialog">

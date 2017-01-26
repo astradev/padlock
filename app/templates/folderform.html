@@ -1,12 +1,37 @@
-<h3 class="text-left">{{@L.newfolder}}</h3>
-<form action="{{@BASE}}/folder/add" method="post" name="addfolder">
-
-  <input type="text" name="name" class="form-control" style="color:#000;" placeholder="{{@L.foldername}}">
-   <br>
-   <select class="form-control selectpicker" multiple-title="{{@L.upperfolder}}" name="parent_id">
-    {{ @optionFolders | raw }}
-  </select>
-  <br><br>
-  <button type="submit" name="new_folder" class="btn btn-default btn-block">{{@L.addfolder}}</button>
-
+<h3 class="text-left">
+	<check if="{{@formFolder.name}}">
+		<true>
+			{{@L.editfolder}}
+		</true>
+		<false>
+			{{@L.newfolder}}
+		</false>
+	</check>
+</h3>
+	<check if="{{@formFolder.id}}">
+		<true>
+			<form action="{{@BASE}}/folder/edit/{{@formFolder.id}}" method="post">
+		</true>
+		<false>
+			<form action="{{@BASE}}/folder/add" method="post">
+		</false>
+	</check>
+	<check if="{{@formFolder.id}}">
+		<input type="hidden" name="id" value="{{@formFolder.id}}">
+	</check>
+	<input type="text" name="name" class="form-control" placeholder="{{@L.foldername}}" value="<?php if( isset($formFolder['name']) ) echo $formFolder['name']; ?>"><br>
+	<select class="form-control selectpicker" multiple-title="{{@L.upperfolder}}" name="parent_id">
+		{{ @optionFolders | raw }}
+	</select>
+	<br><br>
+	<button type="submit" name="new_folder" class="btn btn-default btn-block">
+	<check if="{{@formFolder.name}}">
+		<true>
+			{{@L.editfolder}}
+		</true>
+		<false>
+			{{@L.newfolder}}
+		</false>
+	</check>
+	</button>
 </form>
