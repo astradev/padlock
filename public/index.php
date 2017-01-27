@@ -21,6 +21,9 @@ if( is_readable( '../config/config.ini' ) ) {
 }
 
 // language
+if( $f3->get( 'COOKIE.padlock_language' ) ) {
+	    $f3->set( 'LANGUAGE', $f3->get( 'COOKIE.padlock_language' ) );
+}
 $f3->route( 'GET /lang/@lang', 
   function($f3) { 
       $f3->set( 'COOKIE.padlock_language', $f3->get( 'PARAMS.lang' ), time() + (86400 *30) );
