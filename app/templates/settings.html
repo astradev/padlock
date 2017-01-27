@@ -4,26 +4,15 @@
      <h4>{{ @L.settings }}</h4>
      <br>
      <ul class="nav nav-tabs">
-	<li class=" <?php echo $contenttab=="config"?"active":""; ?>"><a href="#1" data-toggle="tab" aria-expanded="false">{{@L.settings}}</a></li>
-        <li class="<?php echo $contenttab=="users"?"active":""; ?>"><a href="#2" data-toggle="tab" aria-expanded="true">{{@L.users}}</a></li>
-        <li class="<?php echo $contenttab=="roles"?"active":""; ?>"><a href="#3" data-toggle="tab" aria-expanded="false">{{@L.roles}}</a></li>
-        <li class="<?php echo $contenttab=="permissions"?"active":""; ?>"><a href="#4" data-toggle="tab" aria-expanded="false">{{@L.permissions}}</a></li>
+	 	<li class="<?php echo ($section=="config.html"?"active":"");?>" ><a href="{{@BASE}}/settings/config">{{@L.settings}}</a></li>
+        <li class="<?php echo ($section=="users.html"?"active":"");?>"><a href="{{@BASE}}/settings/users">{{@L.users}}</a></li>
+        <li class="<?php echo ($section=="roles.html"?"active":"");?>"><a href="{{@BASE}}/settings/roles">{{@L.roles}}</a></li>
+        <li class="<?php echo ($section=="permissions.html"?"active":"");?>"><a href="{{@BASE}}/settings/permissions">{{@L.permissions}}</a></li>
      </ul>
 
-     <div id="cont" class="tab-content">
-      <div class="tab-pane fade <?php echo $contenttab=="config"?"active in":""; ?>" id="1">
-        <include href="configsettings.html">
+      <div class="">
+        <include href="{{@section}}">
       </div>
-      <div class="tab-pane fade <?php echo $contenttab=="users"?"active in":""; ?>" id="2">
-        <include href="users.html">
-      </div>
-      <div class="tab-pane fade <?php echo $contenttab=="roles"?"active in":""; ?>" id="3">
-        <include href="roles.html">
-      </div>
-      <div class="tab-pane fade <?php echo $contenttab=="permissions"?"active in":""; ?>" id="4">
-        <include href="permissions.html">
-      </div>
-     </div>
    </div>
  </div>
 </div>

@@ -21,7 +21,7 @@ class Permissions extends Backend {
 
         public function show( \Base $f3, $params ) {
 			$f3->set( 'optionFolders', \TreeBuilder::instance()->generateOptionTree() );
-			$f3->set( 'contenttab', 'permissions' );
+			$f3->set( 'section', 'permissions.html' );
         }
 
 }

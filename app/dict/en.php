@@ -60,4 +60,5 @@ return array(
   'couldnotedituser' => 'Could not edit user.',
   'useredited' => 'User was successfully edited.',
   'roles' => 'roles',
+  'users' => 'users',
 );

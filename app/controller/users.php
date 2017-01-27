@@ -22,7 +22,7 @@ class Users extends Backend {
 		$user = new \Model\User();
 
 		$f3->set( 'users', $user->getAllUsers() );
-		$f3->set( 'contenttab', 'users' );
+		$f3->set( 'section', 'users.html' );
 	}
 
 }
