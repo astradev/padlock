@@ -42,7 +42,7 @@ $f3->set( 'DB', new \DB\SQL( 'mysql:host=localhost;port=3306;dbname=padlock', 'p
 $f3->route( 'GET /', 'Controller\Folders->show' );
 $f3->route( 'GET|POST /login', 'Controller\Auth->login' );
 $f3->route( 'GET /logout', 'Controller\Auth->logout' );
-$f3->route( 'GET /settings', 'Controller\Settings->all' );
+$f3->route( 'GET /settings', 'Controller\Settings->show' );
 $f3->route( 'GET /dashboard', 'Controller\Folders->show' );
 
 //Folder routes

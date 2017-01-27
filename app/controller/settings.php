@@ -11,8 +11,15 @@ class Settings extends Base {
 			$f3->reroute( '/dashboard' );
 		}
 	}
-	public function all( \Base $f3, $params ) {
-	    // template information
+	public function show( \Base $f3, $params ) {
+		$f3->logger->write( 'show' );
+		$user = new \Model\User();
+
+		$f3->set( 'users', $user->getAllUsers() );
 		$f3->set( 'content', 'settings.html' );
 	}
+//	public function show( \Base $f3, $params ) {
+//	    // template information
+//		$f3->set( 'content', 'settings.html' );
+//	}
 }

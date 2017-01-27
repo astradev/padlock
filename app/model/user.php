@@ -11,8 +11,7 @@ class User extends Base {
      }
   }
 
-  public function getUsers() {
-    $f3 = \BASE::instance();
-	return false;
+  public function getAllUsers() {
+	  return $this->find();
   }
 }
