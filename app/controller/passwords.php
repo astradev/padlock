@@ -53,6 +53,7 @@ class Passwords extends Base {
 			}
 			$password->description = $f3->get( 'POST.description' );
 			$password->login = $f3->get( 'POST.login' );
+			$password->password = $f3->get( 'POST.password' );
 
 			if( $password->save() ) {
 				$f3->push( 'SESSION.messages', array( $f3->get( 'L.passwordsaved' ), 0 ) );

@@ -20,12 +20,7 @@ if( is_readable( '../config/config.ini' ) ) {
 	trigger_error( 'Could not load configuration: ' . dirname( __FILE__) . '/../config/config.ini' );
 }
 
-// lang switch
-
-if( $f3->get( 'COOKIE.padlock_language' ) ) {
-    $f3->set( 'LANGUAGE', $f3->get( 'COOKIE.padlock_language' ) );
-}
-
+// language
 $f3->route( 'GET /lang/@lang', 
   function($f3) { 
       $f3->set( 'COOKIE.padlock_language', $f3->get( 'PARAMS.lang' ), time() + (86400 *30) );
@@ -73,5 +68,6 @@ $f3->route( 'GET|POST /user/edit/@id', 'Controller\Users->edit' );
 
 // API
 $f3->route( 'GET /api/foldertree', 'Controller\API->foldertree' );
+$f3->route( 'GET /api/test', 'Controller\API->testout' );
 
 $f3->run();

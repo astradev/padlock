@@ -43,6 +43,7 @@ class Auth {
 
   public function logout( $f3, $params ) {
     $f3->clear( 'SESSION' );
+	\Cookies::instance()->clearTree();
     $f3->reroute( 'http://' . $f3->get('HOST') . $f3->get('BASE') . '/' );
   }
 

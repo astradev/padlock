@@ -85,14 +85,15 @@ class Folders extends Base {
 
 	public function show( \Base $f3, $params ) {
 		if( ! isset( $params['id'] ) || ! is_numeric( $params['id'] ) ) {
-			$folderList = \TreeBuilder::instance()->loadTree();
+			$folderList = \TreeBuilder::instance()->getFolderList();
+			$f3->logger->write("default folder: ".print_r( $folderList , true ) );
 			$params['id'] = $folderList[0]['id'];
 		}
 		$folder = new \Model\Folder( $params['id'] );
 		$pws = $folder->getPasswords();
 
 		$f3->set( 'folderTree', \TreeBuilder::instance()->generateTree() );
-		$f3->set( 'folderList', \TreeBuilder::instance()->loadTree() );
+		$f3->set( 'folderList', \TreeBuilder::instance()->getFolderList() );
 		$f3->set( 'folder', $folder );
 		$f3->set( 'passwords', $folder->getPasswords() );
 		$f3->set( 'optionFolders', \TreeBuilder::instance()->generateOptionTree( $params['id'] ) );

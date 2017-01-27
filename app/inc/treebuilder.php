@@ -3,23 +3,62 @@
 class TreeBuilder {
 	protected static $_instance = null;
 
-	public function loadTree() {
+	protected $tmpIncrementer;
+
+	private function getFolderListAll() {
 		$f3 = \BASE::instance();
-		$query = "SELECT folders.id, folders.name, (COUNT(parent.name) - 1) as depth FROM folders"
-			." CROSS JOIN folders AS parent WHERE folders.lft BETWEEN parent.lft AND parent.rgt"
-			." AND folders.id IN ( SELECT fc.id FROM permissions"
-			." LEFT JOIN folders AS fb ON fb.id=permissions.folder_id"
-			." LEFT JOIN folders AS fc ON fc.lft BETWEEN fb.lft AND fb.rgt WHERE permissions.perm > 0 AND role_id IN ( SELECT role_id FROM users WHERE id=:id ) )"
-			." AND folders.id NOT IN ( SELECT fc.id FROM permissions"
-			." LEFT JOIN folders AS fb ON fb.id=permissions.folder_id"
-			." LEFT JOIN folders AS fc ON fc.lft BETWEEN fb.lft AND fb.rgt WHERE permissions.perm = 0 AND role_id IN ( SELECT role_id FROM users WHERE id=:id ) )"
-			." GROUP BY folders.name ORDER BY folders.lft";
-		return $f3->DB->exec( $query, array( "id" => $f3->get( 'SESSION.user.id' ) ) );
+		$query = "SELECT folders.id, folders.name, (COUNT(parent.name) - 1) as depth FROM folders CROSS JOIN folders AS parent WHERE folders.lft BETWEEN parent.lft AND parent.rgt GROUP BY folders.name ORDER BY folders.lft";
+		return $f3->DB->exec( $query );
+	}
+
+	public function processSubtree( $allowed, &$list, &$permissions, $depthOffset=0 ) {
+		$f3 = \BASE::instance();
+		$listSection = array();
+		while( $this->tmpIncrementer < count( $list ) ) {
+			$thisPerm = $allowed;
+			if( in_array( $list[$this->tmpIncrementer]['id'], array_keys( $permissions ) ) ) {
+				if( $permissions[$list[$this->tmpIncrementer]['id']] > 0 ) {
+					$thisPerm = true;
+				} else {
+					$thisPerm = false;
+				}
+			}
+			if( $thisPerm ) {
+				$listSection[] = array( 'id' => $list[$this->tmpIncrementer]['id'], 'name' => $list[$this->tmpIncrementer]['name'], 'depth' => $depthOffset );
+			}
+			if( isset( $list[$this->tmpIncrementer+1] ) ) {
+				$myIndex = $this->tmpIncrementer;
+				if( $list[$this->tmpIncrementer+1]['depth'] > $list[$this->tmpIncrementer]['depth'] ) {
+					$this->tmpIncrementer++;
+					$listSection = array_merge( $listSection, $this->processSubtree( $thisPerm, $list, $permissions, ($thisPerm)?$depthOffset+1:$depthOffset ) );
+					if( $list[$myIndex]['depth'] > $list[$this->tmpIncrementer]['depth'] ) {
+						return $listSection;
+					}
+				} elseif( $list[$this->tmpIncrementer+1]['depth'] == $list[$this->tmpIncrementer]['depth'] ) {
+					$this->tmpIncrementer++;
+				} else {
+					$this->tmpIncrementer++;
+					return $listSection;
+				}
+			} else {
+				return $listSection;
+			}
+		}
+		return $listSection;
+	}
+
+	public function getFolderList() {
+		$list = $this->getFolderListAll();
+		$permissions = \Permissions::instance()->getAllPermissions();
+
+		$this->tmpIncrementer = 0;
+
+		return $this->processSubtree( false, $list, $permissions, $this->tmpIncrementer, 0 );
 	}
 
 	public function generateTree() {
 		$f3 = \BASE::instance();
-		$tree = $this->loadTree();
+		$tree = $this->getFolderList();
 		$result = '';
 		$currDepth = -1;
 		while( ! empty( $tree ) ) {
@@ -41,7 +80,7 @@ class TreeBuilder {
 
 	public function generateOptionTree( $selected = false ) {
 		$f3 = \BASE::instance();
-		$tree = $this->loadTree();
+		$tree = $this->getFolderList();
 
 		$result = '<option value="0"';
 		if( ! $selected ) $result .= ' selected="selected"';
