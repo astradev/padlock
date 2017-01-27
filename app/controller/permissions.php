@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-class Users extends Backend {
+class Permissions extends Backend {
 
 	public function delete( $f3, $params ) {
 		if( $f3->exists( 'POST.id' ) && is_numeric( $f3->get( 'POST.id' ) ) ) {
@@ -20,11 +20,9 @@ class Users extends Backend {
 	}
 
         public function show( \Base $f3, $params ) {
-                $user = new \Model\User();
-
-                $f3->set( 'users', $user->getAllUsers() );
+		$f3->set( 'optionFolders', \TreeBuilder::instance()->generateOptionTree( ) );
                 $f3->set( 'content', 'settings.html' );
-                $f3->set( 'contenttab', 'users' );
+                $f3->set( 'contenttab', 'permissions' );
         }
 
 }

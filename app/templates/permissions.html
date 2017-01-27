@@ -1,0 +1,30 @@
+<br>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="well bs-component">
+      <form class="form-horizontal">
+	<fieldset>
+	  <h4>{{@L.permissions}}</h4>
+
+	  <hr>
+
+	  <div class="col-lg-6">
+	    <select class="form-control selectpicker" data-live-search="true" data-size="15" multiple data-selected-text-format="count">
+	      {{ @optionFolders | raw }}
+	    </select>
+	  </div>
+	  <div class="col-lg-6">
+	    <select class="form-control selectpicker">
+	      <option>Test</option>
+	    </select>
+	  </div>
+
+	</fieldset>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+Selectpicket.options.iconBase = "fa";
+Selectpicket.options.tickIcon = "fa-check";
+</script>
