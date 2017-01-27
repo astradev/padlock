@@ -49,7 +49,7 @@ return array(
   'edit' => 'Bearbeiten',
   'delete' => 'Löschen',
   'email' => 'E-Mail',
-  'role' => 'Gruppe',
+  'roles' => 'Gruppe',
   'userdeletesuccessful' => 'Benutzer wurde erfolgreich gelöscht.',
   'userdeleteerror' => 'Benutzer konnte nicht gelöscht werden.',
   'usercreatesuccessful' => 'Benutzer wurde erfolgreich angelegt.',
