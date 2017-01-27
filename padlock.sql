@@ -36,7 +36,7 @@ CREATE TABLE `folders` (
   `lft` int(10) unsigned NOT NULL,
   `rgt` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `folders` (
 
 LOCK TABLES `folders` WRITE;
 /*!40000 ALTER TABLE `folders` DISABLE KEYS */;
-INSERT INTO `folders` VALUES (1,'Allgemein',1,28),(2,'Generell',29,38),(3,'Universal',39,46),(5,'abstrakt',4,13),(6,'extravagant',7,12),(7,'usbekisch',36,37),(8,'Dumm-Doof-Rettungslos',34,35),(32,'Nagios',47,48),(33,'Grundgesetz',49,52);
+INSERT INTO `folders` VALUES (1,'Allgemein',1,44),(2,'Generell',45,54),(3,'Universal',55,62),(5,'abstrakt',18,29),(6,'extravagant',23,28),(7,'usbekisch',52,53),(8,'Dumm-Doof-Rettungslos',50,51),(32,'Nagios',63,64),(33,'Grundgesetz',65,68),(38,'normal',19,20),(39,'anders',14,15),(40,'igorrr',2,13),(41,'tendon',5,12),(42,'doublemonk',3,4),(43,'großwild',6,11),(44,'tot',9,10),(45,'lebendig',7,8);
 /*!40000 ALTER TABLE `folders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,7 +67,7 @@ CREATE TABLE `passwords` (
   PRIMARY KEY (`id`),
   KEY `folder_id` (`folder_id`),
   CONSTRAINT `passwords_ibfk_1` FOREIGN KEY (`folder_id`) REFERENCES `folders` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +76,7 @@ CREATE TABLE `passwords` (
 
 LOCK TABLES `passwords` WRITE;
 /*!40000 ALTER TABLE `passwords` DISABLE KEYS */;
-INSERT INTO `passwords` VALUES (1,'Google','example@gmail.com','w8h4q.asd',NULL,'Das ist die Beschreibung. Sher sinnvoll',2),(2,'Yahoo','example@yahoo.com','urstgeil',NULL,'weniger text',1),(3,'123','423423','423','NULL','31312',2),(4,'Test','Glanzstück','schlingelwurst',NULL,'Pullermann',3),(5,'extravagantes Passwort','root','123456987asderffoobar',NULL,'System',6),(7,'Hintertür','jeder','123456',NULL,'Ach eine Beschreibung auch noch? Na klar fällt mir da eine ein. JA SICHER!!!!¹11elf',6),(8,'Dumm','doof',NULL,NULL,'beschreibung',8);
+INSERT INTO `passwords` VALUES (1,'Google','example@gmail.com','w8h4q.asd',NULL,'Das ist die Beschreibung. Sher sinnvoll',2),(2,'Yahoo','example@yahoo.com','wurstgeil',NULL,'weniger text',1),(3,'123','423423','423','NULL','31312',2),(4,'Test','Glanzstück','schlingelwurst',NULL,'Pullermann',3),(5,'extravagantes Passwort','root','123456987asderffoobar',NULL,'System',6),(7,'Hintertür','jeder','123456',NULL,'Ach eine Beschreibung auch noch? Na klar fällt mir da eine ein. JA SICHER!!!!¹11elf',6),(8,'Dumm','doof',NULL,NULL,'beschreibung',8),(9,'Ein Passwort','demo',NULL,NULL,'Demo-Nutzer',39),(10,'toter Hase','thase',NULL,NULL,'Hintertür *kicher*',44);
 /*!40000 ALTER TABLE `passwords` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,7 +104,7 @@ CREATE TABLE `permissions` (
 
 LOCK TABLES `permissions` WRITE;
 /*!40000 ALTER TABLE `permissions` DISABLE KEYS */;
-INSERT INTO `permissions` VALUES (1,1,2),(1,2,2),(1,3,2),(1,5,2),(1,6,2),(1,7,2),(1,32,2),(1,33,2);
+INSERT INTO `permissions` VALUES (1,1,2),(1,2,2),(1,3,2),(1,5,2),(1,6,2),(1,7,2),(1,32,2),(1,33,2),(2,1,2),(2,40,0),(2,43,1);
 /*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +120,7 @@ CREATE TABLE `roles` (
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +129,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'admin');
+INSERT INTO `roles` VALUES (1,'admin'),(2,'demorolle');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +150,7 @@ CREATE TABLE `users` (
   `repository` varchar(100) NOT NULL DEFAULT 'internal',
   PRIMARY KEY (`id`),
   UNIQUE KEY `login` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +159,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin','Marco Dickert','foobar@example.org','$2y$10$Phahy6seu3coomir2tuNgOF605DVotqQ6sDGzfqfomcz8.eiQI2gO',1,'internal');
+INSERT INTO `users` VALUES (1,'admin','Marco Dickert','foobar@example.org','$2y$10$Phahy6seu3coomir2tuNgOF605DVotqQ6sDGzfqfomcz8.eiQI2gO',1,'internal'),(2,'demo','Test User','foobaz@example.org','$2y$10$Phahy6seu3coomir2tuNgODr1VK92lCTUw3msMq1cpFVItqlslYbO',0,'internal');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,7 +186,7 @@ CREATE TABLE `users_roles` (
 
 LOCK TABLES `users_roles` WRITE;
 /*!40000 ALTER TABLE `users_roles` DISABLE KEYS */;
-INSERT INTO `users_roles` VALUES (1,1);
+INSERT INTO `users_roles` VALUES (1,1),(2,2);
 /*!40000 ALTER TABLE `users_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -199,4 +199,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-27  0:13:22
+-- Dump completed on 2017-01-27 15:58:03
