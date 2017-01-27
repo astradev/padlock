@@ -1,7 +1,7 @@
 <?php
 namespace Model;
 
-class User extends Base {
+class Role extends Base {
   protected $_dbtable = "roles";
 
   public function __construct( $id=false ) {

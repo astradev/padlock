@@ -61,4 +61,5 @@ return array(
   'useredited' => 'User was successfully edited.',
   'roles' => 'roles',
   'users' => 'users',
+  'newrole' => 'new role',
 );

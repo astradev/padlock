@@ -18,8 +18,8 @@ class Folder extends Base {
       if( \Permissions::instance()->getFolderPermission( $this->id ) > 0 ) {
         return $f3->DB->exec( "SELECT * FROM passwords WHERE folder_id = ?", $this->id );
       } else {
-        // evntl message
-        return false;
+		  $f3->push( 'SESSION.messages', array( $f3->get( 'L.nopermissions' ), 1 ) );
+		  return false;
       }
     } else {
       return false;
