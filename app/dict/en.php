@@ -59,4 +59,5 @@ return array(
   'usercreateerror' => 'Could not create user.',
   'couldnotedituser' => 'Could not edit user.',
   'useredited' => 'User was successfully edited.',
+  'roles' => 'roles',
 );
