@@ -30,8 +30,9 @@ class Auth {
       if( ! $user->dry() ) {
         if( $user->password == password_hash( $f3->get( 'POST.password' ), PASSWORD_BCRYPT, array( "salt" => $f3->get( 'global_salt' ) ) ) ) {
           @$f3->clear( 'SESSION' ); //recreate session id
-          $f3->set( 'SESSION.user.id', $user->id );
-          $f3->set( 'SESSION.user.name', $user->name );
+//          $f3->set( 'SESSION.user.id', $user->id );
+//          $f3->set( 'SESSION.user.name', $user->name );
+          $f3->set( 'SESSION.user', $user->cast() );
           $f3->reroute('/dashboard');
         }
       }

@@ -15,7 +15,7 @@ class Folder extends Base {
   public function getPasswords() {
     $f3 = \BASE::instance();
     if( ! $this->dry() ) {
-      if( \PermissionHelper::instance()->getFolderPermission( $this->id ) > 0 ) {
+      if( \Permissions::instance()->getFolderPermission( $this->id ) > 0 ) {
         return $f3->DB->exec( "SELECT * FROM passwords WHERE folder_id = ?", $this->id );
       } else {
         // evntl message
@@ -28,16 +28,15 @@ class Folder extends Base {
 
   public function save() {
     $f3 = \BASE::instance();
-	if( $this->parent_id == 0 && ! \PermissionHelper::instance()->isSuperuser() ) {
+	if( $this->parent_id == 0 && ! \Permissions::instance()->isSuperuser() ) {
 		return false;
-	} elseif( \PermissionHelper::instance()->getFolderPermission( $this->parent_id ) < 2 ) {
+	} elseif( \Permissions::instance()->getFolderPermission( $this->parent_id ) < 2 ) {
 		$f3->push( 'SESSION.messages', array( $f3->get( 'L.nopermissions' ), 1 ) );
 		return false;
 	}
     if( ! empty( $this->id ) && ! empty( $this->lft ) && ! empty( $this->rgt ) ) {
       return $ret = $f3->DB->exec( "UPDATE folders SET name=:name WHERE id=:id", array( "name" => $this->name, "id" => $this->id ) );
     } elseif( is_numeric( $this->parent_id ) && ! empty( trim( $this->name ) ) ) {
-      $f3->logger->write("model parent_id is set");
       $parentFolder = new \Model\Folder( $this->parent_id );
       if( ! $parentFolder->dry() ) {
         return $f3->DB->exec(
@@ -64,7 +63,7 @@ class Folder extends Base {
   }
 
   public function delete() {
-	if( \PermissionHelper::instance()->getFolderPermission( $this->id ) < 2 ) {
+	if( \Permissions::instance()->getFolderPermission( $this->id ) < 2 ) {
 		$f3 = \BASE::instance();
 		$f3->push( 'SESSION.messages', array( $f3->get( 'L.nopermissions' ), 1 ) );
 		return false;			

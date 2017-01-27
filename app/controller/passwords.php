@@ -16,10 +16,8 @@ class Passwords extends Base {
 		} elseif( isset( $_SERVER['HTTP_REFERER'] ) )   {
 			$ref_matches = array();
 			if( preg_match( ',folder/([0-9]+)$,', $_SERVER['HTTP_REFERER'], $ref_matches ) == 1 ) {
-				$f3->logger->write( "MATCHED: ".print_r($ref_matches, true) );
 				$f3->set( 'optionFolders', \TreeBuilder::instance()->generateOptionTree( $ref_matches[1] ) );
 			} else {
-				$f3->logger->write( "NOTMATCHED" );
 				$f3->set( 'optionFolders', \TreeBuilder::instance()->generateOptionTree() );
 			}
 		} else {
@@ -75,7 +73,7 @@ class Passwords extends Base {
 				$f3->push( 'SESSION.messages', array( $f3->get( 'L.deletepassworderr'), 1 ) );
 			} else {
 				$fid = $password->folder_id;
-				if( $password->erase() ) {
+				if( $password->delete() ) {
 					$f3->push( 'SESSION.messages', array( $f3->get( 'L.deletepasswordok' ), 0 ) );
 				} else {
 					$f3->push( 'SESSION.messages', array( $f3->get( 'L.deletepassworderr' ), 1 ) );
