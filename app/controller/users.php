@@ -67,6 +67,7 @@ class Users extends Backend {
 	public function show( \Base $f3, $params ) {
 		$user = new \Model\User();
 
+		$f3->set( 'superuserList', $user->getSuperuser( $params["id"] ) );
 		$f3->set( 'users', $user->getAllUsers() );
 		$f3->set( 'section', 'users.html' );
 	}

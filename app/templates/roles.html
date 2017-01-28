@@ -1,26 +1,26 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="well bs-component">
-      <h4>{{@L.roles}} - <button type="button" class="btn btn-primary btn-xs">{{@L.newrole}}</button></h4>
+      <h4>{{@L.roles}} - <button type="button" data-toggle="modal" data-target="#roleform" class="btn btn-primary btn-xs">{{@L.newrole}}</button></h4>
       
       <hr>
 
       <table class="table table-striped table-hover ">
         <thead>
           <tr>
-            <th>#</th>
-            <th>{{@L.name}}</th>
-            <th></th>
+            <th class="col-lg-2">#</th>
+            <th class="col-lg-9">{{@L.name}}</th>
+            <th class="col-lg-1"></th>
           </tr>
         </thead>
         <tbody>
-        <repeat group="{{ @roles }}" value="{{ @r }}">
+        <repeat group="{{ @roles }}" value="{{ @role }}">
           <tr>
-            <td>{{ @r.id }}</td>
-            <td>{{ @r.name }}</td>
+            <td>{{ @role.id }}</td>
+            <td>{{ @role.name }}</td>
             <td>
-              <a href="" rel="tooltip" title="{{@L.edit}}" data-placement="bottom"><i class="fa fa-pencil-square-o"></i></a>&nbsp;
-              <a href="" rel="tooltip" title="{{@L.delete}}" data-placement="bottom"><i class="fa fa-trash-o"></i></a>
+	      <a data-toggle="modal" data-target="#roleform-{{ @role.id }}" style="cursor:pointer;color:#000;" rel="tooltip" title="{{@L.edit}}" data-placement="bottom"><i class="fa fa-pencil-square-o"></i></a>&nbsp;
+              <a rel="tooltip" title="{{@L.delete}}" style="cursor:pointer;color:#000;" data-placement="bottom"><i class="fa fa-trash-o"></i></a>
             </td>
           </tr>
         </repeat>
@@ -29,3 +29,27 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="roleform" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <a style="cursor:pointer;float:right;" data-dismiss="modal"><i class="fa fa-times"></i></a>
+        <include href="roleform.html">
+      </div>
+    </div>
+  </div>
+</div>
+
+<repeat group="{{ @roles }}" value="{{ @formRole }}">
+<div class="modal fade" id="roleform-{{ @formRole.id }}" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <a style="cursor:pointer;float:right;" data-dismiss="modal"><i class="fa fa-times"></i></a>        
+        <include href="roleform.html">
+      </div>
+    </div>
+  </div>
+</div>
+</repeat>

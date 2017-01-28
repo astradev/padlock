@@ -59,4 +59,9 @@ return array(
   'newrole' => 'Neue Regel',
   'yes' => 'Ja',
   'no' => 'Nein',
+  'edituser' => 'Benutzer bearbeiten',
+  'newuser' => 'Benutzer hinzufügen',
+  'adminrights' => 'Admin Rechte',
+  'editrole' => 'Regel bearbeiten',
+  'newrole' => 'Regel hinzufügen',
 );

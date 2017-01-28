@@ -78,7 +78,7 @@
     <div class="modal-content">
       <div class="modal-body"> 
         <a style="cursor:pointer;float:right;" data-dismiss="modal"><i class="fa fa-times"></i></a>
-		<include href="passwordform.html">
+	  <include href="passwordform.html">
       </div>
     </div>
   </div>
@@ -157,8 +157,6 @@
 
   $('#loadTree').click( updateTree );
 
-  $('[rel="tooltip"]').tooltip();
-
   $( ".toggleall" ).on( "click", function() {
     if( this.ets ) {
       closeAllNodes();
@@ -208,4 +206,9 @@
     rereadTree();
   }
 
+</script>
+<script type="text/javascript">
+  function deletePw() {
+
+  }
 </script>

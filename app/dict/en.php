@@ -64,4 +64,9 @@ return array(
   'users' => 'Users',
   'yes' => 'Yes',
   'no' => 'No',
+  'edituser' => 'Edit user',
+  'newuser' => 'Add user',
+  'adminrights' => 'Admin rights',
+  'editrole' => 'Edit role',
+  'newrole' => 'New role',
 );

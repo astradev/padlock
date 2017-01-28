@@ -3,18 +3,18 @@
     <div class="well bs-component">
       <form class="form-horizontal">
       <fieldset>
-      <h4>{{@L.users}} - <button type="button" class="btn btn-primary btn-xs">{{@L.newuser}}</button></h4>
+      <h4>{{@L.users}} - <button type="button" data-target="#userform" data-toggle="modal" class="btn btn-primary btn-xs">{{@L.newuser}}</button></h4>
       
       <hr>
 
       <table class="table table-striped table-hover ">
         <thead>
           <tr>
-            <th>{{@L.username}}</th>
-            <th>{{@L.name}}</th>
-            <th>{{@L.email}}</th>
-            <th>{{@L.role}}</th>
-            <th></th>
+	    <th class="col-lg-2">{{@L.username}}</th>
+	    <th class="col-lg-3">{{@L.name}}</th>
+            <th class="col-lg-3">{{@L.password}}</th>
+            <th class="col-lg-3">{{@L.email}}</th>
+            <th class="col-lg-1"></th>
           </tr>
         </thead>
         <repeat group="{{ @users }}" value="{{ @u }}">
@@ -22,11 +22,11 @@
           <tr>
             <td>{{ @u.login }}</td>
             <td>{{ @u.name }}</td>
-            <td>{{ @u.email }}</td>
-            <td>users_role</td>
+            <td>{{ @u.password }}</td>
+	    <td>{{ @u.email }}</td>
             <td>
-              <a href="" rel="tooltip" title="{{@L.edit}}" data-placement="bottom"><i class="fa fa-pencil-square-o"></i></a>&nbsp;
-              <a href="" rel="tooltip" title="{{@L.delete}}" data-placement="bottom"><i class="fa fa-trash-o"></i></a>
+	      <a data-target="#userform-{{ @u.id }}" data-toggle="modal" style="cursor:pointer;color:#000;" rel="tooltip" title="{{@L.edit}}" data-placement="bottom"><i class="fa fa-pencil-square-o"></i></a>&nbsp;
+              <a style="cursor:pointer;color:#000;" rel="tooltip" title="{{@L.delete}}" data-placement="bottom"><i class="fa fa-trash-o"></i></a>
             </td>
           </tr>
         </tbody>
@@ -37,4 +37,26 @@
   </div>
 </div>
 
+<div class="modal fade" id="userform" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <a style="cursor:pointer;float:right;" data-dismiss="modal"><i class="fa fa-times"></i></a>
+        <include href="userform.html">
+      </div>
+    </div>
+  </div>
+</div>
 
+<repeat group="{{ @users }}" value="{{ @formUser }}">
+<div class="modal fade" id="userform-{{ @formUser.id }}" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <a style="cursor:pointer;float:right;" data-dismiss="modal"><i class="fa fa-times"></i></a>        
+        <include href="userform.html">
+      </div>
+    </div>
+  </div>
+</div>
+</repeat>

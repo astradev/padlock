@@ -1,0 +1,61 @@
+<h3 class="text-left">
+	<check if="{{@formUser.id}}">
+		<true>
+			{{@L.edituser}}
+		</true>
+		<false>
+			{{@L.newuser}}
+		</false>
+	</check>
+</h3>
+	<check if="{{@formUser.id}}">
+		<true>
+			<form action="{{@BASE}}/settings/users/edit/{{@formUser.id}}" method="post">
+			<input type="hidden" name="id" value="{{@formUser.id}}">
+		</true>
+		<false>
+			<form action="{{@BASE}}/user/add" method="post">
+		</false>
+	</check>
+  <input type="text" name="login" class="form-control" style="color:#000;" value="{{@formUser.login}}" placeholder="{{@L.username}}">
+  <br>
+  <input type="text" name="name" class="form-control" value="{{@formUser.name}}" placeholder="{{@L.name}}">
+  <br>
+  <input type="password" name="password" class="form-control" value="{{@formUser.password}}" placeholder="{{@L.password}}">
+  <br>
+  <input type="email" name="email" class="form-control" value="{{@formUser.email}}" placeholder="{{@L.email}}">
+  <br>
+  <check if="{{@formUser.id}}">
+    <true>
+      <select class="form-control selectpicker" name="superuser">
+	  {{ @superuserList | raw }}
+      </select>
+    </true>	
+    <false>
+      <select class="form-control selectpicker" name="superuser">
+	  <option selected="selected">{{ @L.adminrights }}</option>
+	  <option>{{ @L.yes }}</option>
+	  <option>{{ @L.no }}</option>
+      </select>
+    </false>
+  </check>
+  <br><br>
+  <button type="submit" class="btn btn-default btn-block">
+	<check if="{{@formUser.id}}">
+		<true>
+			{{@L.edituser}}
+		</true>
+		<false>
+			{{@L.newuser}}
+		</false>
+	</check>
+  </button>
+</form>
+<check if="{{@formUser.id}}">
+	<check if="{{@formUser.id}}">
+	<form action="{{@BASE}}/settings/users/delete" method="post" name="deleteuser">
+		<input type="hidden" name="id" value="{{@formUser.id}}">
+		<button type="submit" class="btn btn-danger btn-delete" name="delete"><i class="fa fa-trash-o"></i></button>
+	</form>
+	</check>
+</check>

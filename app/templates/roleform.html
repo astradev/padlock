@@ -1,0 +1,40 @@
+<h3 class="text-left">
+	<check if="{{@formRole.id}}">
+		<true>
+			{{@L.editrole}}
+		</true>
+		<false>
+			{{@L.newrole}}
+		</false>
+	</check>
+</h3>
+	<check if="{{@formRole.id}}">
+		<true>
+			<form action="{{@BASE}}/settings/roles/edit/{{@formRole.id}}" method="post">
+			<input type="hidden" name="id" value="{{@formRole.id}}">
+		</true>
+		<false>
+			<form action="{{@BASE}}/settings/roles/add" method="post">
+		</false>
+	</check>
+  <input type="text" name="role" class="form-control" style="color:#000;" value="{{@formRole.name}}" placeholder="{{@L.roles}}">
+  <br>
+  <button type="submit" class="btn btn-default btn-block">
+	<check if="{{@formRole.id}}">
+		<true>
+			{{@L.editrole}}
+		</true>
+		<false>
+			{{@L.newrole}}
+		</false>
+	</check>
+  </button>
+</form>
+<check if="{{@formRole.id}}">
+	<check if="{{@formRole.id}}">
+	<form action="{{@BASE}}/settings/roles/delete" method="post" name="deleterole">
+		<input type="hidden" name="id" value="{{@formRole.id}}">
+		<button type="submit" class="btn btn-danger btn-delete" name="delete"><i class="fa fa-trash-o"></i></button>
+	</form>
+	</check>
+</check>
