@@ -9,7 +9,7 @@
     </p>
     <h4 class="text-left">{{@L.folders}}</h4>
     <div id="tree">
-      {{ @folderTree | raw }}
+      <img style='margin-left:35%;' src='{{@BASE}}/ui/img/reload.gif' alt='loading...' />
     </div>
   </div>
 </div>
@@ -33,11 +33,11 @@
         <tbody>
           <repeat group="{{ @passwords }}" value="{{ @pw }}">
           <tr>
-            <td>{{ @pw.label }}</td>
-            <td>{{ @pw.login }}</td>
-            <td>{{ @pw.password }}</td>
-            <td>{{ @pw.description }}</td>
-            <td>
+            <td class="col-lg-2">{{ @pw.label }}</td>
+            <td class="col-lg-2">{{ @pw.login }}</td>
+            <td class="col-lg-2">{{ @pw.password }}</td>
+            <td class="col-lg-5">{{ @pw.description }}</td>
+            <td class="col-lg-1">
               <a data-toggle="modal" style="cursor:pointer;color:#000;" data-target="#passwordform-{{@pw.id}}" rel="tooltip" title="{{@L.edit}}" data-placement="bottom"><i class="fa fa-pencil-square-o"></i></a>&nbsp;
               <a data-toggle="confirmation" style="cursor:pointer;color:#000;" data-placement="bottom"><i class="fa fa-trash-o"></i></a>
             </td>
@@ -104,23 +104,57 @@
       cache: false
     });
     var ajax_load = "<img style='margin-left:35%;' src='{{@BASE}}/ui/img/reload.gif' alt='loading...' />";
+    var old_cookie_content = $.cookie('padlock_tree');
     $.removeCookie('padlock_tree');
     $( "#tree" ).html( ajax_load );
     $.ajax({
       url: '{{@BASE}}/api/foldertree',
       type: "GET",
       success: function(data){
-	    var elem = $('#tree');
+	var elem = $('#tree');
         elem.html( data );
-        elem.easytree({
-          data: $.cookie('padlock_tree'),
-          stateChanged: stateChanged
-        });
-        console.log( 'Tree was updated' );
-      },
+	rereadTree();
+	$.cookie('padlock_tree', JSON.stringify( restoreOldStates( JSON.parse( $.cookie('padlock_tree') ), JSON.parse( old_cookie_content ) ) ), { path: '{{@BASE}}/' });
+	rereadTree();
+	},
       error: function() { console.log('Could not get foldertree'); }
     });
   }
+
+  function restoreOldStates( cur, old ) {
+    for( var i = 0; i < cur.length; i++ ) {
+      console.log( "Iterator: "+i);
+      cur[i].isExpanded = getMatch( cur[i].href, old );
+      if( cur[i].children ) {
+	cur[i].children = restoreOldStates( cur[i].children, old );
+      }
+    }
+    return cur;
+  }
+
+  function getMatch( href, old ) {
+    for( var j =0; j<old.length; j++ ) {
+      if( old[j].href == href ) {
+	return (old[j].isExpanded?true:false);
+      }
+	if( old[j].children ) {
+	var a = getMatch( href, old[j].children );
+	if( a == true ) return true;
+      }
+    }
+    return false;
+  }
+
+  function rereadTree() {
+    var elem = $('#tree');
+    elem.easytree({
+      data: $.cookie('padlock_tree'),
+    enableDnd: true,
+      stateChanged: stateChanged
+    });
+  }
+
+
   $('#loadTree').click( updateTree );
 
   $('[rel="tooltip"]').tooltip();
@@ -136,15 +170,8 @@
   });
 
   function stateChanged(nodes, nodesJson) {
-    var t = nodes[0].text;
     $.cookie('padlock_tree', nodesJson, { path: '{{@BASE}}/' } );
   }
-
-  var easyTree = $('#tree').easytree({
-    data: $.cookie('padlock_tree'),
-    stateChanged: stateChanged,
-    enableDnd: true
-  });
 
   function openAllNodes() {
     var nodes = easyTree.getAllNodes();
@@ -168,6 +195,17 @@
         toggleNodes(nodes[i].children, openOrClose);
       }
     }
+  }
+
+  var padtree = $.cookie('padlock_tree');
+  <check if="{{@SESSION.treeUpdateTrigger == 'true'}}">
+  <true>var treeUpdateTrigger = true;</true>
+  <false>var treeUpdateTrigger = false; </false>
+  </check>
+  if( padtree === undefined || treeUpdateTrigger ) {
+    updateTree();
+  } else {
+    rereadTree();
   }
 
 </script>

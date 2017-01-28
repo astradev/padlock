@@ -57,6 +57,7 @@ class Folders extends Base {
 
 			if( $folder->save() ) {
 				$f3->push( 'SESSION.messages', array( $f3->get( 'L.foldersaved' ), 0 ) );
+				$f3->set( 'SESSION.treeUpdateTrigger', "true" );
 				if( isset( $params['id'] ) )
 					$f3->reroute( '/folder/' . $params['id'] );
 				else
@@ -75,6 +76,7 @@ class Folders extends Base {
 			} else {
 				$folder->delete();
 				$f3->push( 'SESSION.messages', array( "Folder was successfully deleted", 0 ) );
+				$f3->set( 'SESSION.treeUpdateTrigger', "true" );
 			}
 		} else {
 			$f3->push( 'SESSION.messages', array( "Could not delete folder: No valid folder id given", 1 ) );
