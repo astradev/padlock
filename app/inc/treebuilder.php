@@ -17,14 +17,10 @@ class TreeBuilder {
 		while( $this->tmpIncrementer < count( $list ) ) {
 			$thisPerm = $allowed;
 			if( in_array( $list[$this->tmpIncrementer]['id'], array_keys( $permissions ) ) ) {
-				if( $permissions[$list[$this->tmpIncrementer]['id']] > 0 ) {
-					$thisPerm = true;
-				} else {
-					$thisPerm = false;
-				}
+			  $thisPerm = $permissions[$list[$this->tmpIncrementer]['id']];
 			}
 			if( $thisPerm ) {
-				$listSection[] = array( 'id' => $list[$this->tmpIncrementer]['id'], 'name' => $list[$this->tmpIncrementer]['name'], 'depth' => $depthOffset );
+				$listSection[] = array( 'id' => $list[$this->tmpIncrementer]['id'], 'name' => $list[$this->tmpIncrementer]['name'], 'depth' => $depthOffset, 'perm' => $thisPerm );
 			}
 			if( isset( $list[$this->tmpIncrementer+1] ) ) {
 				$myIndex = $this->tmpIncrementer;
@@ -89,7 +85,8 @@ class TreeBuilder {
 			$currNode = array_shift( $tree );
                         $result .= '<option value="'.$currNode['id'].'"';
                         if( $selected == $currNode['id'] ) $result .= ' selected="selected"';
-                        $result .= '>'.str_repeat( '–', $currNode['depth']).' '.$currNode['name'].'</option>';
+			if( $currNode['perm'] == 1 ) $result .= ' data-icon="fa-lock"';
+			$result .= '>'.str_repeat( '–', $currNode['depth']).' '.$currNode['name'].'</option>';
 		}
 		return $result;
 	}

@@ -18,7 +18,6 @@
     <link href="{{@BASE}}/ui/css/style.css" type="text/css" rel="stylesheet">
     <link href="{{@BASE}}/ui/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
     <link href="{{@BASE}}/ui/css/ui.easytree.css" type="text/css" rel="stylesheet">
-    <link href="{{@BASE}}/ui/css/bootstrap-toggle.css" type="text/css" rel="stylesheet">
     <link href="{{@BASE}}/ui/css/bootstrap-select.css" type="text/css" rel="stylesheet">
 
 </head>
@@ -48,7 +47,7 @@
               <li><a href="{{@BASE}}/lang/en">{{@L.english}}</a></li>
             </ul>
           </li>
-          <li><a href="{{@BASE}}/logout">{{@L.logout}}</a></li>
+	  <li><a href="{{@BASE}}/logout">{{ @SESSION.user.login}} {{@L.logout}}</a></li>
         </ul>
       </div>
     </div>
@@ -58,7 +57,7 @@
   <script src="{{@BASE}}/ui/js/bootstrap.js"></script>
   <script src="{{@BASE}}/ui/js/jquery.easytree.js"></script>
   <script src="{{@BASE}}/ui/js/jquery.cookie.js"></script>
-  <script src="{{@BASE}}/ui/js/bootstrap-toggle.js"></script>
+  <script src="{{@BASE}}/ui/js/bootstrap-confirmation.js"></script>
   <script src="{{@BASE}}/ui/js/bootstrap-select.js"></script>
 
   <div class="container">
@@ -82,8 +81,17 @@
 	  $(".droptext").fadeOut();
   }, 5000);
 
-  //$('[data-toggle="confirmation"]').confirmation('show')
-
+  $('[data-toggle=confirmation]').confirmation({
+    rootSelector: '[data-toggle=confirmation]',
+    title: '{{ @L.delete }}',
+    btnOkLabel: '{{ @L.yes }}',
+    btnCancelLabel: '{{ @L.no }}',
+    btnOkClass: 'btn-xs btn-success',
+    btnCancelClass: 'btn-xs btn-danger',
+    onConfirm: function() {
+          alert('Ja');
+    },
+  });
   </script>
 
 </body>

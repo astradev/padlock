@@ -56,4 +56,7 @@ return array(
   'usercreateerror' => 'Benutzer konnte nicht angelegt werden.',
   'couldnotedituser' => 'Bearbeitung des Nutzers fehlgeschlagen.',
   'useredited' => 'Benutzer wurde erfolgreich bearbeitet',
+  'newrole' => 'Neue Regel',
+  'yes' => 'Ja',
+  'no' => 'Nein',
 );

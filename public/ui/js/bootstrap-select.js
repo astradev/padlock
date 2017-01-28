@@ -348,7 +348,7 @@
     doneButtonText: 'Close',
     multipleSeparator: ', ',
     styleBase: 'btn',
-    style: 'btn-default',
+    style: 'btn-select-list',
     size: 'auto',
     title: null,
     selectedTextFormat: 'values',

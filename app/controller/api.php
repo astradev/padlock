@@ -7,7 +7,7 @@ class API {
   }
   public function testout( $f3, $params ) {
 	  print '<pre>';
-	  print_r( \TreeBuilder::instance()->getFolderList() );
+	  print_r( \TreeBuilder::instance()->generateOptionTree() );
 	  print '</pre>';
   }
 }

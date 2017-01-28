@@ -62,4 +62,6 @@ return array(
   'newrole' => 'new role',
   'roles' => 'Roles',
   'users' => 'Users',
+  'yes' => 'Yes',
+  'no' => 'No',
 );
