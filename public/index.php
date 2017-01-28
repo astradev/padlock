@@ -72,9 +72,12 @@ $f3->route( 'GET|POST /user/edit/@id', 'Controller\Users->edit' );
 $f3->redirect( 'GET /settings', '/settings/config' );
 $f3->route( 'GET /settings/config', 'Controller\Config->show' );
 $f3->route( 'GET /settings/users', 'Controller\Users->show' );
+$f3->route( 'GET /settings/users/add', 'Controller\Users->create_edit' );
+$f3->route( 'GET /settings/users/edit/@id', 'Controller\Users->create_edit' );
 $f3->route( 'GET /settings/roles', 'Controller\Roles->show' );
+$f3->route( 'GET /settings/roles/add', 'Controller\Roles->create_edit' );
+$f3->route( 'GET /settings/roles/edit/@id', 'Controller\Roles->create_edit' );
 $f3->route( 'GET /settings/permissions', 'Controller\Permissions->show' );
-
 
 // API
 $f3->route( 'GET /api/foldertree', 'Controller\API->foldertree' );

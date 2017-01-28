@@ -3,6 +3,52 @@ namespace Controller;
 
 class Roles extends Backend {
 
+	public function __construct() {
+		parent::__construct();
+		$f3 = \BASE::instance();
+		$f3->set( 'component', 'roles' );
+	}
+
+	public function create_edit( $f3, $params ) {
+		$f3->set( 'section', 'roleform.html' );
+		$role = new \Model\Role();
+
+		if( isset( $params['id'] ) && is_numeric( $params['id'] ) ) {
+			$role->load( array( "id=?", $params['id'] ) );
+			if( ! $role->dry() ) {
+				$f3->set( 'formRole', $role );
+			}
+		}
+
+		if( $f3->get( 'VERB' ) == "POST" ) {
+			if( $f3->exists( 'POST.id' ) && ! is_numeric( $f3->get( 'POST.id' ) ) ) {
+				$f3->push( 'SESSION.messages', array( $f3->get( 'L.novalidid' ), 1 ) );
+				return;
+			} elseif ( $f3->exists( 'POST.id' ) && is_numeric( $f3->get( 'POST.id' ) ) ) {
+				$role->reset();
+				$role->load( array( 'id=?', $f3->get( 'POST.id' ) ) );
+				if( $role->dry() ) {
+					$f3->push( 'SESSION.messages', array( $f3->get( 'L.novalidid' ), 1 ) );
+					$f3->clear( 'formRole' );
+					$f3->set( 'formRole', $role );
+				}
+			}
+			if( ! $f3->exists( 'POST.name' ) || empty( trim( $f3->get( 'POST.name' ) ) ) ) {
+				$f3->push( 'SESSION.messages', array( $f3->get( 'L.invalidname' ), 1 ) );
+				return;
+			} else {
+				$role->name = $f3->get( 'POST.name' );
+			}
+
+			if( $role->save() ) {
+				$f3->push( 'SESSION.messages', array( $f3->get( 'L.rolesaved' ), 0 ) );
+				$f3->reroute( '/settings/roles' );
+			} else {
+				$f3->push( 'SESSION.messages', array( $f3->get( 'L.rolesaveerr' ), 1 ) );
+			}
+		}
+	}
+
 	public function delete( $f3, $params ) {
 		if( $f3->exists( 'POST.id' ) && is_numeric( $f3->get( 'POST.id' ) ) ) {
 			$role = new \Model\Role( $f3->get( 'POST.id' ) );
@@ -21,7 +67,7 @@ class Roles extends Backend {
 		$role = new \Model\Role();
 
 		$f3->set( 'roles', $role->getAllRoles() );
-		$f3->set( 'section', 'users.html' );
+		$f3->set( 'section', 'roles.html' );
 	}
 
 }

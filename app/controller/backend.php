@@ -1,5 +1,4 @@
 <?php
-
 namespace Controller;
 
 class Backend extends Base {
