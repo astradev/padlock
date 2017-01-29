@@ -13,6 +13,7 @@ abstract class Base {
 			$f3->reroute( '/dashboard' );
 		}
 		$this->response = new \View\Frontend();
+		if( ! $f3->exists( 'SESSION.treeUpdateTrigger' ) ) $f3->set( 'SESSION.treeUpdateTrigger', 'false' );
 	}
 
 	public function afterroute() {
