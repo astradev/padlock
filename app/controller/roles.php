@@ -15,10 +15,8 @@ class Roles extends Backend {
 
 		if( isset( $params['id'] ) && is_numeric( $params['id'] ) ) {
 			$role->load( array( "id=?", $params['id'] ) );
-			if( ! $role->dry() ) {
-				$f3->set( 'formRole', $role );
-			}
 		}
+		$f3->set( 'formRole', $role );
 
 		if( $f3->get( 'VERB' ) == "POST" ) {
 			if( $f3->exists( 'POST.id' ) && ! is_numeric( $f3->get( 'POST.id' ) ) ) {
@@ -67,6 +65,7 @@ class Roles extends Backend {
 		$role = new \Model\Role();
 
 		$f3->set( 'roles', $role->getAllRoles() );
+		$f3->set( 'formRole', $role );
 		$f3->set( 'section', 'roles.html' );
 	}
 
