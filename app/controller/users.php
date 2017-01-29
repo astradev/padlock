@@ -16,10 +16,8 @@ class Users extends Backend {
 
 		if( isset( $params['id'] ) && is_numeric( $params['id'] ) ) {
 			$user->load( array( "id=?", $params['id'] ) );
-			if( ! $user->dry() ) {
-				$f3->set( 'formUser', $user );
-			}
 		}
+		$f3->set( 'formUser', $user );
 
 		if( $f3->get( 'VERB' ) == "POST" ) {
 			if( $f3->exists( 'POST.id' ) && ! is_numeric( $f3->get( 'POST.id' ) ) ) {
@@ -34,11 +32,25 @@ class Users extends Backend {
 					$f3->set( 'formUser', $user );
 				}
 			}
-			if( ! $f3->exists( 'POST.name' ) || empty( trim( $f3->get( 'POST.name' ) ) ) ) {
-				$f3->push( 'SESSION.messages', array( $f3->get( 'L.invalidname' ), 1 ) );
+			if( ! $f3->exists( 'POST.login' ) || empty( trim( $f3->get( 'POST.login' ) ) ) ) {
+				$f3->push( 'SESSION.messages', array( $f3->get( 'L.novalidlogin' ), 1 ) );
 				return;
 			} else {
-				$user->name = $f3->get( 'POST.name' );
+				$tmp = new \Model\User();
+				$tmp->load( array( 'login=?', $f3->get( 'POST.login' ) ) );
+				if( ! $tmp->dry() && $tmp->id != $f3->get( 'POST.id' ) ) {
+					$f3->push( 'SESSION.messages', array( $f3->get( 'L.loginexists' ), 1 ) );
+					return;
+				}
+				$user->login = $f3->get( 'POST.login' );
+			}
+			if( $f3->exists( 'POST.newpassword' ) && ! empty( trim( $f3->get( 'POST.newpassword' ) ) ) ) {
+				$user->newpassword = $f3->get( 'POST.newpassword' );
+			}
+			$user->email = $f3->get( 'POST.email' );
+			$user->name = $f3->get( 'POST.name' );
+			if( $f3->get( 'POST.superuser' ) == "yes" ) {
+				$user->superuser = $f3->get( 'POST.name' );
 			}
 
 			if( $user->save() ) {
@@ -67,8 +79,13 @@ class Users extends Backend {
 	public function show( \Base $f3, $params ) {
 		$user = new \Model\User();
 
-		$f3->set( 'superuserList', $user->getSuperuser( $params["id"] ) );
+		if( isset( $params['id'] ) && is_numeric( $params['id'] ) ) {
+			$f3->set( 'superuserList', $user->getSuperuser( $params["id"] ) );
+		} else {
+			$f3->set( 'superuserList', $user->getSuperuser() );
+		}
 		$f3->set( 'users', $user->getAllUsers() );
+		$f3->set( 'formUser', $user );
 		$f3->set( 'section', 'users.html' );
 	}
 
