@@ -49,6 +49,7 @@ $f3->route( 'GET /dashboard', 'Controller\Folders->show' );
 
 //Folder routes
 $f3->route( 'GET /folder', 'Controller\Folders->show' );
+$f3->route( 'GET /folders', 'Controller\Folders->show' );
 $f3->route( 'GET /folder/@id', 'Controller\Folders->show' );
 $f3->route( 'GET|POST /folder/add', 'Controller\Folders->create_edit' );
 $f3->route( 'GET|POST /folder/edit', 'Controller\Folders->create_edit' );
@@ -63,20 +64,15 @@ $f3->route( 'GET|POST /password/edit/@id', 'Controller\Passwords->create_edit' )
 $f3->route( 'GET|POST /password/delete', 'Controller\Passwords->delete' );
 $f3->route( 'GET|POST /password/delete/@id', 'Controller\Passwords->delete' );
 
-//User routes
-$f3->route( 'GET|POST /user/add', 'Controller\Users->edit' );
-$f3->route( 'GET|POST /user/edit', 'Controller\Users->edit' );
-$f3->route( 'GET|POST /user/edit/@id', 'Controller\Users->edit' );
-
 //Settings
 $f3->redirect( 'GET /settings', '/settings/config' );
 $f3->route( 'GET /settings/config', 'Controller\Config->show' );
 $f3->route( 'GET /settings/users', 'Controller\Users->show' );
-$f3->route( 'GET /settings/users/add', 'Controller\Users->create_edit' );
-$f3->route( 'GET /settings/users/edit/@id', 'Controller\Users->create_edit' );
+$f3->route( 'GET|POST /settings/user/add', 'Controller\Users->create_edit' );
+$f3->route( 'GET|POST /settings/user/edit/@id', 'Controller\Users->create_edit' );
 $f3->route( 'GET /settings/roles', 'Controller\Roles->show' );
-$f3->route( 'GET /settings/roles/add', 'Controller\Roles->create_edit' );
-$f3->route( 'GET /settings/roles/edit/@id', 'Controller\Roles->create_edit' );
+$f3->route( 'GET|POST /settings/role/add', 'Controller\Roles->create_edit' );
+$f3->route( 'GET|POST /settings/role/edit/@id', 'Controller\Roles->create_edit' );
 $f3->route( 'GET /settings/permissions', 'Controller\Permissions->show' );
 
 // API
