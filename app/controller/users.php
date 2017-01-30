@@ -50,7 +50,7 @@ class Users extends Backend {
 			$user->email = $f3->get( 'POST.email' );
 			$user->name = $f3->get( 'POST.name' );
 			if( $f3->get( 'POST.superuser' ) == "yes" ) {
-				$user->superuser = $f3->get( 'POST.name' );
+				$user->superuser = true;
 			}
 
 			if( $user->save() ) {
