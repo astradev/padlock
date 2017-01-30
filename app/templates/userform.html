@@ -28,7 +28,15 @@
   <check if="{{@formUser.id}}">
     <true>
       <select class="form-control selectpicker" name="superuser">
-	  {{ @superuserList | raw }}
+	<check if="{{@formUser.superuser == 1}}">
+	  <true>
+	    <option selected="selected">{{ @L.yes }}</option>
+	    <option>{{ @L.no }}</option>
+	  </true>
+	  <false>
+	    <option selected="selected">{{ @L.no }}</option>
+	    <option>{{ @L.yes }}</option>
+	</check>
       </select>
     </true>	
     <false>
