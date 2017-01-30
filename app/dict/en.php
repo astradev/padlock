@@ -69,4 +69,11 @@ return array(
   'adminrights' => 'Admin rights',
   'editrole' => 'Edit role',
   'newrole' => 'New role',
+  'loginexists' => 'Login name exist. Choose another.',
+  'novalidid' => 'No valid id given.',
+  'novalidlogin' => 'No login name given.',
+  'usersaveerr' => 'Error while saving the users.',
+  'usersaved' => 'User saved successfully.',
+  'admin' => 'admin',
+
 );

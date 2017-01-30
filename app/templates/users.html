@@ -14,6 +14,7 @@
 	    <th class="col-lg-3">{{@L.name}}</th>
             <th class="col-lg-3">{{@L.password}}</th>
             <th class="col-lg-3">{{@L.email}}</th>
+            <th class="col-lg-3">{{@L.admin}}</th>
             <th class="col-lg-1"></th>
           </tr>
         </thead>
@@ -23,7 +24,13 @@
             <td>{{ @u.login }}</td>
             <td>{{ @u.name }}</td>
             <td>{{ @u.password }}</td>
-	    <td>{{ @u.email }}</td>
+			<td>{{ @u.email }}</td>
+			<td>
+			<check if="{{ @u.superuser }}">
+				<true>{{@L.yes}}</true>
+				<false>{{@L.no}}</false>
+			</check>
+			</td>
             <td>
 	      <a data-target="#userform-{{ @u.id }}" data-toggle="modal" style="cursor:pointer;color:#000;" rel="tooltip" title="{{@L.edit}}" data-placement="bottom"><i class="fa fa-pencil-square-o"></i></a>&nbsp;
               <a style="cursor:pointer;color:#000;" rel="tooltip" title="{{@L.delete}}" data-placement="bottom"><i class="fa fa-trash-o"></i></a>
@@ -33,6 +40,7 @@
         </repeat>
       </table>
       </fieldset>
+	  </form>
     </div>
   </div>
 </div>

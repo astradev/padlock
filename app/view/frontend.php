@@ -13,7 +13,7 @@ class Frontend {
 		$f3 = \BASE::instance();
 		$ret = \Template::instance()->render( $this->template );
 		$f3->clear( 'SESSION.messages' );
-		$f3->clear( 'SESSION.treeUpdateTrigger' );
+		$f3->set( 'SESSION.treeUpdateTrigger', 'false' );
 		return $ret;
 	}
 }

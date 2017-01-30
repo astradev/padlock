@@ -88,7 +88,10 @@ class Folders extends Base {
 	public function show( \Base $f3, $params ) {
 		if( ! isset( $params['id'] ) || ! is_numeric( $params['id'] ) ) {
 			$folderList = \TreeBuilder::instance()->getFolderList();
-			$f3->logger->write("default folder: ".print_r( $folderList , true ) );
+			if( count( $folderList ) == 0 ) {
+				$f3->set( 'content', 'nopermissions.html' );
+				return;
+			}
 			$params['id'] = $folderList[0]['id'];
 		}
 		$folder = new \Model\Folder( $params['id'] );
