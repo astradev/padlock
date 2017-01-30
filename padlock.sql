@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.53, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.54, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: padlock
 -- ------------------------------------------------------
--- Server version	5.5.53-0+deb8u1-log
+-- Server version	5.5.54-0+deb8u1-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -36,7 +36,7 @@ CREATE TABLE `folders` (
   `lft` int(10) unsigned NOT NULL,
   `rgt` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `folders` (
 
 LOCK TABLES `folders` WRITE;
 /*!40000 ALTER TABLE `folders` DISABLE KEYS */;
-INSERT INTO `folders` VALUES (1,'Allgemein',1,44),(2,'Generell',45,54),(3,'Universal',55,62),(5,'abstrakt',18,29),(6,'extravagant',23,28),(7,'usbekisch',52,53),(8,'Dumm-Doof-Rettungslos',50,51),(32,'Nagios',63,64),(33,'Grundgesetz',65,68),(38,'normal',19,20),(39,'anders',14,15),(40,'igorrr',2,13),(41,'tendon',5,12),(42,'doublemonk',3,4),(43,'großwild',6,11),(44,'tot',9,10),(45,'lebendig',7,8);
+INSERT INTO `folders` VALUES (1,'Allgemein',1,50),(2,'Generell',51,60),(3,'Universal',61,68),(5,'abstrakt',20,35),(6,'extravagant',29,34),(7,'usbekisch',58,59),(8,'Dumm-Doof-Rettungslos',56,57),(32,'Nagios',69,70),(33,'Grundgesetz',71,74),(38,'normal',23,26),(39,'anders',16,17),(40,'igorrr',2,15),(41,'tendon',7,14),(42,'doublemonk',5,6),(43,'großwild',8,13),(44,'toter',11,12),(45,'lebendig',9,10),(46,'maigre',3,4),(47,'streber',24,25),(48,'Donaudampfschiffahrtsgesellschaftskapitänskajütentürknauf',21,22);
 /*!40000 ALTER TABLE `folders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +120,7 @@ CREATE TABLE `roles` (
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +129,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'admin'),(2,'demorolle');
+INSERT INTO `roles` VALUES (1,'admin'),(2,'demorolle'),(3,'Gruppe grantiger Greise'),(4,'test');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +150,7 @@ CREATE TABLE `users` (
   `repository` varchar(100) NOT NULL DEFAULT 'internal',
   PRIMARY KEY (`id`),
   UNIQUE KEY `login` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +159,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin','Marco Dickert','foobar@example.org','$2y$10$Phahy6seu3coomir2tuNgOF605DVotqQ6sDGzfqfomcz8.eiQI2gO',1,'internal'),(2,'demo','Test User','foobaz@example.org','$2y$10$Phahy6seu3coomir2tuNgODr1VK92lCTUw3msMq1cpFVItqlslYbO',0,'internal');
+INSERT INTO `users` VALUES (1,'admin','Marco Dickert','foobar@example.org','$2y$10$Phahy6seu3coomir2tuNgOF605DVotqQ6sDGzfqfomcz8.eiQI2gO',1,'internal'),(2,'demo','Test User','foobaz@example.org','$2y$10$Phahy6seu3coomir2tuNgODr1VK92lCTUw3msMq1cpFVItqlslYbO',0,'internal'),(3,'test','Tester','tester@example.org','$2y$10$Phahy6seu3coomir2tuNgODC7D1WK..cAPXy824wdpilmdJ83qhm.',1,'internal');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,4 +199,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-27 15:58:03
+-- Dump completed on 2017-01-30 16:04:14
