@@ -4,6 +4,7 @@ class Permissions {
 	protected static $_instance = null;
 
 	public function getFolderPermission( $folder_id ) {
+		if( $this->isSuperuser() ) return 2;
 		$f3 = \BASE::instance();
 		$folder = new \Model\Folder( $folder_id );
 		if( $folder->dry() ) return false;

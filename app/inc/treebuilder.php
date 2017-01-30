@@ -45,11 +45,17 @@ class TreeBuilder {
 
 	public function getFolderList() {
 		$list = $this->getFolderListAll();
-		$permissions = \Permissions::instance()->getAllPermissions();
 
-		$this->tmpIncrementer = 0;
-
-		return $this->processSubtree( false, $list, $permissions, $this->tmpIncrementer, 0 );
+		if( \Permissions::instance()->isSuperuser() ) {
+			for( $i = 0; $i < count( $list ); $i++ ) {
+				$list[$i]['perm'] = 2;
+			}
+			return $list;
+		} else {
+			$permissions = \Permissions::instance()->getAllPermissions();
+			$this->tmpIncrementer = 0;
+			return $this->processSubtree( false, $list, $permissions, $this->tmpIncrementer, 0 );
+		}
 	}
 
 	public function generateTree() {
