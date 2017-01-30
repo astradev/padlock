@@ -10,14 +10,14 @@
 </h3>
 	<check if="{{@formRole.id}}">
 		<true>
-			<form action="{{@BASE}}/settings/roles/edit/{{@formRole.id}}" method="post">
+			<form action="{{@BASE}}/settings/role/edit/{{@formRole.id}}" method="post">
 			<input type="hidden" name="id" value="{{@formRole.id}}">
 		</true>
 		<false>
-			<form action="{{@BASE}}/settings/roles/add" method="post">
+			<form action="{{@BASE}}/settings/role/add" method="post">
 		</false>
 	</check>
-  <input type="text" name="role" class="form-control" style="color:#000;" value="{{@formRole.name}}" placeholder="{{@L.roles}}">
+  <input type="text" name="name" class="form-control" style="color:#000;" value="{{@formRole.name}}" placeholder="{{@L.roles}}">
   <br>
   <button type="submit" class="btn btn-default btn-block">
 	<check if="{{@formRole.id}}">
@@ -31,10 +31,8 @@
   </button>
 </form>
 <check if="{{@formRole.id}}">
-	<check if="{{@formRole.id}}">
-	<form action="{{@BASE}}/settings/roles/delete" method="post" name="deleterole">
+	<form action="{{@BASE}}/settings/role/delete/{{@formRole.id}}" method="post" name="deleterole">
 		<input type="hidden" name="id" value="{{@formRole.id}}">
 		<button type="submit" class="btn btn-danger btn-delete" name="delete"><i class="fa fa-trash-o"></i></button>
 	</form>
-	</check>
 </check>
