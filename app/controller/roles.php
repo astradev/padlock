@@ -32,9 +32,15 @@ class Roles extends Backend {
 				}
 			}
 			if( ! $f3->exists( 'POST.name' ) || empty( trim( $f3->get( 'POST.name' ) ) ) ) {
-				$f3->push( 'SESSION.messages', array( $f3->get( 'L.invalidname' ), 1 ) );
+				$f3->push( 'SESSION.messages', array( $f3->get( 'L.novalidname' ), 1 ) );
 				return;
 			} else {
+				$tmp = new \Model\Role();
+				$tmp->load( array( 'name=?', $f3->get( 'POST.name' ) ) );
+				if( ! $tmp->dry() && $f3->get( 'POST.id' ) != $tmp->id ) {
+					$f3->push( 'SESSION.messages', array( $f3->get( 'L.roleexists' ), 1 ) );
+					return;
+				}
 				$role->name = $f3->get( 'POST.name' );
 			}
 
