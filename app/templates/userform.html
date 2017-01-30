@@ -26,8 +26,16 @@
   <input type="email" name="email" class="form-control" value="{{@formUser.email}}" placeholder="{{@L.email}}">
   <br>
       <select class="form-control selectpicker" name="superuser">
-	  <option value="no" <?php if( ! $formUser['superuser'] ) echo 'selected="selected"'; ?>>{{@L.no}}</option>
-	  <option value="yes" <?php if( $formUser['superuser'] ) echo 'selected="selected"'; ?>>{{@L.yes}}</option>
+	  <check if="{{@formUser.superuser}}">
+		  <true>
+			  <option value="no">{{@L.no}}</option>
+			  <option value="yes" selected="selected">{{@L.yes}}</option>
+		  </true>
+		  <false>
+			  <option value="no" selected="selected">{{@L.no}}</option>
+			  <option value="yes">{{@L.yes}}</option>
+		  </false>
+	  </check>
       </select>
   <br><br>
   <button type="submit" class="btn btn-default btn-block">
