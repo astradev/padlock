@@ -75,5 +75,7 @@ return array(
   'usersaveerr' => 'Error while saving the users.',
   'usersaved' => 'User saved successfully.',
   'admin' => 'admin',
-
+  'rolesaved' => 'Role was saved successfully.',
+  'rolesaveerr' => 'Role could not be saved.',
+  'roleexists' => 'Role name exists.',
 );
