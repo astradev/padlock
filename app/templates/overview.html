@@ -98,117 +98,115 @@
 </repeat>
 
 <script type="text/javascript">
-  $.cookie.defaults.path = '{{@BASE}}/';
-  function updateTree() {
-    $.ajaxSetup ({
-      cache: false
-    });
-    var ajax_load = "<img style='margin-left:35%;' src='{{@BASE}}/ui/img/reload.gif' alt='loading...' />";
-    var old_cookie_content = $.cookie('padlock_tree');
-    $.removeCookie('padlock_tree');
-    $( "#tree" ).html( ajax_load );
-    $.ajax({
-      url: '{{@BASE}}/api/foldertree',
-      type: "GET",
-      success: function(data){
-	var elem = $('#tree');
-        elem.html( data );
-	rereadTree();
-	$.cookie('padlock_tree', JSON.stringify( restoreOldStates( JSON.parse( $.cookie('padlock_tree') ), JSON.parse( old_cookie_content ) ) ), { path: '{{@BASE}}/' });
-	rereadTree();
-	},
-      error: function() { console.log('Could not get foldertree'); }
-    });
-  }
+$.cookie.defaults.path = '{{@BASE}}/';
 
-  function restoreOldStates( cur, old ) {
-    for( var i = 0; i < cur.length; i++ ) {
-      console.log( "Iterator: "+i);
-      cur[i].isExpanded = getMatch( cur[i].href, old );
-      if( cur[i].children ) {
-	cur[i].children = restoreOldStates( cur[i].children, old );
-      }
-    }
-    return cur;
-  }
+function Padlock() {
+	var self = this;
+	var old_cookie_content = "";
+	this.rereadTree = function() {
+		var elem = $('#tree');
+		elem.easytree({
+			data: $.cookie('padlock_tree'),
+			enableDnd: true,
+			stateChanged: this.stateChanged
+		});
+	};
+	this.updateTree = function() {
+		$.ajaxSetup ({
+			cache: false
+		});
+		var ajax_load = "<img style='margin-left:35%;' src='{{@BASE}}/ui/img/reload.gif' alt='loading...' />";
+		this.old_cookie_content = $.cookie('padlock_tree');
+		$.removeCookie('padlock_tree');
+		$( "#tree" ).html( ajax_load );
+		$.ajax({
+			url: '{{@BASE}}/api/foldertree',
+			type: "GET",
+			success: this.updateTreeSuccess,
+			error: function() { console.log('Could not get foldertree'); }
+		});
+	};
+	this.updateTreeSuccess = function( data ) {
+		var elem = $('#tree');
+		elem.html( data );
+		self.rereadTree();
+		console.log( JSON.parse( old_cookie_content ) );
+		$.cookie('padlock_tree', JSON.stringify( restoreOldStates( JSON.parse( $.cookie('padlock_tree') ), JSON.parse( this.old_cookie_content ) ) ), { path: '{{@BASE}}/' });
+		this.rereadTree();
+	};
+	this.restoreOldStates = function( cur, old, active=0 ) {
+		for( var i = 0; i < cur.length; i++ ) {
+			cur[i].isExpanded = getMatch( cur[i].href, old );
+			// Todo: restore isActive
+			if( cur[i].children ) {
+				cur[i].children = restoreOldStates( cur[i].children, old );
+			}
+		}
+		return cur;
+	};
+	this.getMatch = function( href, old ) {
+		for( var j =0; j<old.length; j++ ) {
+			if( old[j].href == href ) {
+				return (old[j].isExpanded?true:false);
+			}
+			if( old[j].children ) {
+				var a = getMatch( href, old[j].children );
+				if( a == true ) return true;
+			}
+		}
+		return false;
+	};
+	this.stateChanged = function stateChanged(nodes, nodesJson) {
+		var t = nodes[0].text;
+		console.log( "State changed"+nodesJson );
+		$.cookie('padlock_tree', nodesJson, { path: '{{@BASE}}/' } );
+	};
+	this.openAllNodes = function() {
+		var nodes = easyTree.getAllNodes();
+		toggleNodes(nodes, 'open');
+		easyTree.rebuildTree(nodes);
+	};
 
-  function getMatch( href, old ) {
-    for( var j =0; j<old.length; j++ ) {
-      if( old[j].href == href ) {
-	return (old[j].isExpanded?true:false);
-      }
-	if( old[j].children ) {
-	var a = getMatch( href, old[j].children );
-	if( a == true ) return true;
-      }
-    }
-    return false;
-  }
+	this.closeAllNodes = function() {
+		var nodes = easyTree.getAllNodes();
+		toggleNodes(nodes, 'close');
+		easyTree.rebuildTree(nodes);
+	};
 
-  function rereadTree() {
-    var elem = $('#tree');
-    elem.easytree({
-      data: $.cookie('padlock_tree'),
-    enableDnd: true,
-      stateChanged: stateChanged
-    });
-  }
+	this.toggleNodes = function toggleNodes(nodes, openOrClose){
+		var i = 0;
+		for (i = 0; i < nodes.length; i++) {
+			nodes[i].isExpanded = openOrClose == "open"; // either expand node or don't
 
-
-  $('#loadTree').click( updateTree );
-
-  $( ".toggleall" ).on( "click", function() {
-    if( this.ets ) {
-      closeAllNodes();
-      this.ets = false;
-    } else {
-      openAllNodes();
-      this.ets = true;
-    }
-  });
-
-  function stateChanged(nodes, nodesJson) {
-    $.cookie('padlock_tree', nodesJson, { path: '{{@BASE}}/' } );
-  }
-
-  function openAllNodes() {
-    var nodes = easyTree.getAllNodes();
-    toggleNodes(nodes, 'open');
-    easyTree.rebuildTree(nodes);
-  }
-
-  function closeAllNodes() {
-    var nodes = easyTree.getAllNodes();
-    toggleNodes(nodes, 'close');
-    easyTree.rebuildTree(nodes);
-  }
-
-  function toggleNodes(nodes, openOrClose){
-    var i = 0;
-    for (i = 0; i < nodes.length; i++) {
-      nodes[i].isExpanded = openOrClose == "open"; // either expand node or don't
-
-      // if has children open/close those as well
-      if (nodes[i].children && nodes[i].children.length > 0) {
-        toggleNodes(nodes[i].children, openOrClose);
-      }
-    }
-  }
-
-  var padtree = $.cookie('padlock_tree');
-  <check if="{{@SESSION.treeUpdateTrigger == 'true'}}">
-  <true>var treeUpdateTrigger = true;</true>
-  <false>var treeUpdateTrigger = false; </false>
-  </check>
-  if( padtree === undefined || treeUpdateTrigger ) {
-    updateTree();
-  } else {
-    rereadTree();
-  }
-
-</script>
-<script type="text/javascript">
-  function deletePw() {
-
-  }
+			// if has children open/close those as well
+			if (nodes[i].children && nodes[i].children.length > 0) {
+				toggleNodes(nodes[i].children, openOrClose);
+			}
+		}
+	};
+	this.init = function() {
+		$('#loadTree').click( this.updateTree );
+		$( ".toggleall" ).on( "click", function() {
+			if( this.ets ) {
+				this.closeAllNodes();
+				this.ets = false;
+			} else {
+				this.openAllNodes();
+				this.ets = true;
+			}
+		});
+		var padtree = $.cookie('padlock_tree');
+		<check if="{{@SESSION.treeUpdateTrigger == 'true'}}">
+			<true>var treeUpdateTrigger = true;</true>
+			<false>var treeUpdateTrigger = false; </false>
+		</check>
+		if( padtree === undefined || treeUpdateTrigger ) {
+			this.updateTree();
+		} else {
+			this.rereadTree();
+		}
+	};
+};
+var app = new Padlock();
+app.init();
 </script>
