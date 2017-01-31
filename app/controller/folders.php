@@ -63,7 +63,7 @@ class Folders extends Base {
 				else
 					$f3->reroute( '/dashboard' );
 			} else {
-				$f3->push( 'SESSION.messages', array( $f3->get( 'L.foldersaveerr' )."NANANANANANANANA", 1 ) );
+				$f3->push( 'SESSION.messages', array( $f3->get( 'L.foldersaveerr' ), 1 ) );
 			}
 		}
 	}
@@ -72,14 +72,14 @@ class Folders extends Base {
 		if( $f3->exists( 'POST.id' ) && is_numeric( $f3->get( 'POST.id' ) ) ) {
 			$folder = new \Model\Folder( $f3->get( 'POST.id' ) );
 			if( $folder->dry() ) {
-				$f3->push( 'SESSION.messages', array( $f3->get( 'L.deletefoldererr'), 1 ) );
+				$f3->push( 'SESSION.messages', array( $f3->get( 'L.folderdeleteerr'), 1 ) );
 			} else {
 				$folder->delete();
-				$f3->push( 'SESSION.messages', array( "Folder was successfully deleted", 0 ) );
+				$f3->push( 'SESSION.messages', array( $f3->get("L.folderdeleted"), 0 ) );
 				$f3->set( 'SESSION.treeUpdateTrigger', "true" );
 			}
 		} else {
-			$f3->push( 'SESSION.messages', array( "Could not delete folder: No valid folder id given", 1 ) );
+			$f3->push( 'SESSION.messages', array( $f3->get("L.unknownfolderdeleteerr"), 1 ) );
 		}
 
 		$f3->reroute( '/dashboard' );

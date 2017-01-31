@@ -66,7 +66,7 @@ $f3->route( 'GET|POST /password/delete/@id', 'Controller\Passwords->delete' );
 
 //Settings
 $f3->redirect( 'GET /settings', '/settings/config' );
-$f3->route( 'GET /settings/config', 'Controller\Config->show' );
+$f3->route( 'GET /settings/config', 'Controller\Config->getConfig' );
 $f3->route( 'GET /settings/users', 'Controller\Users->show' );
 $f3->route( 'GET|POST /settings/user/add', 'Controller\Users->create_edit' );
 $f3->route( 'GET|POST /settings/user/edit/@id', 'Controller\Users->create_edit' );

@@ -10,6 +10,10 @@ class Config extends Backend {
 		$f3->set( 'component', 'config' );
 	}
 
+	public function getConfig( \Base $f3, $params ) {
+		$f3->set( 'section', 'config.html' );
+	}
+
 	public function show( \Base $f3, $params ) {
 		$f3->set( 'section', 'config.html' );
 	}
