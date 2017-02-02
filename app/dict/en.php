@@ -1,81 +1,142 @@
 <?php
 
 return array(
-  'language' => 'Language',
+  //Language
   'german' => 'German',
   'english' => 'English',
+  'languageandtime' => 'Language and time',
+  'normallanguage' => 'Normal Language',
+  'languagepath' => 'Path to languages',
+  
+  //Menu
   'settings' => 'Settings',
   'home' => 'Home',
-  'name' => 'Name',
-  'loginfailed' => 'Login failed. Your username or password was wrong.',
   'logout' => 'Logout',
+  'language' => 'Language',
+  
+  //Login ----------------------
+  'loginfailed' => 'Login failed. Your username or password was wrong.',
+  'loginexists' => 'Login name exist. Choose another.',
+  //----------------------------
+  
+  //Folder ---------------------
+  //Error messages
+  'unknownfoldererr' => 'Unknown error occured while saving folder.',
+  'invalidfoldername' => 'The folder name is invalid.',
+  'foldersaveerr' => 'Folder could not be saved.',
+  
+  //Success messages
+  'foldersaved' => 'Folder was successfully saved.',
+  'folderdeleted' => 'Folder was successfully deleted.',
+  'folderdeleteerr' => 'Unknown error occured while deleting folder.',
+  'unknownfolderdeleteerr' => 'Could not delete folder: No valid folder id given.',
+  
+  //Normal messages
   'foldername' => 'Folder name',
   'addfolder' => 'Add folder',
+  'toggleall' => 'Toggle all',
   'newfolder' => 'New folder',
-  'folders' => 'Folder',
-  'password' => 'Password',
+  'upperfolder' => 'Select parent folder', 
+  'editfolder' => 'Edit folder',
+  'refreshfolder' => 'Refresh folders', 
+  'deletefolder' => 'Delete folder',
+  //----------------------------
+
+  
+  //Roles ----------------------
+  //Error messages
+  'rolesaveerr' => 'Role could not be saved.',
+  'roleexists' => 'Role name exists.',
+  
+  //Success messages
+  'rolesaved' => 'Role was saved successfully.',
+  
+  //Normal messages
+  'editrole' => 'Edit role',
+  'newrole' => 'New role',
+  //----------------------------
+  
+
+  //Password -------------------
+  //Error messages
+  'nopasswordset' => 'No password was set. This is mandatory.',
+  'nolabelset' => 'No label was set. This is mandatory.', 
+  
+  //Success messages
+
+  
+  //Normal messages
   'addpassword' => 'Add password',
   'newpassword' => 'New password',
   'passwordrepeat' => 'Repeat Password',
-  'dashboard' => 'Dashboard',
-  'unknownfoldererr' => 'Unknown error occured while saving folder.',
-  'invalidfoldername' => 'The folder name is invalid.',
-  'foldersaved' => 'Folder was successfully saved.',
-  'foldersaveerr' => 'Folder could not be saved.',
-  'installsetup' => 'Install setup',
-  'login' => 'Login',
-  'username' => 'Username',
-  'upperfolder' => 'Select parent folder',
-  'label' => 'Label',
-  'description' => 'Description',
   'editpassword' => 'Edit password',
-  'editfolder' => 'Edit folder',
-  'nopermissions' => 'You have no permissions to do this',
-  'nolabelset' => 'No label was set. This is mandatory.',
-  'nopasswordset' => 'No password was set. This is mandatory.',
-  'users' => 'Users',
-  'permissions' => 'Permissions',
-  'refreshfolder' => 'Refresh folders',
-  'languageandtime' => 'Language and time',
-  'time' => 'Time',
-  'timezone' => 'Timezone',
-  'normallanguage' => 'Normal Language',
-  'languagepath' => 'Path to languages',
-  'paths' => 'Paths',
-  'designpath' => 'Designs',
-  'toggleall' => 'Toggle all',
-  'deletefolder' => 'Delete folder',
   'deletepassword' => 'Delete password',
-  'yesdelete' => 'Yes, delete',
-  'nodelete' => 'No, abort',
-  'newuser' => 'Add user',
-  'edit' => 'Edit',
-  'delete' => 'Delete',
-  'email' => 'E-Mail',
-  'role' => 'Group',
-  'userdeletesuccessful' => 'User was successfully deleted.',
-  'userdeleteerror' => 'Could not delete user.',
-  'usercreatesuccessful' => 'User was successfully created.',
-  'usercreateerror' => 'Could not create user.',
-  'couldnotedituser' => 'Could not edit user.',
-  'useredited' => 'User was successfully edited.',
-  'newrole' => 'new role',
-  'roles' => 'Roles',
-  'users' => 'Users',
-  'yes' => 'Yes',
-  'no' => 'No',
-  'edituser' => 'Edit user',
-  'newuser' => 'Add user',
-  'adminrights' => 'Admin rights',
-  'editrole' => 'Edit role',
-  'newrole' => 'New role',
-  'loginexists' => 'Login name exist. Choose another.',
+  //----------------------------  
+  
+  
+  //User -----------------------
+  //Error messages
   'novalidid' => 'No valid id given.',
   'novalidlogin' => 'No login name given.',
   'usersaveerr' => 'Error while saving the users.',
+  'usercreateerror' => 'Could not create user.',
+  'couldnotedituser' => 'Could not edit user.',
+  'userdeleteerror' => 'Could not delete user.',
+  
+  //Success messages
+  'useredited' => 'User was successfully edited.',
   'usersaved' => 'User saved successfully.',
-  'admin' => 'admin',
-  'rolesaved' => 'Role was saved successfully.',
-  'rolesaveerr' => 'Role could not be saved.',
-  'roleexists' => 'Role name exists.',
+  'userdeletesuccessful' => 'User was successfully deleted.',
+  'usercreatesuccessful' => 'User was successfully created.',
+  
+  //Normal messages
+  'newuser' => 'Add user',
+  'edituser' => 'Edit user',
+  'newuser' => 'Add user',
+  'adminrights' => 'Admin rights',
+  //----------------------------  
+  
+ 
+  //Permissions ----------------
+  //Error messages
+  'nopermissions' => 'You have no permissions to do this',
+  
+  //Success messages
+
+  
+  //Normal messages
+
+  //----------------------------  
+  
+  //Button/Header defautls
+  'name' => 'Name',
+  'folders' => 'Folder',
+  'password' => 'Password',
+  'login' => 'Login',
+  'username' => 'Username',
+  'dashboard' => 'Dashboard',
+  'description' => 'Description',
+  'users' => 'Users',
+  'permissions' => 'Permissions',  
+  'paths' => 'Paths',
+  'designpath' => 'Designs',
+  'time' => 'Time',
+  'timezone' => 'Timezone',
+  'label' => 'Label', 
+  'edit' => 'Edit',
+  'delete' => 'Delete',
+  'email' => 'E-Mail',
+  'role' => 'Group', 
+  'roles' => 'Roles',
+  'users' => 'Users',
+  'admin' => 'Admin',
+  
+  //Values
+  'yes' => 'Yes',
+  'no' => 'No', 
+  'yesdelete' => 'Yes, delete',
+  'nodelete' => 'No, abort',
+ 
+  //Other
+  'installsetup' => 'Install setup',
 );
