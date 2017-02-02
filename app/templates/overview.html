@@ -9,7 +9,6 @@
     </p>
     <h4 class="text-left">{{@L.folders}}</h4>
     <div id="tree">
-      <img style='margin-left:35%;' src='{{@BASE}}/ui/img/reload.gif' alt='loading...' />
     </div>
   </div>
 </div>
@@ -118,7 +117,7 @@ function Padlock() {
 			cache: false
 		});
 		var ajax_load = '<img style="margin-left:35%;" src="{{@BASE}}/ui/img/reload.gif" alt="loading..." />';
-		this.oldStates = sessionStorage.getItem( 'padlock_tree' );
+		self.oldStates = sessionStorage.getItem( 'padlock_tree' );
 		sessionStorage.setItem( 'padlock_tree', '' );
 		$( '#tree' ).html( ajax_load );
 		$.ajax({
@@ -132,7 +131,7 @@ function Padlock() {
 		var elem = $('#tree');
 		elem.html( data );
 		self.rereadTree();
-		if( self.oldStates.trim() != '' ) {
+		if( typeof self.oldStates != 'undefined' && self.oldStates.trim() != '' ) {
 			sessionStorage.setItem( 'padlock_tree', JSON.stringify( self.restoreOldStates( JSON.parse( sessionStorage.getItem( 'padlock_tree' ) ), JSON.parse( self.oldStates ) <?php if( isset( $f3->get( 'PARAMS.id' ) ) ) echo ', '.$PARAMS['id']; ?> ) ) );
 			self.rereadTree();
 		}
