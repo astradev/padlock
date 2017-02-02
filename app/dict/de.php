@@ -7,6 +7,7 @@ return array(
   'languageandtime' => 'Sprache und Zeit',
   'normallanguage' => 'Standard Sprache',
   'languagepath' => 'Sprachpfad',
+  'languageprefix' => 'Sprachen Präfix',
   
   //Menu
   'settings' => 'Einstellungen',

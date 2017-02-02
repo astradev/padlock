@@ -7,6 +7,7 @@ return array(
   'languageandtime' => 'Language and time',
   'normallanguage' => 'Normal Language',
   'languagepath' => 'Path to languages',
+  'languageprefix' => 'Language Prefix',
   
   //Menu
   'settings' => 'Settings',

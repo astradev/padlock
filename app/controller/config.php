@@ -4,39 +4,30 @@ namespace Controller;
 
 class Config extends Backend {
 
-	public function __construct() {
+	public function __construct( $filename, $safefile = false ) {
 		parent::__construct();
 		$f3 = \BASE::instance();
+    
 		$f3->set( 'component', 'config' );
 	}
 
-	public function edit( $f3, $params ) {
-	
-	}
-  
-	public function open_ini( $array, $indent = 0 ) {
-	  global $str;
-	  foreach( $array as $k => $v ) {
-	    if( is_array( $v ) ) {
-	      for( $i=0; $i < $indent * 5; $i++ ) {
-		$str .= " ";
-	      }
-	      open_ini( $v, $indent + 1 );
-	    } else {
-	      for( $i=0; $i < $indent * 5; $i++) {
-		$str .= " ";
-	      }
-	    }
-	  }
-	}
+	public function config_set( $config, $section, $key, $value ) {
+		$configData = parse_ini_file( $config, true );
+		$configData[$section][$key] = $value;
 
-	public function edit_ini( $array, $file ) {
-	}
+		$content = '';
+
+		foreach( $configData as $section => $sectionContent ) {
+		  $sectionContent = array_map( function( $value, $key ) {
+		    return "$key=$value";
+		  }, array_values( $sectionContent ), array_key( $sectionContent ) );
+		  $sectionContent = implode( "\n", $sectionContent );
+		  $content .= "[$section]\n$sectionContent\n";
+		}
+		file_put_contents( $config, $content );
+	}		
 
 	public function show( \Base $f3 ) {
-		$ini = new \Controller\Config();
-
-		$f3->set( 'configOut', $ini->open_ini() );
 		$f3->set( 'section', 'config.html' );
 	}
 
