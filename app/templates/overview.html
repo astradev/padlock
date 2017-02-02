@@ -102,13 +102,14 @@ $.cookie.defaults.path = '{{@BASE}}/';
 
 function Padlock() {
 	var self = this;
-	var old_cookie_content = "";
+	var oldStates = "";
+	var easytree;
 	this.rereadTree = function() {
 		var elem = $('#tree');
-		elem.easytree({
-			data: $.cookie('padlock_tree'),
+		this.easytree = elem.easytree({
+			data: sessionStorage.getItem( 'padlock_tree' ),
 			enableDnd: true,
-			stateChanged: this.stateChanged
+			stateChanged: self.stateChanged
 		});
 	};
 	this.updateTree = function() {
@@ -116,8 +117,8 @@ function Padlock() {
 			cache: false
 		});
 		var ajax_load = "<img style='margin-left:35%;' src='{{@BASE}}/ui/img/reload.gif' alt='loading...' />";
-		this.old_cookie_content = $.cookie('padlock_tree');
-		$.removeCookie('padlock_tree');
+		this.oldStates = sessionStorage.getItem( 'padlock_tree' );
+		sessionStorage.setItem( 'padlock_tree', '' );
 		$( "#tree" ).html( ajax_load );
 		$.ajax({
 			url: '{{@BASE}}/api/foldertree',
@@ -130,16 +131,18 @@ function Padlock() {
 		var elem = $('#tree');
 		elem.html( data );
 		self.rereadTree();
-		console.log( JSON.parse( old_cookie_content ) );
-		$.cookie('padlock_tree', JSON.stringify( restoreOldStates( JSON.parse( $.cookie('padlock_tree') ), JSON.parse( this.old_cookie_content ) ) ), { path: '{{@BASE}}/' });
-		this.rereadTree();
+		if( typeof self.oldStates !== 'undefined' ) {
+			sessionStorage.setItem( 'padlock_tree', JSON.stringify( self.restoreOldStates( JSON.parse( sessionStorage.getItem( 'padlock_tree' ) ), JSON.parse( self.oldStates ) <?php if( isset( $f3->get( 'PARAMS.id' ) ) ) echo ", ".$PARAMS['id']; ?> ) ) );
+			self.rereadTree();
+		}
 	};
 	this.restoreOldStates = function( cur, old, active=0 ) {
 		for( var i = 0; i < cur.length; i++ ) {
-			cur[i].isExpanded = getMatch( cur[i].href, old );
-			// Todo: restore isActive
+			if( self.getMatch( cur[i].href, old ) ) {
+				cur[i].isExpanded = true;
+			}
 			if( cur[i].children ) {
-				cur[i].children = restoreOldStates( cur[i].children, old );
+				cur[i].children = self.restoreOldStates( cur[i].children, old );
 			}
 		}
 		return cur;
@@ -150,16 +153,14 @@ function Padlock() {
 				return (old[j].isExpanded?true:false);
 			}
 			if( old[j].children ) {
-				var a = getMatch( href, old[j].children );
+				var a = self.getMatch( href, old[j].children );
 				if( a == true ) return true;
 			}
 		}
 		return false;
 	};
-	this.stateChanged = function stateChanged(nodes, nodesJson) {
-		var t = nodes[0].text;
-		console.log( "State changed"+nodesJson );
-		$.cookie('padlock_tree', nodesJson, { path: '{{@BASE}}/' } );
+	this.stateChanged = function stateChanged( nodes, nodesJson ) {
+		sessionStorage.setItem( 'padlock_tree', nodesJson );
 	};
 	this.openAllNodes = function() {
 		var nodes = easyTree.getAllNodes();
@@ -185,24 +186,27 @@ function Padlock() {
 		}
 	};
 	this.init = function() {
-		$('#loadTree').click( this.updateTree );
+		$('#loadTree').click( self.updateTree );
 		$( ".toggleall" ).on( "click", function() {
 			if( this.ets ) {
-				this.closeAllNodes();
+				self.closeAllNodes();
 				this.ets = false;
 			} else {
-				this.openAllNodes();
+				self.openAllNodes();
 				this.ets = true;
 			}
 		});
-		var padtree = $.cookie('padlock_tree');
+
 		<check if="{{@SESSION.treeUpdateTrigger == 'true'}}">
 			<true>var treeUpdateTrigger = true;</true>
 			<false>var treeUpdateTrigger = false; </false>
 		</check>
-		if( padtree === undefined || treeUpdateTrigger ) {
+		
+		if( sessionStorage.getItem( 'padlock_tree' ).trim() == "" || sessionStorage.getItem( 'padlock_tree' ) == null || treeUpdateTrigger ) {
+			console.log( "updatetree completely");
 			this.updateTree();
 		} else {
+			console.log( "refresh from cookie");
 			this.rereadTree();
 		}
 	};
