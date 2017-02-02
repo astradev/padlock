@@ -131,7 +131,7 @@ function Padlock() {
 		var elem = $('#tree');
 		elem.html( data );
 		self.rereadTree();
-		if( typeof self.oldStates != 'undefined' && self.oldStates.trim() != '' ) {
+		if( typeof self.oldStates != 'undefined' && self.oldStates != '' ) {
 			sessionStorage.setItem( 'padlock_tree', JSON.stringify( self.restoreOldStates( JSON.parse( sessionStorage.getItem( 'padlock_tree' ) ), JSON.parse( self.oldStates ) <?php if( isset( $f3->get( 'PARAMS.id' ) ) ) echo ', '.$PARAMS['id']; ?> ) ) );
 			self.rereadTree();
 		}
@@ -148,13 +148,15 @@ function Padlock() {
 		return cur;
 	};
 	this.getMatch = function( href, old ) {
-		for( var j =0; j<old.length; j++ ) {
-			if( old[j].href == href ) {
-				return (old[j].isExpanded?true:false);
-			}
-			if( old[j].children ) {
-				var a = self.getMatch( href, old[j].children );
-				if( a == true ) return true;
+		if( old ) {
+			for( var j =0; j<old.length; j++ ) {
+				if( old[j].href == href ) {
+					return (old[j].isExpanded?true:false);
+				}
+				if( old[j].children ) {
+					var a = self.getMatch( href, old[j].children );
+					if( a == true ) return true;
+				}
 			}
 		}
 		return false;
@@ -194,7 +196,7 @@ function Padlock() {
 			<false>var treeUpdateTrigger = false; </false>
 		</check>
 		
-		if( sessionStorage.getItem( 'padlock_tree' ).trim() == '' || sessionStorage.getItem( 'padlock_tree' ) == null || treeUpdateTrigger ) {
+		if( ! sessionStorage.getItem( 'padlock_tree' ) || sessionStorage.getItem( 'padlock_tree' ) == '' || treeUpdateTrigger ) {
 			console.log( 'updatetree completely');
 			this.updateTree();
 		} else {
