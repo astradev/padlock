@@ -54,6 +54,7 @@ return array(
   //Normal messages
   'editrole' => 'Edit role',
   'newrole' => 'New role',
+  'members' => 'Members',
   //----------------------------
   
 

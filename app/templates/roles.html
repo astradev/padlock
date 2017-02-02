@@ -9,7 +9,8 @@
         <thead>
           <tr>
             <th class="col-lg-2">#</th>
-            <th class="col-lg-9">{{@L.name}}</th>
+            <th class="col-lg-7">{{@L.name}}</th>
+            <th class="col-lg-2">{{@L.members}}</th>
             <th class="col-lg-1"></th>
           </tr>
         </thead>
@@ -18,6 +19,7 @@
           <tr>
             <td>{{ @role.id }}</td>
             <td>{{ @role.name }}</td>
+            <td>{{ @role.users }}</td>
             <td>
 	      <a data-toggle="modal" data-target="#roleform-{{ @role.id }}" style="cursor:pointer;color:#000;" rel="tooltip" title="{{@L.edit}}" data-placement="bottom"><i class="fa fa-pencil-square-o"></i></a>&nbsp;
               <a rel="tooltip" title="{{@L.delete}}" style="cursor:pointer;color:#000;" data-placement="bottom"><i class="fa fa-trash-o"></i></a>
