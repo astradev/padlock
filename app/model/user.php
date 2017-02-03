@@ -5,15 +5,25 @@ class User extends Base {
   protected $_dbtable = "users";
   public $newpassword = false;
 
-  public function __construct( $login=false ) {
+  public function __construct( $id=false ) {
       parent::__construct();
-      if( is_string( $login ) ) {
-        $this->load( array( 'login=?', $login ) );
+      if( is_numeric( $id ) ) {
+        $this->load( array( 'id=?', $id ) );
      }
   }
 
+  public function loadByLogin( $login=false ) {
+      if( is_string( $login ) ) {
+        $this->load( array( 'login=?', $login ) );
+		return true;
+     } else
+		 return false;
+  }
+
   public function getAllUsers() {
-	  return $this->find();
+	  $f3 = \BASE::instance();
+	  $query = "SELECT * FROM users LEFT JOIN ( SELECT user_id, GROUP_CONCAT( roles.id ) AS roles FROM users_roles LEFT JOIN roles ON roles.id = users_roles.role_id GROUP BY users_roles.user_id ) tmpRoles ON tmpRoles.user_id = users.id";
+	  return $f3->DB->exec( $query );
   }
   
   public function save() {

@@ -66,25 +66,33 @@ class Users extends Backend {
 		if( $f3->exists( 'POST.id' ) && is_numeric( $f3->get( 'POST.id' ) ) ) {
 			$user = new \Model\User( $f3->get( 'POST.id' ) );
 			if( ! $user->dry() && $user->delete() ) {
-				$f3->SESSION->messages[] = array( "L.userdeletesuccessful", 0 );
+				$f3->push( 'SESSION.messages', array( $f3->get( 'L.userdeletesuccessful' ), 0 ) );
 			} else {
-				$f3->SESSION->messages[] = array( "L.userdeleteerror", 1 );
+				$f3->push( 'SESSION.messages', array( $f3->get( 'L.userdeleteerror' )." User not found", 1 ) );
 			}
 		} else {
-			$f3->SESSION->messages[] = array( "L.userdeleteerror", 1 );
+			$f3->push( 'SESSION.messages', array( $f3->get( 'L.userdeleteerror' )." ID not given or smth.", 1 ) );
 		}
 		$f3->reroute( '/settings/users' );
 	}
 
 	public function show( \Base $f3, $params ) {
 		$user = new \Model\User();
+		$role = new \Model\Role();
+		$allUsers = $user->getAllUsers();
+		$allRoles = $role->getAllRoles();
 
-		if( isset( $params['id'] ) && is_numeric( $params['id'] ) ) {
-			$f3->set( 'superuserList', $user->getSuperuser( $params["id"] ) );
-		} else {
-			$f3->set( 'superuserList', $user->getSuperuser() );
+		for( $i = 0; $i < count( $allUsers ); $i++ ) {
+			$hisRoles = explode( ',', $allUsers[$i]['roles'] );
+			$allUsers[$i]['roles'] = array();
+			foreach( $hisRoles as $role ) {
+				if( intval( $role ) > 0 )
+					array_push( $allUsers[$i]['roles'], array( 'id' => intval( $role ), 'name' => $allRoles[intval( $role )] ) );
+			}
 		}
-		$f3->set( 'users', $user->getAllUsers() );
+		$f3->logger->write( "user arr: " . print_r( $allUsers, true ));
+
+		$f3->set( 'users', $allUsers );
 		$f3->set( 'formUser', $user );
 		$f3->set( 'section', 'users.html' );
 	}

@@ -12,9 +12,10 @@
           <tr>
 	    <th class="col-lg-2">{{@L.username}}</th>
 	    <th class="col-lg-3">{{@L.name}}</th>
-            <th class="col-lg-3">{{@L.email}}</th>
-            <th class="col-lg-3">{{@L.admin}}</th>
-            <th class="col-lg-1"></th>
+		<th class="col-lg-3">{{@L.email}}</th>
+		<th class="col-lg-3">{{@L.roles}}</th>
+		<th class="col-lg-3">{{@L.admin}}</th>
+		<th class="col-lg-1"></th>
           </tr>
         </thead>
         <repeat group="{{ @users }}" value="{{ @u }}">
@@ -23,6 +24,13 @@
             <td>{{ @u.login }}</td>
             <td>{{ @u.name }}</td>
 			<td>{{ @u.email }}</td>
+			<td>
+			<check if="{{@u.roles}}">
+				<repeat group="{{@u.roles}}" value="{{@r}}">
+					{{@r.name}}<br>
+				</repeat>
+			</check>
+			</td>
 			<td>
 			<check if="{{ @u.superuser }}">
 				<true>{{@L.yes}}</true>

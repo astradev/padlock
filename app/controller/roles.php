@@ -70,7 +70,7 @@ class Roles extends Backend {
 	public function show( \Base $f3, $params ) {
 		$role = new \Model\Role();
 
-		$f3->set( 'roles', $role->getAllRoles() );
+		$f3->set( 'roles', $role->getAllRolesWithUsers() );
 		$f3->set( 'formRole', $role );
 		$f3->set( 'section', 'roles.html' );
 	}
