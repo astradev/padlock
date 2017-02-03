@@ -8,6 +8,9 @@ class Users extends Backend {
 		parent::__construct();
 		$f3 = \BASE::instance();
 		$f3->set( 'component', 'users' );
+		$role = new \Model\Role();
+		$allRoles = $role->getAllRoles();
+		$f3->set( 'allRoles', $allRoles );
 	}
 
 	public function create_edit( $f3, $params ) {
@@ -102,7 +105,6 @@ class Users extends Backend {
 
 		$f3->set( 'users', $allUsers );
 		$f3->set( 'formUser', $user );
-		$f3->set( 'allRoles', $allRoles );
 		$f3->set( 'section', 'users.html' );
 	}
 

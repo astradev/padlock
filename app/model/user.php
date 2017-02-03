@@ -44,16 +44,19 @@ class User extends Base {
 	  if(  $this->newpassword ) {
 		  $this->password = password_hash( $this->newpassword, PASSWORD_BCRYPT, array( "salt" => $f3->get( 'global_salt' ) ) );
 	  }
+	  $ret = parent::save();
 	  if( $this->newroles ) {
+		  if( ! is_numeric( $this->id ) ) $this->load( array( 'login=?', $this->login ) );
 		  $this->setNewRoles( $this->newroles );
 	  }
-	  return parent::save();
+	  return $ret;
   }
 
   public function setNewRoles( $roles ) {
 	  $f3 = \BASE::instance();
 	  $f3->DB->begin();
-	  $f3->DB->exec( "DELETE FROM users_roles WHERE user_id = ?", $this->id );
+	  if( is_numeric( $this->id ) ) 
+		  $f3->DB->exec( "DELETE FROM users_roles WHERE user_id = ?", $this->id );
 	  foreach( $roles as $role ) {
 		  if( is_numeric( $role ) )
 			  $f3->DB->exec( "INSERT INTO users_roles VALUES ( :uid, :rid )", array( 'uid' => $this->id, 'rid' => $role ) );
