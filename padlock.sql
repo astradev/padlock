@@ -36,7 +36,7 @@ CREATE TABLE `folders` (
   `lft` int(10) unsigned NOT NULL,
   `rgt` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `folders` (
 
 LOCK TABLES `folders` WRITE;
 /*!40000 ALTER TABLE `folders` DISABLE KEYS */;
-INSERT INTO `folders` VALUES (1,'Allgemein',1,50),(2,'Generell',51,60),(3,'Universal',61,68),(5,'abstrakt',20,35),(6,'extravagant',29,34),(7,'usbekisch',58,59),(8,'Dumm-Doof-Rettungslos',56,57),(32,'Nagios',69,70),(33,'Grundgesetz',71,74),(38,'normal',23,26),(39,'anders',16,17),(40,'igorrr',2,15),(41,'tendon',7,14),(42,'doublemonk',5,6),(43,'großwild',8,13),(44,'toter',11,12),(45,'lebendig',9,10),(46,'maigre',3,4),(47,'streber',24,25),(48,'Donaudampfschiffahrtsgesellschaftskapitänskajütentürknauf',21,22);
+INSERT INTO `folders` VALUES (1,'Allgemein',1,54),(2,'Generell',55,64),(3,'Universal',65,72),(5,'abstrakt',20,39),(6,'extravagant',33,38),(7,'usbekisch',62,63),(8,'Dumm-Doof-Rettungslos',60,61),(32,'Nagios',73,76),(33,'Grundgesetz',77,80),(38,'normal',23,30),(39,'anders',16,17),(40,'igorrr',2,15),(41,'tendon',7,14),(42,'double monk',5,6),(43,'großwild',8,13),(44,'toter',11,12),(45,'lebendig',9,10),(46,'maigre',3,4),(47,'streber',28,29),(48,'Donaudampfschiffahrtsgesellschaftskapitänskajütentürknauf',21,22),(49,'abc123',74,75),(50,'keinStreber',24,27),(51,'Unterordner',25,26);
 /*!40000 ALTER TABLE `folders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -67,7 +67,7 @@ CREATE TABLE `passwords` (
   PRIMARY KEY (`id`),
   KEY `folder_id` (`folder_id`),
   CONSTRAINT `passwords_ibfk_1` FOREIGN KEY (`folder_id`) REFERENCES `folders` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +76,7 @@ CREATE TABLE `passwords` (
 
 LOCK TABLES `passwords` WRITE;
 /*!40000 ALTER TABLE `passwords` DISABLE KEYS */;
-INSERT INTO `passwords` VALUES (1,'Google','example@gmail.com','w8h4q.asd',NULL,'Das ist die Beschreibung. Sher sinnvoll',2),(2,'Yahoo','example@yahoo.com','wurstgeil',NULL,'weniger text',1),(3,'123','423423','423','NULL','31312',2),(4,'Test','Glanzstück','schlingelwurst',NULL,'Pullermann',3),(5,'extravagantes Passwort','root','123456987asderffoobar',NULL,'System',6),(7,'Hintertür','jeder','123456',NULL,'Ach eine Beschreibung auch noch? Na klar fällt mir da eine ein. JA SICHER!!!!¹11elf',6),(8,'Dumm','doof',NULL,NULL,'beschreibung',8),(9,'Ein Passwort','demo',NULL,NULL,'Demo-Nutzer',39),(10,'toter Hase','thase',NULL,NULL,'Hintertür *kicher*',44);
+INSERT INTO `passwords` VALUES (1,'Google','example@gmail.com','w8h4q.asd',NULL,'Das ist die Beschreibung. Sher sinnvoll',2),(2,'Yahoo','example@yahoo.com','wurstgeil',NULL,'weniger text',1),(3,'123','423423','423','NULL','31312',2),(4,'Test','Glanzstück','schlingelwurst',NULL,'Pullermann',3),(5,'extravagantes Passwort','root','123456987asderffoobar',NULL,'System',6),(7,'Hintertür','jeder','123456',NULL,'Ach eine Beschreibung auch noch? Na klar fällt mir da eine ein. JA SICHER!!!!¹11elf',6),(8,'Dumm','doof',NULL,NULL,'beschreibung',8),(9,'Ein Passwort','demo',NULL,NULL,'Demo-Nutzer',39),(10,'toter Hase','thase',NULL,NULL,'Hintertür *kicher*',44),(11,'DHCP-Server','root','pullerM4nn',NULL,'Zum Ändern der Einträge',51),(12,'Utzbekisches Armeelager','Admiral Admin ','3x kurz, 3x lang, Passwort \"Russisch Mann\"',NULL,'Das utzbekistczghe Armeelager lagert Algen in Lagerregalen',7);
 /*!40000 ALTER TABLE `passwords` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +120,7 @@ CREATE TABLE `roles` (
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +129,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'admin'),(2,'demorolle'),(3,'Gruppe grantiger Greise'),(4,'test');
+INSERT INTO `roles` VALUES (1,'admin'),(2,'demorolle'),(6,'Gradwanderer'),(3,'Gruppe grantiger Greise'),(4,'test');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +150,7 @@ CREATE TABLE `users` (
   `repository` varchar(100) NOT NULL DEFAULT 'internal',
   PRIMARY KEY (`id`),
   UNIQUE KEY `login` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +159,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin','Marco Dickert','foobar@example.org','$2y$10$Phahy6seu3coomir2tuNgOF605DVotqQ6sDGzfqfomcz8.eiQI2gO',1,'internal'),(2,'demo','Test User','foobaz@example.org','$2y$10$Phahy6seu3coomir2tuNgODr1VK92lCTUw3msMq1cpFVItqlslYbO',0,'internal'),(3,'test','Tester','tester@example.org','$2y$10$Phahy6seu3coomir2tuNgODC7D1WK..cAPXy824wdpilmdJ83qhm.',1,'internal');
+INSERT INTO `users` VALUES (1,'admin','Marco Dickert','foobar@example.org','$2y$10$Phahy6seu3coomir2tuNgOF605DVotqQ6sDGzfqfomcz8.eiQI2gO',1,'internal'),(2,'demo','Test User','foobaz@example.org','$2y$10$Phahy6seu3coomir2tuNgODr1VK92lCTUw3msMq1cpFVItqlslYbO',0,'internal'),(3,'test','Tester','tester@example.org','$2y$10$Phahy6seu3coomir2tuNgODC7D1WK..cAPXy824wdpilmdJ83qhm.',1,'internal'),(4,'Muni','Christian Kuhn','muni@example.org','$2y$10$Phahy6seu3coomir2tuNgOMsjr/RTxrDyBIJtwnH/3vXGrKtTrl3a',0,'internal');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,7 +186,7 @@ CREATE TABLE `users_roles` (
 
 LOCK TABLES `users_roles` WRITE;
 /*!40000 ALTER TABLE `users_roles` DISABLE KEYS */;
-INSERT INTO `users_roles` VALUES (1,1),(2,2);
+INSERT INTO `users_roles` VALUES (1,1),(3,1),(2,2),(2,4),(2,6);
 /*!40000 ALTER TABLE `users_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -199,4 +199,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-30 16:04:14
+-- Dump completed on 2017-02-03 15:05:56
