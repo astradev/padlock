@@ -52,6 +52,15 @@ class Users extends Backend {
 			if( $f3->get( 'POST.superuser' ) == "yes" ) {
 				$user->superuser = true;
 			}
+			if( $f3->exists( 'POST.newroles' ) ) {
+				$newroles = $f3->get( 'POST.newroles' );
+				if( ! is_array( $newroles ) ) $newroles = array( $newroles );
+				$oldroles = array_column( $user->roles, 'id' );
+				sort( $newroles );
+				sort( $oldroles );
+				if( $newroles != $oldroles )
+					$user->newroles = $newroles;
+			}
 
 			if( $user->save() ) {
 				$f3->push( 'SESSION.messages', array( $f3->get( 'L.usersaved' ), 0 ) );
@@ -87,13 +96,13 @@ class Users extends Backend {
 			$allUsers[$i]['roles'] = array();
 			foreach( $hisRoles as $role ) {
 				if( intval( $role ) > 0 )
-					array_push( $allUsers[$i]['roles'], array( 'id' => intval( $role ), 'name' => $allRoles[intval( $role )] ) );
+					array_push( $allUsers[$i]['roles'], array_values( array_filter( $allRoles, function( $row ) use ( $role ) { return $row['id'] == intval( $role ); } ) )[0] );
 			}
 		}
-		$f3->logger->write( "user arr: " . print_r( $allUsers, true ));
 
 		$f3->set( 'users', $allUsers );
 		$f3->set( 'formUser', $user );
+		$f3->set( 'allRoles', $allRoles );
 		$f3->set( 'section', 'users.html' );
 	}
 

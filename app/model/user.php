@@ -4,6 +4,8 @@ namespace Model;
 class User extends Base {
   protected $_dbtable = "users";
   public $newpassword = false;
+  public $roles = array();
+  public $newroles = array();
 
   public function __construct( $id=false ) {
       parent::__construct();
@@ -20,6 +22,17 @@ class User extends Base {
 		 return false;
   }
 
+  public function load( $filter=NULL, array $options=NULL, $ttl=0 ) {
+	  parent::load( $filter, $options, $ttl );
+	  $this->roles = $this->getRoles();
+  }
+
+  public function getRoles( $id=false ) {
+	  $f3 = \BASE::instance();
+	  $id = ( is_numeric( $id ) ? $id : ( is_numeric( $this->id ) ? $this->id : $f3->get( 'SESSION.user.id' ) ) );
+	  return $f3->DB->exec( "SELECT roles.id, roles.name FROM roles WHERE roles.id IN ( SELECT users_roles.role_id FROM users_roles WHERE users_roles.user_id = ? )", $id );
+  }
+
   public function getAllUsers() {
 	  $f3 = \BASE::instance();
 	  $query = "SELECT * FROM users LEFT JOIN ( SELECT user_id, GROUP_CONCAT( roles.id ) AS roles FROM users_roles LEFT JOIN roles ON roles.id = users_roles.role_id GROUP BY users_roles.user_id ) tmpRoles ON tmpRoles.user_id = users.id";
@@ -28,12 +41,24 @@ class User extends Base {
   
   public function save() {
 	  $f3 = \BASE::instance();
-	  $f3->logger->write( "save called: newpassword = ".$this->newpassword );
 	  if(  $this->newpassword ) {
-		  $f3->logger->write( "newpassword set" );
 		  $this->password = password_hash( $this->newpassword, PASSWORD_BCRYPT, array( "salt" => $f3->get( 'global_salt' ) ) );
 	  }
+	  if( $this->newroles ) {
+		  $this->setNewRoles( $this->newroles );
+	  }
 	  return parent::save();
+  }
+
+  public function setNewRoles( $roles ) {
+	  $f3 = \BASE::instance();
+	  $f3->DB->begin();
+	  $f3->DB->exec( "DELETE FROM users_roles WHERE user_id = ?", $this->id );
+	  foreach( $roles as $role ) {
+		  if( is_numeric( $role ) )
+			  $f3->DB->exec( "INSERT INTO users_roles VALUES ( :uid, :rid )", array( 'uid' => $this->id, 'rid' => $role ) );
+	  }
+	  $f3->DB->commit();
   }
 
   public function getSuperuser() {

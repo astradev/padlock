@@ -25,19 +25,20 @@
   <br>
   <input type="email" name="email" class="form-control" value="{{@formUser.email}}" placeholder="{{@L.email}}">
   <br>
-      <select class="form-control selectpicker" name="superuser">
-<<<<<<< HEAD
-	<check if="{{ @formUser.superuser == 1 }}">
-	<true>
-	  <option value="no">{{@L.no}}</option>
-	  <option value="yes" selected="selcted">{{@L.yes}}</option>
-	</true>
-	<false>
-	  <option value="no" selected="selected">{{@L.no}}</option>
-	  <option value="yes">{{@L.yes}}</option>
-	</false>
+  <select class="form-control selectpicker" multiple data-toggle="dropdown" data-live-search="true" data-size="15" name="newroles[]">
+  <repeat group="{{@allRoles}}" value="{{@curRole}}">
+  	<check if="in_array( {{@curRole.id}}, array_column( {{@formUser.roles}}, 'id' ) )">
+		<true>
+			<option value="{{@curRole.id}}" selected="selected">{{@curRole.name}}</option>
+		</true>
+		<false>
+			<option value="{{@curRole.id}}">{{@curRole.name}}</option>			
+		</false>
 	</check>
-=======
+  </repeat>
+  </select>
+  <br><br>
+      <select class="form-control selectpicker" name="superuser">
 	  <check if="{{@formUser.superuser}}">
 		  <true>
 			  <option value="no">{{@L.no}}</option>
@@ -48,7 +49,6 @@
 			  <option value="yes">{{@L.yes}}</option>
 		  </false>
 	  </check>
->>>>>>> 3e39abd5a34df0332b2729bd7f6fc724b158a629
       </select>
   <br><br>
   <button type="submit" class="btn btn-default btn-block">
