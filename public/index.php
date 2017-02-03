@@ -71,6 +71,8 @@ $f3->route( 'GET /settings/config/edit', 'Controller\Config->edit' );
 $f3->route( 'GET /settings/users', 'Controller\Users->show' );
 $f3->route( 'GET|POST /settings/user/add', 'Controller\Users->create_edit' );
 $f3->route( 'GET|POST /settings/user/edit/@id', 'Controller\Users->create_edit' );
+$f3->route( 'GET|POST /settings/user/delete', 'Controller\Users->delete' );
+$f3->route( 'GET|POST /settings/user/delete/@id', 'Controller\Users->delete' );
 $f3->route( 'GET /settings/roles', 'Controller\Roles->show' );
 $f3->route( 'GET|POST /settings/role/add', 'Controller\Roles->create_edit' );
 $f3->route( 'GET|POST /settings/role/edit/@id', 'Controller\Roles->create_edit' );
