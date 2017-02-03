@@ -64,7 +64,8 @@ return array(
   'nolabelset' => 'No label was set. This is mandatory.', 
   
   //Success messages
-
+  'passwordsaved' => 'Password was saved successfully.',
+  'passwordsaveerr' => 'Password could not be saved.',
   
   //Normal messages
   'addpassword' => 'Add password',
