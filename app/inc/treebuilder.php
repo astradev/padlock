@@ -52,7 +52,7 @@ class TreeBuilder {
 			}
 			return $list;
 		} else {
-			$permissions = \Permissions::instance()->getAllPermissions();
+			$permissions = \Permissions::instance()->getUserPermissions();
 			$this->tmpIncrementer = 0;
 			return $this->processSubtree( false, $list, $permissions, $this->tmpIncrementer, 0 );
 		}

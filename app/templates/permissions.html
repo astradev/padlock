@@ -4,9 +4,20 @@
       <form class="form-horizontal">
 	<fieldset>
 	  <h4>{{@L.permissions}}</h4>
-
 	  <hr>
-
+	  <table>
+	  <thead>
+	  <th>folder</th>
+	  <th>role</th>
+	  <th>permission</th>
+	  </thead>
+	  <tbody>
+	  <repeat group="{{@permissions}}" value="{{@permission}}">
+	  <tr><td>{{@permission.folder_name}}</td><td>{{@permission.role_name}}</td><td>{{@permission.perm}}</td></tr>
+	  </repeat>
+	  </tbody>
+	  </table>
+	  <hr>
 	  <div class="col-lg-6">
 	    <select class="form-control selectpicker" data-toggle="dropdown" data-live-search="true" data-size="15" multiple data-selected-text-format="count">
 	      {{ @optionFolders | raw }}
