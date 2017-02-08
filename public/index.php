@@ -78,6 +78,8 @@ $f3->route( 'GET|POST /settings/role/add', 'Controller\Roles->create_edit' );
 $f3->route( 'GET|POST /settings/role/edit/@id', 'Controller\Roles->create_edit' );
 $f3->route( 'GET /settings/permissions', 'Controller\Permissions->show' );
 $f3->route( 'GET /settings/permissions/@mode', 'Controller\Permissions->show' );
+$f3->route( 'POST /settings/permissions/add', 'Controller\Permissions->add' );
+$f3->route( 'POST /settings/permissions/delete', 'Controller\Permissions->delete' );
 
 // API
 $f3->route( 'GET /api/foldertree', 'Controller\API->foldertree' );
