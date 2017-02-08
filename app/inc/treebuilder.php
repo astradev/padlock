@@ -83,10 +83,8 @@ class TreeBuilder {
 	public function generateOptionTree( $selected = false ) {
 		$f3 = \BASE::instance();
 		$tree = $this->getFolderList();
+		$result = '';
 
-		$result = '<option value="0"';
-		if( ! $selected ) $result .= ' selected="selected"';
-		$result .= '>- (kein)</option>';
 		while( !empty( $tree ) ) {
 			$currNode = array_shift( $tree );
                         $result .= '<option value="'.$currNode['id'].'"';

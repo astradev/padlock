@@ -62,8 +62,8 @@ class Permissions extends Backend {
 				$f3->push( 'SESSION.messages', array( "Permission successfully deleted.", 0 ) );
 				$f3->reroute( '/settings/permissions' );
 			} else {
-			$f3->push( 'SESSION.messages', array( "Permission could not be deleted.", 1 ) );
-			$f3->reroute( '/settings/permissions' );
+				$f3->push( 'SESSION.messages', array( "Permission could not be deleted.", 1 ) );
+				$f3->reroute( '/settings/permissions' );
 			}
 		}
 	}

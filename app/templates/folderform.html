@@ -19,6 +19,7 @@
 	</check>
 	<input type="text" name="name" class="form-control" placeholder="{{@L.foldername}}" value="<?php if( isset($formFolder['name']) ) echo $formFolder['name']; ?>"><br>
 	<select class="form-control selectpicker" data-toggle="dropdown" data-live-search="true" data-size="15" name="parent_id">
+		<option value="0">---</option>
 		{{ @optionFolders | raw }}
 	</select>
 	<br><br>

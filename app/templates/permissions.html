@@ -3,15 +3,25 @@
 	<div class="well bs-component">
 		<h4>{{@L.permissions}}</h4>
 		<hr>
-		<table>
+		<table class="table table-striped table-hover">
 			<thead>
 				<th>folder</th>
 				<th>role</th>
 				<th>permission</th>
+				<th></th>
 			</thead>
 			<tbody>
 				<repeat group="{{@permissions}}" value="{{@permission}}">
-				<tr><td>{{@permission.folder_name}}</td><td>{{@permission.role_name}}</td><td>{{@permission.perm}}</td></tr>
+				<tr>
+					<td>{{@permission.folder_name}}</td><td>{{@permission.role_name}}</td><td>{{@permission.perm}}</td>
+					<td>
+						<form action="{{@BASE}}/settings/permissions/delete" method="post">
+						<input type="hidden" name="folder" value="{{@permission.folder_id}}">
+						<input type="hidden" name="role" value="{{@permission.role_id}}">
+						<button type="submit" class="btn btn-danger">delete</button>
+						</form>
+					</td>
+				</tr>
 				</repeat>
 			</tbody>
 		</table>
@@ -26,7 +36,7 @@
 					</select>
 				</div>
 				<div class="col-lg-4">
-					<select class="form-control selectpicker" data-toggle="dropdown" data-live-search="true" data-size="15" multiple data-selected-text-format="count" name="folder">
+					<select class="form-control selectpicker" data-toggle="dropdown" data-live-search="true" data-size="15" data-selected-text-format="count" name="folder">
 						{{ @optionFolders | raw }}
 					</select>
 				</div>
