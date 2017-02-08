@@ -18,15 +18,27 @@
 	  </tbody>
 	  </table>
 	  <hr>
-	  <div class="col-lg-6">
-	    <select class="form-control selectpicker" data-toggle="dropdown" data-live-search="true" data-size="15" multiple data-selected-text-format="count">
+	  <div class="col-lg-4">
+	    <select class="form-control selectpicker" data-toggle="dropdown" data-live-search="true" data-size="15" multiple data-selected-text-format="count" name="folder">
 	      {{ @optionFolders | raw }}
 	    </select>
 	  </div>
-	  <div class="col-lg-6">
-	    <select class="form-control selectpicker">
-	      <option>Test</option>
+	  <div class="col-lg-4">
+	    <select class="form-control selectpicker" name="role">
+			<repeat group="{{@roles}}" value="{{@r}}">
+			<option value="{{@r.id}}">{{@r.name}}</option>
+			</repeat>
 	    </select>
+	  </div>
+	  <div class="col-lg-3">
+	    <select class="form-control selectpicker" name="perm">
+			<option value="0">no permission</option>
+			<option value="1">read</option>
+			<option value="2">read + write</option>
+	    </select>
+	  </div>
+	  <div class="col-lg-1">
+	  <button type="submit" class="form-control btn btn-default btn-block">add</button>
 	  </div>
 
 	</fieldset>
