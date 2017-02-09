@@ -34,7 +34,7 @@
           <tr>
             <td class="col-lg-2">{{ @pw.label }}</td>
             <td class="col-lg-2">{{ @pw.login }}</td>
-            <td class="col-lg-2">{{ @pw.password }}</td>
+            <td class="col-lg-2">{{ @pw->getDecryptedPassword() }}</td>
             <td class="col-lg-5">{{ @pw.description }}</td>
             <td class="col-lg-1">
               <a data-toggle="modal" style="cursor:pointer;color:#000;" data-target="#passwordform-{{@pw.id}}" rel="tooltip" title="{{@L.edit}}" data-placement="bottom"><i class="fa fa-pencil-square-o"></i></a>&nbsp;
