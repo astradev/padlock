@@ -54,14 +54,15 @@ class Users extends Backend {
 			$user->name = $f3->get( 'POST.name' );
 			if( $f3->get( 'POST.superuser' ) == "yes" ) {
 				$user->superuser = true;
+			} else {
+				$user->superuser = false;
 			}
-			if( $f3->exists( 'POST.newroles' ) ) {
-				$newroles = $f3->get( 'POST.newroles' );
-				if( ! is_array( $newroles ) ) $newroles = array( $newroles );
-				$oldroles = array_column( $user->roles, 'id' );
-				sort( $newroles );
-				sort( $oldroles );
-				if( $newroles != $oldroles )
+			$newroles = $f3->get( 'POST.newroles' );
+			if( ! is_array( $newroles ) ) $newroles = array( $newroles );
+			$oldroles = array_column( $user->roles, 'id' );
+			sort( $newroles );
+			sort( $oldroles );
+			if( $newroles != $oldroles ) {
 					$user->newroles = $newroles;
 			}
 
