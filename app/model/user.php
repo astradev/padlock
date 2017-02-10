@@ -5,7 +5,7 @@ class User extends Base {
   protected $_dbtable = "users";
   public $newpassword = false;
   public $roles = array();
-  public $newroles = array();
+  public $newroles = NULL;
 
   public function __construct( $id=false ) {
       parent::__construct();
@@ -42,10 +42,10 @@ class User extends Base {
   public function save() {
 	  $f3 = \BASE::instance();
 	  if(  $this->newpassword ) {
-		  $this->password = password_hash( $this->newpassword, PASSWORD_BCRYPT, array( "salt" => $f3->get( 'global_salt' ) ) );
+		  $this->password = password_hash( $this->newpassword, PASSWORD_BCRYPT, array( "salt" => $f3->get( 'GLOBAL_SALT' ) ) );
 	  }
 	  $ret = parent::save();
-	  if( $this->newroles ) {
+	  if( is_array( $this->newroles ) ) {
 		  if( ! is_numeric( $this->id ) ) $this->load( array( 'login=?', $this->login ) );
 		  $this->setNewRoles( $this->newroles );
 	  }

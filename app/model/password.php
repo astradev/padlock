@@ -21,7 +21,7 @@ class Password extends Base {
 			if( isset( $this->newpassword ) && $this->newpassword != '' && in_array( $this->enc_method, openssl_get_cipher_methods() ) ) {
 				$f3->logger->write("encrypted password");
 				$this->iv = base64_encode( mcrypt_create_iv( openssl_cipher_iv_length( $this->enc_method ) ) );
-				$this->password = openssl_encrypt( $this->newpassword, $this->enc_method, $f3->get( 'global_salt' ), 0, base64_decode( $this->iv ) );
+				$this->password = openssl_encrypt( $this->newpassword, $this->enc_method, $f3->get( 'GLOBAL_SALT' ), 0, base64_decode( $this->iv ) );
 			}
 			return parent::save();
 		}
@@ -30,7 +30,7 @@ class Password extends Base {
 	public function getDecryptedPassword() {
 		$f3 = \BASE::instance();
 		if( in_array( $this->enc_method, openssl_get_cipher_methods() ) )
-			return openssl_decrypt( $this->password, $this->enc_method, $f3->get( 'global_salt' ), 0, base64_decode( $this->iv ) );
+			return openssl_decrypt( $this->password, $this->enc_method, $f3->get( 'GLOBAL_SALT' ), 0, base64_decode( $this->iv ) );
 		else
 			return $this->password;
 	}

@@ -27,7 +27,7 @@ class Auth {
 			$user = new \Model\User();
 			$user->loadByLogin( $f3->get( 'POST.login' ) );
 			if( ! $user->dry() ) {
-				if( $user->password == password_hash( $f3->get( 'POST.password' ), PASSWORD_BCRYPT, array( "salt" => $f3->get( 'global_salt' ) ) ) ) {
+				if( $user->password == password_hash( $f3->get( 'POST.password' ), PASSWORD_BCRYPT, array( "salt" => $f3->get( 'GLOBAL_SALT' ) ) ) ) {
 					@$f3->clear( 'SESSION' ); //recreate session id
 					$f3->set( 'SESSION.user', $user->cast() );
 					$f3->reroute('/dashboard');

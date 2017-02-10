@@ -55,7 +55,7 @@ class Passwords extends Base {
 				$password->enc_method = $f3->get( 'POST.enc_method' );
 			} elseif( ! in_array( $password->enc_method, openssl_get_cipher_methods() ) ) {
 				$f3->logger->write("set default enc_method");
-				$password->enc_method = $f3->get( 'default_enc_method' );
+				$password->enc_method = $f3->get( 'DEFAULT_ENC_METHOD' );
 			}
 			$password->description = $f3->get( 'POST.description' );
 			$password->login = $f3->get( 'POST.login' );
