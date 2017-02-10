@@ -1,26 +1,24 @@
 <?php
-/*
-   Padlock
-*/
+////
+// Padlock - an enterprise password manager
+////
 
-/*
-   Initialization
-*/
+// initialize the framework
 $f3 = require( '../lib/base.php' );
 
-/* For the installer */
-//if( file_exists( '../app/controller/install.php' )) {
-//        $f3->route( 'GET /install', 'Controller\Installer->start' );
-//} else { 
-
-// check config
-if( is_readable( '../config/config.ini' ) ) {
-	$f3->config( '../config/config.ini' );
+// load config
+$padlock_config = '../config/default.ini';
+if( file_exists( $padlock_config ) ) {
+	if( is_readable( $padlock_config ) ) {
+		$f3->config( $padlock_config );
+	} else {
+		trigger_error( 'Could not load configuration: ' . dirname( __FILE__) . $padlock_config );
+	}
 } else {
-	trigger_error( 'Could not load configuration: ' . dirname( __FILE__) . '/../config/config.ini' );
+	$f3->reroute( '/install' );
 }
 
-// language
+// language switch
 if( $f3->get( 'COOKIE.padlock_language' ) ) {
 	    $f3->set( 'LANGUAGE', $f3->get( 'COOKIE.padlock_language' ) );
 }
@@ -31,16 +29,14 @@ $f3->route( 'GET /lang/@lang',
   }
 );
 
-// check tmp dir
+// initialize logger
+$f3->set( 'logger', new \Log( 'debug.log' ) );
 
-// logger
-$f3->set( 'logger', new \Log('debug.log') );
-
-//messages
+// initialize messages
 if( ! $f3->get( 'SESSION.messages' ) ) $f3->set( 'SESSION.messages', array() );
 
-// set db
-$f3->set( 'DB', new \DB\SQL( 'mysql:host=localhost;port=3306;dbname=padlock', 'padlock', 'Schlagbohrumschwunggewicht' ) );
+// initialize db
+$f3->set( 'DB', new \DB\SQL( 'mysql:host=' . $f3->get( 'DBHOST' ) . ';port=' . $f3->get( 'DBPORT' ) . ';dbname=' . $f3->get( 'DBNAME' ), $f3->get( 'DBUSER' ), $f3->get( 'DBPASS' ) ) );
 
 $f3->route( 'GET /', 'Controller\Folders->show' );
 $f3->route( 'GET|POST /login', 'Controller\Auth->login' );
