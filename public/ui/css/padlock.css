@@ -61,3 +61,6 @@ fieldset[disabled] .btn-select-list.focus {
   color: #3e3f3a;
   background-color: #ffffff;
 }
+.mobile-overflow {
+  overflow: auto;
+}

@@ -4,13 +4,6 @@
     <div class="alert alert-dismissible alert-<?php echo ($myMess[1]==0)?'success':(($myMess[1]==1)?'danger':'info');?>">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
       {{ @myMess[0] }}
-      <!--<script type="text/javascript">
-      $.notify({
-	message: '{{ @myMess[0] }}';
-      },{
-	type: '<?php echo ($myMess[1]==0)?'success':(($myMess[1]==1)?'danger':'info');?>';
-      });
-      </script>-->
     </div>
   </div>
 </div>
