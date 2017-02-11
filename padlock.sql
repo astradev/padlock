@@ -36,7 +36,7 @@ CREATE TABLE `folders` (
   `lft` int(10) unsigned NOT NULL,
   `rgt` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `folders` (
 
 LOCK TABLES `folders` WRITE;
 /*!40000 ALTER TABLE `folders` DISABLE KEYS */;
-INSERT INTO `folders` VALUES (1,'Allgemein',1,54),(2,'Generell',55,64),(3,'Universal',65,72),(5,'abstrakt',20,39),(6,'extravagant',33,38),(7,'usbekisch',62,63),(8,'Dumm-Doof-Rettungslos',60,61),(32,'Nagios',73,76),(33,'Grundgesetz',77,80),(38,'normal',23,30),(39,'anders',16,17),(40,'igorrr',2,15),(41,'tendon',7,14),(42,'double monk',5,6),(43,'großwild',8,13),(44,'toter',11,12),(45,'lebendig',9,10),(46,'maigre',3,4),(47,'streber',28,29),(48,'Donaudampfschiffahrtsgesellschaftskapitänskajütentürknauf',21,22),(49,'abc123',74,75),(50,'keinStreber',24,27),(51,'Unterordner',25,26);
+INSERT INTO `folders` VALUES (1,'Allgemein',1,56),(2,'Generell',57,66),(3,'Universal',67,74),(5,'abstrakt',20,41),(6,'extravagant',35,40),(7,'usbekisch',64,65),(8,'Dumm-Doof-Rettungslos',62,63),(32,'Nagios',75,78),(33,'Grundgesetz',79,82),(38,'normal',25,32),(39,'anders',16,17),(40,'Igorrr',2,15),(41,'tendon',7,14),(42,'double monk',5,6),(43,'großwild',8,13),(44,'toter',11,12),(45,'lebendig',9,10),(46,'maigre',3,4),(47,'streber',30,31),(49,'abc123',76,77),(50,'keinStreber',26,29),(51,'Unterordner',27,28);
 /*!40000 ALTER TABLE `folders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -64,10 +64,12 @@ CREATE TABLE `passwords` (
   `attachments` text,
   `description` text,
   `folder_id` int(10) unsigned NOT NULL,
+  `enc_method` varchar(255) DEFAULT NULL,
+  `iv` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `folder_id` (`folder_id`),
   CONSTRAINT `passwords_ibfk_1` FOREIGN KEY (`folder_id`) REFERENCES `folders` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +78,7 @@ CREATE TABLE `passwords` (
 
 LOCK TABLES `passwords` WRITE;
 /*!40000 ALTER TABLE `passwords` DISABLE KEYS */;
-INSERT INTO `passwords` VALUES (1,'Google','example@gmail.com','w8h4q.asd',NULL,'Das ist die Beschreibung. Sher sinnvoll',2),(2,'Yahoo','example@yahoo.com','wurstgeil',NULL,'weniger text',1),(3,'123','423423','423','NULL','31312',2),(4,'Test','Glanzstück','schlingelwurst',NULL,'Pullermann',3),(5,'extravagantes Passwort','root','123456987asderffoobar',NULL,'System',6),(7,'Hintertür','jeder','123456',NULL,'Ach eine Beschreibung auch noch? Na klar fällt mir da eine ein. JA SICHER!!!!¹11elf',6),(8,'Dumm','doof',NULL,NULL,'beschreibung',8),(9,'Ein Passwort','demo',NULL,NULL,'Demo-Nutzer',39),(10,'toter Hase','thase',NULL,NULL,'Hintertür *kicher*',44),(11,'DHCP-Server','root','pullerM4nn',NULL,'Zum Ändern der Einträge',51),(12,'Utzbekisches Armeelager','Admiral Admin ','3x kurz, 3x lang, Passwort \"Russisch Mann\"',NULL,'Das utzbekistczghe Armeelager lagert Algen in Lagerregalen',7);
+INSERT INTO `passwords` VALUES (1,'Google','example@gmail.com','w8h4q.asd',NULL,'Das ist die Beschreibung. Sher sinnvoll',2,NULL,'\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'),(2,'Yahoo','example@yahoo.com','bR0xHSgWUTna',NULL,'weniger text',1,'AES-256-CTR','t4Y9uQBBgxgjQHaZeQnKPg=='),(3,'123','423423','423','NULL','31312',2,NULL,'\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'),(4,'Test','Glanzstück','schlingelwurst',NULL,'Pullermann',3,NULL,'\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'),(5,'extravagantes Passwort','root','123456987asderffoobar',NULL,'System',6,NULL,'\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'),(7,'Hintertür','jeder','123456',NULL,'Ach eine Beschreibung auch noch? Na klar fällt mir da eine ein. JA SICHER!!!!¹11elf',6,NULL,'\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'),(8,'Dumm','doof','pQmn+N51F3jYOtkSYFfP',NULL,'beschreibung',8,'AES-256-CTR','kt/L6Y1rWr/wmlcOaJcAfQ=='),(9,'Ein Passwort','demo',NULL,NULL,'Demo-Nutzer',39,NULL,'\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'),(10,'toter Hase','thase',NULL,NULL,'Hintertür *kicher*',44,NULL,'\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'),(11,'DHCP-Server','root','fqg83lm0XW4ExA==',NULL,'Zum Ändern der Einträge',51,'AES-256-CTR','x9Dhcqp8u3CGtqzEsT4W7g=='),(12,'Utzbekisches Armeelager','Admiral Admin ','3x kurz, 3x lang, Passwort \"Russisch Mann\"',NULL,'Das utzbekistczghe Armeelager lagert Algen in Lagerregalen',7,NULL,'\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'),(13,'Neues Passwort','igorrr','1xNA7hTyFbIstgf0RgAU5z4x',NULL,'zum Test',1,'AES-256-CTR','bGcp9yrMuhJNizHQx+RgCw==');
 /*!40000 ALTER TABLE `passwords` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,7 +106,7 @@ CREATE TABLE `permissions` (
 
 LOCK TABLES `permissions` WRITE;
 /*!40000 ALTER TABLE `permissions` DISABLE KEYS */;
-INSERT INTO `permissions` VALUES (1,1,2),(1,2,2),(1,3,2),(1,5,2),(1,6,2),(1,7,2),(1,32,2),(1,33,2),(2,1,2),(2,40,0),(2,43,1);
+INSERT INTO `permissions` VALUES (1,1,2),(1,2,2),(1,5,2),(1,6,2),(1,32,2),(1,33,2),(2,1,2),(2,40,0),(2,43,1),(3,1,1),(3,3,2),(3,32,2);
 /*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +152,7 @@ CREATE TABLE `users` (
   `repository` varchar(100) NOT NULL DEFAULT 'internal',
   PRIMARY KEY (`id`),
   UNIQUE KEY `login` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,7 +161,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin','Marco Dickert','foobar@example.org','$2y$10$Phahy6seu3coomir2tuNgOF605DVotqQ6sDGzfqfomcz8.eiQI2gO',1,'internal'),(2,'demo','Test User','foobaz@example.org','$2y$10$Phahy6seu3coomir2tuNgODr1VK92lCTUw3msMq1cpFVItqlslYbO',0,'internal'),(3,'test','Tester','tester@example.org','$2y$10$Phahy6seu3coomir2tuNgODC7D1WK..cAPXy824wdpilmdJ83qhm.',1,'internal'),(4,'Muni','Christian Kuhn','muni@example.org','$2y$10$Phahy6seu3coomir2tuNgOMsjr/RTxrDyBIJtwnH/3vXGrKtTrl3a',0,'internal');
+INSERT INTO `users` VALUES (1,'admin','Marco Dickert','foobar@example.org','$2y$10$Phahy6seu3coomir2tuNgOF605DVotqQ6sDGzfqfomcz8.eiQI2gO',1,'internal'),(2,'demo','Test User','foobaz@example.org','$2y$10$Phahy6seu3coomir2tuNgODr1VK92lCTUw3msMq1cpFVItqlslYbO',0,'internal'),(3,'test','Tester','tester@example.org','$2y$10$Phahy6seu3coomir2tuNgOd/fhGylKrPwlJkaeW5bkOkOEBYZgRxC',1,'internal'),(4,'muni','Christian Kuhn','muni@example.org','$2y$10$Phahy6seu3coomir2tuNgO1oRbQIoy3sssfWAbaeJDdtqLBxPGLU2',0,'internal'),(5,'Mike Dickert','miked','mike@example.org','$2y$10$Phahy6seu3coomir2tuNgOo43Lt7SnmbGutcM/KMDW5QU7KzINfUG',0,'internal'),(6,'janni','Janet Dickert','janice@example.org','$2y$10$Phahy6seu3coomir2tuNgOdLM.vHVsiwH7Mh0iS3VEtxGkcYsE9mm',0,'internal'),(7,'grober','schnitzer','ob.er.aber.ueber@oberammergau.kommt.de','$2y$10$Phahy6seu3coomir2tuNgOz3byWIiFCiW0FqAflcoc0.29XE5s14m',0,'internal');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,7 +188,7 @@ CREATE TABLE `users_roles` (
 
 LOCK TABLES `users_roles` WRITE;
 /*!40000 ALTER TABLE `users_roles` DISABLE KEYS */;
-INSERT INTO `users_roles` VALUES (1,1),(3,1),(2,2),(2,4),(2,6);
+INSERT INTO `users_roles` VALUES (1,1),(3,1),(2,2),(5,2),(7,2),(3,3),(4,3),(5,3),(2,4),(3,4),(2,6),(5,6);
 /*!40000 ALTER TABLE `users_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -199,4 +201,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-03 15:05:56
+-- Dump completed on 2017-02-11 19:55:43
