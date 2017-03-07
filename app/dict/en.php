@@ -110,7 +110,21 @@ return array(
   //Normal messages
 
   //----------------------------  
+
+
+  //Config ---------------------
+  //Error messages
   
+  //Success messages
+  'savechanges' => 'Save changes',
+
+  //Normal messages
+  'database' => 'Datenbank',
+  'dbhost' => 'Host',
+  'dbport' => 'Port',
+  //----------------------------
+
+
   //Button/Header defautls
   'name' => 'Name',
   'folders' => 'Folder',

@@ -11,24 +11,50 @@ class Config extends Backend {
 		$f3->set( 'component', 'config' );
 	}
 
-	public function config_set( $config, $section, $key, $value ) {
-		$configData = parse_ini_file( $config, true );
-		$configData[$section][$key] = $value;
+	public function read( \Base $f3 ) {
+	  $file = "../config/config.ini";
 
-		$content = '';
+	  $ini = parse_ini_file( $file, TRUE );
 
-		foreach( $configData as $section => $sectionContent ) {
-		  $sectionContent = array_map( function( $value, $key ) {
-		    return "$key=$value";
-		  }, array_values( $sectionContent ), array_key( $sectionContent ) );
-		  $sectionContent = implode( "\n", $sectionContent );
-		  $content .= "[$section]\n$sectionContent\n";
-		}
-		file_put_contents( $config, $content );
+	  foreach( $ini as $key => $value ) {
+	    foreach( $value as $k => $v ) {
+	      $f3->set( 'k', $k );
+	      $f3->set( 'v', $v );
+	    }
+	  }
 	}		
 
+	public function write( \Base $f3 ) {
+	  $file = "../config/config.ini";
+
+	  if( $f3->get( 'VERB' ) == "POST" ) {
+	    $data = $f3->get( 'VERB' ) == "POST";
+
+	    $content = "";
+
+	    $ini = parse_ini_file( $file, TRUE );
+
+	    foreach( $data as $section => $values ) {
+	      $content .= "[".$section."]n";
+    	      foreach( $values as $key => $value ) {
+		$content .= $key."=".$value."n";
+	      }
+	    }
+
+	    if( !$handle = fopen( $file, "w" ) ) {
+	      $f3->push( 'SESSION.messages', array( "Fehler", 1 ) );
+	    }
+
+	    $success = fwrite( $handle, $content );
+	    fclose( $handle );
+
+	    $f3->push( 'SESSION.messages', array( "Gut", 0 ) );
+	    return $success;
+	  }
+	}
+
 	public function show( \Base $f3 ) {
-		$f3->set( 'section', 'config.html' );
+	  $f3->set( 'section', 'config.html' );
 	}
 
 }

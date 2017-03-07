@@ -5,10 +5,10 @@
     <hr>
     <table class="table table-striped table-hover">
       <thead>
-	<th>role</th>
-	<th>folder</th>
-	<th>read</th>
-	<th>write</th>
+	<th class="col-lg-2">role</th>
+	<th class="col-lg-8">folder</th>
+	<th class="col-lg-1">read</th>
+	<th class="col-lg-1">write</th>
       </thead>
       <tbody>
 	<repeat group="{{@permissions}}" value="{{@permission}}">
@@ -25,16 +25,21 @@
 	  <td>
 	    <check if="{{@cF.perm > 0}}">
 	    <true>
-	    <span class="fa fa-eye fa-2x"></span>
+	    <span class="fa fa-check"></span>
 	    </true>
 	    <false>
-	    <span class="fa fa-ban fa-2x"></span>
+	    <span class="fa fa-ban"></span>
 	    </false>
 	    </check>
 	  </td>
 	  <td>
 	    <check if="{{@cF.perm > 1}}">
-	    <span class="fa fa-pencil-square-o fa-2x"></span>
+	    <true>
+	    <span class="fa fa-check"></span>
+	    </true>
+	    <false>
+	    <psan class="fa fa-ban"></span>
+	    </false>
 	    </check>
 	  </td>
 	  <td align="right">
