@@ -113,10 +113,11 @@ return array(
 
 
   //Config ---------------------
-  //Error messages
-  
+  'configupdatederr' => 'Error while saving settings.',
+
   //Success messages
   'savechanges' => 'Save changes',
+  'configupdated' => 'Successfully saved settings.',
 
   //Normal messages
   'database' => 'Datenbank',

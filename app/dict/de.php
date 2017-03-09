@@ -111,9 +111,11 @@ return array(
   
   //Config ---------------------
   //Error messages
-  
+  'configupdatederr' => 'Fehler beim speichern der Einstellungen',
+
   //Success messages
   'savechanges' => 'Änderungen speichern',
+  'configupdated' => 'Die Einstellungen wurden erfolgreich gespeichert.',
 
   //Normal messages
   'database' => 'Datenbank',

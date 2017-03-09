@@ -2,65 +2,17 @@
 <div class="col-lg-12">
   <div class="well bs-component">
     <form action="{{@BASE}}/settings/config/edit" method="POST" class="form-horizontal">
-      <fieldset>
-        <h4>{{@L.languageandtime}}</h4>
-
-        <div class="form-group">
-          <label for="textArea" class="col-lg-2 control-label">{{@L.timezone}}</label>
-	  <div class="col-lg-10"><input type="text" class="form-control" id="timezone" name="timezone" value="{{ @TZ }}"></div>
-        </div>
-
-        <div class="form-group">
-          <label for="textArea" class="col-lg-2 control-label">{{@L.normallanguage}}</label>
-	  <div class="col-lg-10"><input type="text" class="form-control" id="setlanguage" name="setlanguage" value=""></div>
-        </div>
-
-        <div class="form-group">
-          <label for="textArea" class="col-lg-2 control-label">{{@L.languageprefix}}</label>
-	  <div class="col-lg-10"><input type="text" class="form-control" id="langprefix" name="langprefix" value="{{ @PREFIX }}"></div>
-        </div>
-
-      </fieldset>
-
-      <fieldset>
-        <h4>{{@L.paths}}</h4>
-
-        <div class="form-group">
-          <label for="textArea" class="col-lg-2 control-label">{{@L.designpath}}</label>
-	  <div class="col-lg-10"><input type="text" class="form-control" id="designpath" name="designpath" value="{{ @UI }}"></div>
-        </div>
-
-        <div class="form-group">
-          <label for="textArea" class="col-lg-2 control-label">{{@L.languagepath}}</label>
-	  <div class="col-lg-10"><input type="text" class="form-control" id="languagepath" name="languagepath" value="{{ @LOCALES }}"></div>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <h4>{{@L.database}}</h4>
-
-        <div class="form-group">
-          <label for="textArea" class="col-lg-2 control-label">{{@L.dbhost}}</label>
-	  <div class="col-lg-10"><input type="text" class="form-control" name="dbhost" value="{{ @DBHOST }}"></div>
-        </div>
-
-        <div class="form-group">
-          <label for="textArea" class="col-lg-2 control-label">{{@L.dbport}}</label>
-	  <div class="col-lg-10"><input type="text" class="form-control" name="dbport" value="{{ @DBPORT }}"></div>
-        </div>
-
-        <div class="form-group">
-          <label for="textArea" class="col-lg-2 control-label">{{@L.name}}</label>
-	  <div class="col-lg-10"><input type="text" class="form-control" name="dbname" value="{{ @DBUSER }}"></div>
-        </div>
-
-        <div class="form-group">
-          <label for="textArea" class="col-lg-2 control-label">{{@L.password}}</label>
-	  <div class="col-lg-10"><input type="text" class="form-control" name="dbpassword" value=""></div>
-        </div>
-      </fieldset>
-
-      <button type="submit" class="btn btn-primary btn-block btn-sm">{{ @L.savechanges }}</button>
+      <repeat group="{{ @ini }}" key="{{ @section }}" value="{{ @values }}">
+	<input type="hidden" value="{{ @section }}" name="{{ @section }}">
+	<repeat group="{{ @values }}" key="{{ @key }}" value="{{ @value }}">
+	<div class="form-group">
+	  <label for="textArea" class="col-lg-2 control-label">{{ @key }}</label>
+	  <div class="col-lg-10"><input type="text" class="form-control" name="{{@section}}[{{@key}}]" value="{{@value}}"></div>
+	</div>
+	</repeat>
+	<br>
+      </repeat>
+      <input type="submit" class="btn btn-primary btn-block btn-sm" value="{{ @L.savechanges }}">
     </form>
   </div>
 </div>
