@@ -64,3 +64,13 @@ fieldset[disabled] .btn-select-list.focus {
 .mobile-overflow {
   overflow: auto;
 }
+
+.midalert {
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  width: 50%;
+  top: -40px;
+  text-align: center;
+  z-index: 1;
+}
