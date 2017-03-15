@@ -34,8 +34,13 @@
           <tr>
             <td class="col-lg-2">{{ @pw.label }}</td>
             <td class="col-lg-2">{{ @pw.login }}</td>
-	    <td class="col-lg-2">{{ @pw->getDecryptedPassword() }}</td>
-            <td class="col-lg-5">{{ @pw.description }}</td>
+			<td class="col-lg-4 pwcol">
+				<div class="input-group">
+					<input type="password" class="form-control pwinput" data-password="{{ @pw->getDecryptedPassword() }}" value="**********" readonly>
+					<div class="input-group-addon"><a class="pwshow fa fa-eye"></a> <a class="pwcopy fa fa-copy"></a></div>
+				</div>
+			</td>
+			<td class="col-lg-3 hidden-xs hidden-sm">{{ @pw.description }}</td>
             <td class="col-lg-1">
               <a data-toggle="modal" style="cursor:pointer;color:#000;" data-target="#passwordform-{{@pw.id}}" rel="tooltip" title="{{@L.edit}}" data-placement="bottom"><i class="fa fa-pencil-square-o"></i></a>&nbsp;
               <a data-toggle="confirmation" style="cursor:pointer;color:#000;" data-placement="bottom"><i class="fa fa-trash-o"></i></a>
@@ -189,6 +194,25 @@ function Padlock() {
 			nodes = self.toggleNodes( nodes, self.toggleStatus==true ? false : true );
 			self.toggleStatus = self.toggleStatus==true ? false : true;
 			self.easytree.rebuildTree( nodes );
+		});
+
+		$('.pwshow')
+			.on( 'mousedown', function(e) {
+				console.log(e);
+				var pwinput = $(this).parent().prev();
+				pwinput
+					.val( pwinput.data('password') )
+					.attr( 'type', 'text' );
+			})
+			.on( 'mouseup mouseleave', function() {
+				var pwinput = $(this).parent().prev();
+				pwinput
+					.val( '**********' )
+					.attr( 'type', 'password' );
+			});
+		$('.pwcopy').on( 'click', function(e) {
+			var pwinput = $(this).parent().prev();
+			window.prompt( '{{ @L.copypaste }}', pwinput.data('password') );
 		});
 
 		<check if="{{@SESSION.treeUpdateTrigger == 'true'}}">
