@@ -157,4 +157,5 @@ return array(
  
   //Other
   'installsetup' => 'Install setup',
+  'copypaste' => 'Just copy it and press enter to close',
 );
