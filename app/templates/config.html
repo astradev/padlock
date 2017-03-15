@@ -5,10 +5,21 @@
       <repeat group="{{ @ini }}" key="{{ @section }}" value="{{ @values }}">
 	<input type="hidden" value="{{ @section }}" name="{{ @section }}">
 	<repeat group="{{ @values }}" key="{{ @key }}" value="{{ @value }}">
-	<div class="form-group">
-	  <label for="textArea" class="col-lg-2 control-label">{{ @key }}</label>
-	  <div class="col-lg-10"><input type="text" class="form-control" name="{{@section}}[{{@key}}]" value="{{@value}}"></div>
-	</div>
+	<check if="{{ @key == 'TZ' }}">
+	  <true>
+	  <div class="form-group">
+	    <label for="input" class="col-lg-2 control-label">{{ @L.timezone }}</label>
+	    <div class="col-lg-10">
+	    <select class="form-control selectpicker">
+	      <option selected="selected">{{ @TZ }}</option>
+	      <repeat group="{{ @timezone }}" value="{{ @tz }}">
+		<option>{{ @tz.zone }}</option>
+	      </repeat>
+	    </select>
+	    </div>
+	  </div>
+	  </true>
+	</check>
 	</repeat>
 	<br>
       </repeat>

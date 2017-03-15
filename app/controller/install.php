@@ -16,7 +16,8 @@ class Installer {
             
           } else {
             $f3->SESSION->messages[] = array( "Please check the marked fields", 1 );
-            $f3->reroute( '/install' );
+	    $f3->reroute( '/install' );
+	  }
         }
 
         public function selectDb( $f3, $params ) {
@@ -29,14 +30,15 @@ class Installer {
         }
 
         public function finish( $f3, $params ) {
-          if( $f3->exists( 'POST.submit' ) ) {
+          if( $f3->get( 'VERB' ) == "POST" ) {
               unlink( '../templates/install.html' );
               unlink( 'install.php' );
 
-              $f3->SESSION->messages[] = array( "Install successfully finished", 0 );
-              $f3->reroute( '/dashboard' );
+              $f3->push( 'SESSION.messages', array( $f3->get( 'L.installsuccess' ), 0 ) );
+              $f3->reroute( '/login' );
           } else {
-              $f3->SESSION->messages[] = array( "An error occurred during the installation", 1 );
-              $f3->reroute( '/install' );
+	      $f3->push( 'SESSION.messages', array( $f3->get( 'L.installerr' ), 1 ) );
+	      $f3->reroute( '/install' );
+	  }
         }
 }
