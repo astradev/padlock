@@ -32,19 +32,22 @@
         <tbody>
           <repeat group="{{ @passwords }}" value="{{ @pw }}">
           <tr>
-            <td class="col-lg-2">{{ @pw.label }}</td>
-            <td class="col-lg-2">{{ @pw.login }}</td>
-			<td class="col-lg-4 pwcol">
-				<div class="input-group">
-					<input type="password" class="form-control pwinput" data-password="{{ @pw->getDecryptedPassword() }}" value="**********" readonly>
-					<div class="input-group-addon"><a class="pwshow fa fa-eye"></a> <a class="pwcopy fa fa-copy"></a></div>
-				</div>
-			</td>
-			<td class="col-lg-3 hidden-xs hidden-sm">{{ @pw.description }}</td>
-            <td class="col-lg-1">
-              <a data-toggle="modal" style="cursor:pointer;color:#000;" data-target="#passwordform-{{@pw.id}}" rel="tooltip" title="{{@L.edit}}" data-placement="bottom"><i class="fa fa-pencil-square-o"></i></a>&nbsp;
-              <a data-toggle="confirmation" style="cursor:pointer;color:#000;" data-placement="bottom"><i class="fa fa-trash-o"></i></a>
-            </td>
+	    <td class="col-lg-2">{{ @pw.label }}</td>
+	    <td class="col-lg-2">{{ @pw.login }}</td>
+	    <td class="col-lg-4 pwcol">
+	      <div class="input-group">
+		<input type="password" class="form-control pwinput" data-password="{{ @pw->getDecryptedPassword() }}" value="**********" readonly>
+		<div class="input-group-addon">
+		  <a id="pw-{{ @pw.id }}" data-placement="bottom" style="text-decoration:none;cursor:pointer;" class="pwshow fa fa-eye"></a> 
+		  <a style="text-decoration:none;cursor:pointer;" class="pwcopy fa fa-copy"></a>
+		</div>
+	      </div>
+	    </td>
+	    <td class="col-lg-3 hidden-xs hidden-sm">{{ @pw.description }}</td>
+	    <td class="col-lg-1">
+	      <a data-toggle="modal" style="cursor:pointer;color:#000;" data-target="#passwordform-{{@pw.id}}" rel="tooltip" title="{{@L.edit}}" data-placement="bottom"><i class="fa fa-pencil-square-o"></i></a>&nbsp;
+	      <a data-toggle="confirmation" style="cursor:pointer;color:#000;" data-placement="bottom"><i class="fa fa-trash-o"></i></a>
+	    </td>
           </tr>
           </repeat>	
         </tbody>
@@ -71,6 +74,20 @@
       <div class="modal-body">
         <a style="cursor:pointer;float:right;" data-dismiss="modal"><i class="fa fa-times"></i></a>        
         <include href="folderform.html">
+      </div>
+    </div>
+  </div>
+</div>
+</repeat>
+
+<repeat group="{{ @passwords }}" value="{{ @pw }}">
+<div class="modal fade" id="pw-modal-{{ @pw.id }}" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body"> 
+        <a style="cursor:pointer;float:right;" data-dismiss="modal"><i class="fa fa-times"></i></a>
+	<h3>{{ @L.yourpassword }}</h3>
+	<input class="form-control" value="{{ @pw->getDecryptedPassword() }}">
       </div>
     </div>
   </div>
@@ -105,130 +122,146 @@
 $.cookie.defaults.path = '{{@BASE}}/';
 
 function Padlock() {
-	var self = this;
-	var oldStates = '';
-	var toggleStatus = false;
-	var easytree;
-	this.rereadTree = function() {
-		var elem = $('#tree');
-		this.easytree = elem.easytree({
-			data: sessionStorage.getItem( 'padlock_tree' ),
-			enableDnd: true,
-			stateChanged: self.stateChanged
-		});
-	};
-	this.updateTree = function() {
-		$.ajaxSetup ({
-			cache: false
-		});
-		var ajax_load = '<img style="margin-left:35%;" src="{{@BASE}}/ui/img/reload.gif" alt="loading..." />';
-		self.oldStates = sessionStorage.getItem( 'padlock_tree' );
-		sessionStorage.setItem( 'padlock_tree', '' );
-		$( '#tree' ).html( ajax_load );
-		$.ajax({
-			url: '{{@BASE}}/api/foldertree',
-			type: 'GET',
-			success: self.updateTreeSuccess,
-			error: function() { console.log('Could not get foldertree'); }
-		});
-	};
-	this.updateTreeSuccess = function( data ) {
-		var elem = $('#tree');
-		elem.html( data );
-		self.rereadTree();
-		if( typeof self.oldStates != 'undefined' && self.oldStates != '' ) {
-			sessionStorage.setItem( 'padlock_tree', JSON.stringify( self.restoreOldStates( JSON.parse( sessionStorage.getItem( 'padlock_tree' ) ), JSON.parse( self.oldStates ) <?php if( isset( $f3->get( 'PARAMS.id' ) ) ) echo ', '.$PARAMS['id']; ?> ) ) );
-			self.rereadTree();
-		}
-	};
-	this.restoreOldStates = function( cur, old, active=0 ) {
-		for( var i = 0; i < cur.length; i++ ) {
-			if( self.getMatch( cur[i].href, old ) ) {
-				cur[i].isExpanded = true;
-			}
-			if( cur[i].children ) {
-				cur[i].children = self.restoreOldStates( cur[i].children, old );
-			}
-		}
-		return cur;
-	};
-	this.getMatch = function( href, old ) {
-		if( old ) {
-			for( var j =0; j<old.length; j++ ) {
-				if( old[j].href == href ) {
-					return (old[j].isExpanded?true:false);
-				}
-				if( old[j].children ) {
-					var a = self.getMatch( href, old[j].children );
-					if( a == true ) return true;
-				}
-			}
-		}
-		return false;
-	};
-	this.stateChanged = function stateChanged( nodes, nodesJson ) {
-		sessionStorage.setItem( 'padlock_tree', nodesJson );
-	};
-	this.openAllNodes = function() {
-		var nodes = easyTree.getAllNodes();
-		toggleNodes(nodes, 'open');
-		easyTree.rebuildTree(nodes);
-	};
+  var self = this;
+  var oldStates = '';
+  var toggleStatus = false;
+  var easytree;
+  this.rereadTree = function() {
+    var elem = $('#tree');
+    this.easytree = elem.easytree({
+      data: sessionStorage.getItem( 'padlock_tree' ),
+      enableDnd: true,
+      stateChanged: self.stateChanged
+    });
+  };
+  this.updateTree = function() {
+    $.ajaxSetup ({
+      cache: false
+    });
+    var ajax_load = '<img style="margin-left:35%;" src="{{@BASE}}/ui/img/reload.gif" alt="loading..." />';
+    self.oldStates = sessionStorage.getItem( 'padlock_tree' );
+    sessionStorage.setItem( 'padlock_tree', '' );
+    $( '#tree' ).html( ajax_load );
+    $.ajax({
+      url: '{{@BASE}}/api/foldertree',
+      type: 'GET',
+      success: self.updateTreeSuccess,
+      error: function() { console.log('Could not get foldertree'); }
+    });
+  };
+  this.updateTreeSuccess = function( data ) {
+    var elem = $('#tree');
+    elem.html( data );
+    self.rereadTree();
+    if( typeof self.oldStates != 'undefined' && self.oldStates != '' ) {
+      sessionStorage.setItem( 'padlock_tree', JSON.stringify( self.restoreOldStates( JSON.parse( sessionStorage.getItem( 'padlock_tree' ) ), JSON.parse( self.oldStates ) <?php if( isset( $f3->get( 'PARAMS.id' ) ) ) echo ', '.$PARAMS['id']; ?> ) ) );
+      self.rereadTree();
+    }
+  };
+  this.restoreOldStates = function( cur, old, active=0 ) {
+    for( var i = 0; i < cur.length; i++ ) {
+      if( self.getMatch( cur[i].href, old ) ) {
+	cur[i].isExpanded = true;
+      }
+      if( cur[i].children ) {
+	cur[i].children = self.restoreOldStates( cur[i].children, old );
+      }
+    }
+    return cur;
+  };
+  this.getMatch = function( href, old ) {
+    if( old ) {
+      for( var j =0; j<old.length; j++ ) {
+	if( old[j].href == href ) {
+	  return (old[j].isExpanded?true:false);
+	}
+	if( old[j].children ) {
+	  var a = self.getMatch( href, old[j].children );
+	  if( a == true ) return true;
+	}
+      }
+    }
+    return false;
+  };
+  this.stateChanged = function stateChanged( nodes, nodesJson ) {
+    sessionStorage.setItem( 'padlock_tree', nodesJson );
+  };
+  this.openAllNodes = function() {
+    var nodes = easyTree.getAllNodes();
+    toggleNodes(nodes, 'open');
+    easyTree.rebuildTree(nodes);
+  };
 
-	this.closeAllNodes = function() {
-		var nodes = easyTree.getAllNodes();
-		toggleNodes(nodes, 'close');
-		easyTree.rebuildTree(nodes);
-	};
-	this.toggleNodes = function toggleNodes( nodes, open ){
-		for( var i = 0; i < nodes.length; i++ ) {
-			nodes[i].isExpanded = open;
-			if( nodes[i].children && nodes[i].children.length > 0 )
-				self.toggleNodes( nodes[i].children, open );
-		}
-	};
-	this.init = function() {
-		$('#loadTree').click( self.updateTree );
-		$( '.toggleall' ).on( 'click', function() {
-			var nodes = self.easytree.getAllNodes();
-			nodes = self.toggleNodes( nodes, self.toggleStatus==true ? false : true );
-			self.toggleStatus = self.toggleStatus==true ? false : true;
-			self.easytree.rebuildTree( nodes );
-		});
+  this.closeAllNodes = function() {
+    var nodes = easyTree.getAllNodes();
+    toggleNodes(nodes, 'close');
+    easyTree.rebuildTree(nodes);
+  };
+  this.toggleNodes = function toggleNodes( nodes, open ){
+    for( var i = 0; i < nodes.length; i++ ) {
+      nodes[i].isExpanded = open;
+      if( nodes[i].children && nodes[i].children.length > 0 )
+	self.toggleNodes( nodes[i].children, open );
+    }
+  };
+  this.init = function() {
+    $('#loadTree').click( self.updateTree );
+    $( '.toggleall' ).on( 'click', function() {
+      var nodes = self.easytree.getAllNodes();
+      nodes = self.toggleNodes( nodes, self.toggleStatus==true ? false : true );
+      self.toggleStatus = self.toggleStatus==true ? false : true;
+      self.easytree.rebuildTree( nodes );
+    });
 
-		$('.pwshow')
-			.on( 'mousedown', function(e) {
-				console.log(e);
-				var pwinput = $(this).parent().prev();
-				pwinput
-					.val( pwinput.data('password') )
-					.attr( 'type', 'text' );
-			})
-			.on( 'mouseup mouseleave', function() {
-				var pwinput = $(this).parent().prev();
-				pwinput
-					.val( '**********' )
-					.attr( 'type', 'password' );
-			});
-		$('.pwcopy').on( 'click', function(e) {
-			var pwinput = $(this).parent().prev();
-			window.prompt( '{{ @L.copypaste }}', pwinput.data('password') );
-		});
+    $('.pwshow')
+      .on( 'mousedown', function(e) {
+	console.log(e);
+	var pwinput = $(this).parent().prev();
+	pwinput
+	  .val( pwinput.data('password') )
+	  .attr( 'type', 'text' );
+      })
+    .on( 'mouseup mouseleave', function() {
+      var pwinput = $(this).parent().prev();
+      pwinput
+	.val( '**********' )
+	.attr( 'type', 'password' );
+    });
 
-		<check if="{{@SESSION.treeUpdateTrigger == 'true'}}">
-			<true>var treeUpdateTrigger = true;</true>
-			<false>var treeUpdateTrigger = false; </false>
-		</check>
-		
-		if( ! sessionStorage.getItem( 'padlock_tree' ) || sessionStorage.getItem( 'padlock_tree' ) == '' || treeUpdateTrigger ) {
-			console.log( 'updatetree completely');
-			this.updateTree();
-		} else {
-			console.log( 'refresh from cookie');
-			this.rereadTree();
-		}
-	};
+    $('.pwcopy').on( 'click', function(e) {
+      var pwinput = $(this).parent().prev();
+      window.prompt( '{{ @L.copypaste }}', pwinput.data('password') );
+    });
+
+    <check if="{{@SESSION.treeUpdateTrigger == 'true'}}">
+      <true>var treeUpdateTrigger = true;</true>
+      <false>var treeUpdateTrigger = false; </false>
+      </check>
+
+      if( ! sessionStorage.getItem( 'padlock_tree' ) || sessionStorage.getItem( 'padlock_tree' ) == '' || treeUpdateTrigger ) {
+	console.log( 'updatetree completely');
+	this.updateTree();
+      } else {
+	console.log( 'refresh from cookie');
+	this.rereadTree();
+      }
+  };
 };
 var app = new Padlock();
 app.init();
+</script>
+
+<script type="text/javascript">
+if ($(window).width() < 960) {
+  $( '.pwinput' ).hide();
+  $( '.input-group-addon' ).addClass( "pw-mobile" );
+  <repeat group="{{ @passwords }}" value="{{ @pw }}">
+  $( '#pw-{{@pw.id}}' ).on( "click", function() {
+    $( '#pw-modal-{{ @pw.id }}' ).modal( 'toggle' );
+  });
+  </repeat>
+}
+else {
+  $( '.pwinput' ).show();
+}
 </script>

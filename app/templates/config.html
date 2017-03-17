@@ -4,32 +4,168 @@
     <form action="{{@BASE}}/settings/config/edit" method="POST" class="form-horizontal">
       <repeat group="{{ @ini }}" key="{{ @section }}" value="{{ @values }}">
 	<input type="hidden" value="{{ @section }}" name="{{ @section }}">
+
 	<repeat group="{{ @values }}" key="{{ @key }}" value="{{ @value }}">
+	
+	<check if="{{ @key == 'TITLE' }}">
+	  <true>
+	  <legend>{{ @L.general }}</legend>
+	  <div class="form-group">
+	    <label for="input" class="col-lg-2 control-label">Titel</label>
+	    <div class="col-lg-10">
+	      <input type="text" name="{{@section}}[{{@key}}]" value="{{@value}}" class="form-control">
+	    </div>
+	  </div>
+	  </true>
+	</check>
+
 	<check if="{{ @key == 'TZ' }}">
 	  <true>
 	  <div class="form-group">
 	    <label for="input" class="col-lg-2 control-label">{{ @L.timezone }}</label>
 	    <div class="col-lg-10">
-	    <select class="form-control selectpicker">
-	      <option selected="selected">{{ @TZ }}</option>
+	      <select class="form-control selectpicker" data-live-search="true" name="{{@section}}[{{@key}}]">
+	      <option selected="selected" style="background:#98978b;color:#fff;" value="{{@value}}">{{ @value }}</option>
 	      <repeat group="{{ @timezone }}" value="{{ @tz }}">
-		<option>{{ @tz.zone }}</option>
+		<option value="{{@tz.zone}}">{{ @tz.zone }}</option>
 	      </repeat>
 	    </select>
 	    </div>
 	  </div>
 	  </true>
 	</check>
-	<check if="{{ @key == 'TITLE' }}">
+
+	<check if="{{ @key == 'DEFAULT_ENC_METHOD' }}">
 	  <true>
+	  <hr>
+	  <legend>{{ @L.security }}</legend>
 	  <div class="form-group">
-	    <label for="input" class="col-lg-2 control-label">Titel</label>
+	    <label for="input" class="col-lg-2 control-label">{{ @L.encmethod }}</label>
 	    <div class="col-lg-10">
-	      <input type="text" name="title" value="{{@TITLE}}" class="form-control">
+	      <select class="form-control selectpicker" name="{{@section}}[{{@key}}]">
+		<option selected="selected" style="background:#98978b;color:#fff;" value="{{@value}}">{{ @value }}</option>
+		<option value="AES-128-CTR">AES-128-CTR</option>
+		<option value="AES-256-CTR">AES-256-CTR</option>
+	      </select>
 	    </div>
 	  </div>
 	  </true>
 	</check>
+
+	<check if="{{ @key == 'GLOBAL_SALT' }}">
+	  <true>
+	  <div class="form-group">
+	    <label for="input" class="col-lg-2 control-label">{{ @L.securitysalt }}</label>
+	    <div class="col-lg-10">
+	      <input type="text" value="{{@value}}" name="{{@section}}[{{@key}}]" class="form-control">
+	    </div>
+	  </div>
+	  </true>
+	</check>
+
+	<check if="{{ @key == 'DBHOST' }}">
+	  <true>
+	  <hr>
+	  <legend>{{ @L.database }}</legend>
+	  <div class="form-group">
+	    <label for="input" class="col-lg-2 control-label">{{ @L.dbhost }}</label>
+	    <div class="col-lg-10">
+	      <input type="text" value="{{@value}}" name="{{@section}}[{{@key}}]" class="form-control">
+	    </div>
+	  </div>
+	  </true>
+	</check>
+
+	<check if="{{ @key == 'DBPORT' }}">
+	  <true>
+	  <div class="form-group">
+	    <label for="input" class="col-lg-2 control-label">{{ @L.dbport }}</label>
+	    <div class="col-lg-10">
+	      <input type="text" value="{{@value}}" name="{{@section}}[{{@key}}]" class="form-control">
+	    </div>
+	  </div>
+	  </true>
+	</check>
+
+	<check if="{{ @key == 'DBNAME' }}">
+	  <true>
+	  <div class="form-group">
+	    <label for="input" class="col-lg-2 control-label">{{ @L.name }}</label>
+	    <div class="col-lg-10">
+	      <input type="text" value="{{@value}}" name="{{@section}}[{{@key}}]" class="form-control">
+	    </div>
+	  </div>
+	  </true>
+	</check>
+
+	<check if="{{ @key == 'DBUSER' }}">
+	  <true>
+	  <div class="form-group">
+	    <label for="input" class="col-lg-2 control-label">{{ @L.users }}</label>
+	    <div class="col-lg-10">
+	      <input type="text" value="{{@value}}" name="{{@section}}[{{@key}}]" class="form-control">
+	    </div>
+	  </div>
+	  </true>
+	</check>
+
+	<check if="{{ @key == 'DBPASS' }}">
+	  <true>
+	  <div class="form-group">
+	    <label for="input" class="col-lg-2 control-label">{{ @L.password }}</label>
+	    <div class="col-lg-10">
+	      <input type="text" value="{{@value}}" name="{{@section}}[{{@key}}]" class="form-control">
+	    </div>
+	  </div>
+	  </true>
+	</check>
+
+	<check if="{{ @key == 'DBPREF' }}">
+	  <true>
+	  <div class="form-group">
+	    <label for="input" class="col-lg-2 control-label">{{ @L.dbpref }}</label>
+	    <div class="col-lg-10">
+	      <input type="text" value="{{@value}}" name="{{@section}}[{{@key}}]" class="form-control">
+	    </div>
+	  </div>
+	  </true>
+	</check>
+
+	<check if="{{ @key == 'UPLOADS' }}">
+	  <true>
+	  <hr>
+	  <legend>{{ @L.paths }}</legend>
+	  <div class="form-group">
+	    <label for="input" class="col-lg-2 control-label">Uploads</label>
+	    <div class="col-lg-10">
+	      <input type="text" value="{{@value}}" name="{{@section}}[{{@key}}]" class="form-control">
+	    </div>
+	  </div>
+	  </true>
+	</check>
+
+	<check if="{{ @key == 'CACHE' }}">
+	  <true>
+	  <div class="form-group">
+	    <label for="input" class="col-lg-2 control-label">Cache</label>
+	    <div class="col-lg-10">
+	      <input type="text" value="{{@value}}" name="{{@section}}[{{@key}}]" class="form-control">
+	    </div>
+	  </div>
+	  </true>
+	</check>
+
+	<check if="{{ @key == 'TEMP' }}">
+	  <true>
+	  <div class="form-group">
+	    <label for="input" class="col-lg-2 control-label">Temp</label>
+	    <div class="col-lg-10">
+	      <input type="text" value="{{@value}}" name="{{@section}}[{{@key}}]" class="form-control">
+	    </div>
+	  </div>
+	  </true>
+	</check>
+
 	</repeat>
 	<br>
       </repeat>

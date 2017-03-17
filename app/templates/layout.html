@@ -12,10 +12,9 @@
     <!-- Icon -->
     <link rel="icon" type="image/png" href="{{@BASE}}/ui/img/icon.png"> 
 
-    <!-- Css -->
-    <link href="{{@BASE}}/ui/css/padlock.css" type="text/css" rel="stylesheet">
     <!-- Bootstrap -->
     <link href="{{@BASE}}/ui/css/style.css" type="text/css" rel="stylesheet">
+    <link href="{{@BASE}}/ui/css/padlock.css" type="text/css" rel="stylesheet">
     <link href="{{@BASE}}/ui/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
     <link href="{{@BASE}}/ui/css/ui.easytree.css" type="text/css" rel="stylesheet">
     <link href="{{@BASE}}/ui/css/bootstrap-select.css" type="text/css" rel="stylesheet">
@@ -37,9 +36,9 @@
       <div class="navbar-collapse collapse" id="navbar">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="{{@BASE}}/dashboard">{{@L.home}}</a></li>
-		  <check if="{{@SESSION.user.superuser}}">
-			  <li><a href="{{@BASE}}/settings">{{@L.settings}}</a></li>
-		  </check>
+	  <check if="{{@SESSION.user.superuser}}">
+	  <li><a href="{{@BASE}}/settings">{{@L.settings}}</a></li>
+	  </check>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> {{@L.language}} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
@@ -87,7 +86,6 @@
       deletePw();
     },
   });
-
   </script>
 
 </body>

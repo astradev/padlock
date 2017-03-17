@@ -72,6 +72,7 @@ return array(
   'passwordrepeat' => 'Passwort wiederholen',
   'editpassword' => 'Passwort bearbeiten',
   'deletepassword' => 'Passwort löschen',
+  'yourpassword' => 'Dein Passwort',
   //----------------------------  
   
   
@@ -121,6 +122,11 @@ return array(
   'database' => 'Datenbank',
   'dbhost' => 'Host',
   'dbport' => 'Port',
+  'dbpref' => 'Präfix',
+  'encmethod' => 'Verschlüsselung',
+  'securitysalt' => 'Sicherheitsschlüssel',
+  'general' => 'Allgemein',
+  'security' => 'Sicherheit',
   //----------------------------
 
   //Button/Header defautls
@@ -144,6 +150,7 @@ return array(
   'role' => 'Regel', 
   'roles' => 'Gruppe',
   'admin' => 'Administrator',
+  'showpw' => 'Passwort anzeigen',
   
   //Values
   'yes' => 'Ja',

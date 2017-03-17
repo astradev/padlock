@@ -74,6 +74,7 @@ return array(
   'passwordrepeat' => 'Repeat Password',
   'editpassword' => 'Edit password',
   'deletepassword' => 'Delete password',
+  'yourpassword' => 'Your password',
   //----------------------------  
   
   
@@ -123,6 +124,11 @@ return array(
   'database' => 'Datenbank',
   'dbhost' => 'Host',
   'dbport' => 'Port',
+  'dbpref' => 'Prefix',
+  'encmethod' => 'Encryption',
+  'securitysalt' => 'Security salt',
+  'general' => 'General',
+  'security' => 'Security',
   //----------------------------
 
 
@@ -148,6 +154,7 @@ return array(
   'roles' => 'Roles',
   'users' => 'Users',
   'admin' => 'Admin',
+  'showpw' => 'Show password',
   
   //Values
   'yes' => 'Yes',
