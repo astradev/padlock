@@ -122,7 +122,6 @@
 $.cookie.defaults.path = '{{@BASE}}/';
 
 function Padlock() {
-<<<<<<< HEAD
   var self = this;
   var oldStates = '';
   var toggleStatus = false;
@@ -159,7 +158,8 @@ function Padlock() {
       self.rereadTree();
     }
   };
-  this.restoreOldStates = function( cur, old, active=0 ) {
+  this.restoreOldStates = function( cur, old, active ) {
+    active = active || 0;
     for( var i = 0; i < cur.length; i++ ) {
       if( self.getMatch( cur[i].href, old ) ) {
 	cur[i].isExpanded = true;
@@ -228,78 +228,6 @@ function Padlock() {
 	.val( '**********' )
 	.attr( 'type', 'password' );
     });
-=======
-	var self = this;
-	var oldStates = '';
-	var toggleStatus = false;
-	var easytree;
-	this.rereadTree = function() {
-		var elem = $('#tree');
-		this.easytree = elem.easytree({
-			data: sessionStorage.getItem( 'padlock_tree' ),
-			enableDnd: true,
-			stateChanged: self.stateChanged
-		});
-	};
-	this.updateTree = function() {
-		$.ajaxSetup ({
-			cache: false
-		});
-		var ajax_load = '<img style="margin-left:35%;" src="{{@BASE}}/ui/img/reload.gif" alt="loading..." />';
-		self.oldStates = sessionStorage.getItem( 'padlock_tree' );
-		sessionStorage.setItem( 'padlock_tree', '' );
-		$( '#tree' ).html( ajax_load );
-		$.ajax({
-			url: '{{@BASE}}/api/foldertree',
-			type: 'GET',
-			success: self.updateTreeSuccess,
-			error: function() { console.log('Could not get foldertree'); }
-		});
-	};
-	this.updateTreeSuccess = function( data ) {
-		var elem = $('#tree');
-		elem.html( data );
-		self.rereadTree();
-		if( typeof self.oldStates != 'undefined' && self.oldStates != '' ) {
-			sessionStorage.setItem( 'padlock_tree', JSON.stringify( self.restoreOldStates( JSON.parse( sessionStorage.getItem( 'padlock_tree' ) ), JSON.parse( self.oldStates ) <?php if( isset( $f3->get( 'PARAMS.id' ) ) ) echo ', '.$PARAMS['id']; ?> ) ) );
-			self.rereadTree();
-		}
-	};
-	this.restoreOldStates = function( cur, old, active ) {
-		active = active || 0;
-		for( var i = 0; i < cur.length; i++ ) {
-			if( self.getMatch( cur[i].href, old ) ) {
-				cur[i].isExpanded = true;
-			}
-			if( cur[i].children ) {
-				cur[i].children = self.restoreOldStates( cur[i].children, old );
-			}
-		}
-		return cur;
-	};
-	this.getMatch = function( href, old ) {
-		if( old ) {
-			for( var j =0; j<old.length; j++ ) {
-				if( old[j].href == href ) {
-					return (old[j].isExpanded?true:false);
-				}
-				if( old[j].children ) {
-					var a = self.getMatch( href, old[j].children );
-					if( a == true ) return true;
-				}
-			}
-		}
-		return false;
-	};
-	this.stateChanged = function stateChanged( nodes, nodesJson ) {
-		sessionStorage.setItem( 'padlock_tree', nodesJson );
-	};
-	this.openAllNodes = function() {
-		var nodes = easyTree.getAllNodes();
-		toggleNodes(nodes, 'open');
-		easyTree.rebuildTree(nodes);
-	};
->>>>>>> 7c670e60e77e10d63aa00f568af0717691151964
 
     $('.pwcopy').on( 'click', function(e) {
       var pwinput = $(this).parent().prev();
