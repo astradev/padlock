@@ -141,7 +141,8 @@ function Padlock() {
 			self.rereadTree();
 		}
 	};
-	this.restoreOldStates = function( cur, old, active=0 ) {
+	this.restoreOldStates = function( cur, old, active ) {
+		active = active || 0;
 		for( var i = 0; i < cur.length; i++ ) {
 			if( self.getMatch( cur[i].href, old ) ) {
 				cur[i].isExpanded = true;
