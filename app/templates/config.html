@@ -42,10 +42,11 @@
 	  <div class="form-group">
 	    <label for="input" class="col-lg-2 control-label">{{ @L.encmethod }}</label>
 	    <div class="col-lg-10">
-	      <select class="form-control selectpicker" name="{{@section}}[{{@key}}]">
-		<option selected="selected" style="background:#98978b;color:#fff;" value="{{@value}}">{{ @value }}</option>
-		<option value="AES-128-CTR">AES-128-CTR</option>
-		<option value="AES-256-CTR">AES-256-CTR</option>
+	      <select class="form-control selectpicker" data-live-search="true" name="{{@section}}[{{@key}}]">
+			<option selected="selected" style="background:#98978b;color:#fff;" value="{{@value}}">{{ @value }}</option>
+			<repeat group="{{@encmethods}}" value="{{@encmethod}}">
+				<option value="{{@encmethod}}">{{@encmethod}}</option>
+			</repeat>
 	      </select>
 	    </div>
 	  </div>

@@ -46,9 +46,11 @@ class Config extends Backend {
 
 	  $file = "../config/config.ini";
 	  $ini = parse_ini_file( $file, TRUE );
+	  $encmethods = openssl_get_cipher_methods( false );
 
 	  $f3->set( 'timezone', $tz );
 	  $f3->set( 'ini', $ini );
+	  $f3->set( 'encmethods', $encmethods );
 	  $f3->set( 'section', 'config.html' );
 	}
 
