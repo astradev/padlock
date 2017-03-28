@@ -4,7 +4,7 @@
     <p class="text-right">  
       <a rel="tooltip" class="toggleall" title="{{@L.toggleall}}" data-placement="bottom" style="position:absolute;right:100px;top:25px;cursor:pointer"><i class="fa fa-expand"></i></a>
       <a rel="tooltip" title="{{@L.editfolder}}" data-placement="bottom" style="position:absolute;right:80px;top:25px;cursor:pointer" data-toggle="modal" data-target="#folderform-{{ @folder.id }}"><i class="fa fa-pencil-square-o"></i></a>
-      <a id="loadTree" rel="tooltip" title="{{@L.refreshfolder}}" data-placement="bottom" style="position:absolute;right:60px;top:25px;cursor:pointer"><i class="fa fa-refresh"></i></a>
+      <a rel="tooltip" title="{{@L.refreshfolder}}" data-placement="bottom" style="position:absolute;right:60px;top:25px;cursor:pointer" id="loadTree"><i class="fa fa-refresh"></i></a>
       <a rel="tooltip" title="{{@L.addfolder}}" data-placement="bottom" style="position:absolute;right:40px;top:25px;cursor:pointer;" data-toggle="modal" data-target="#folderform"><i class="fa fa-plus"></i></a>
     </p>
     <h4 class="text-left">{{@L.folders}}</h4>
@@ -17,7 +17,7 @@
 <div class="col-lg-9">
   <div class="panel panel-default mobile-overflow">
     <div class="panel-body">
-	  <h4>{{@folder.name}}</h4>
+      <h4>{{@folder.name}}</h4>
       <p class="text-right"><a style="position:absolute;right:40px;top:25px;cursor:pointer;" rel="tooltip" title="{{@L.addpassword}}" data-placement="bottom" data-toggle="modal" data-target="#passwordform"><i class="fa fa-plus"></i></a></p>
       <table class="table table-striped table-hover ">
         <thead>
@@ -36,9 +36,9 @@
 	    <td class="col-lg-2">{{ @pw.login }}</td>
 	    <td class="col-lg-4 pwcol">
 	      <div class="input-group">
-		<input type="password" class="form-control pwinput" data-password="{{ @pw->getDecryptedPassword() }}" value="**********" readonly>
-		<div class="input-group-addon">
-		  <a id="pw-{{ @pw.id }}" data-placement="bottom" style="text-decoration:none;cursor:pointer;" class="pwshow fa fa-eye"></a> 
+		<input type="password" class="form-control pwinput" data-password="{{ urlencode( @pw->getDecryptedPassword() ) }}" value="**********" readonly>
+		<div class="pw-buttons input-group-addon">
+		  <a style="text-decoration:none;cursor:pointer;" class="pwshow fa fa-eye"></a> 
 		  <a style="text-decoration:none;cursor:pointer;" class="pwcopy fa fa-copy"></a>
 		</div>
 	      </div>
@@ -46,7 +46,7 @@
 	    <td class="col-lg-3 hidden-xs hidden-sm">{{ @pw.description }}</td>
 	    <td class="col-lg-1">
 	      <a data-toggle="modal" style="cursor:pointer;color:#000;" data-target="#passwordform-{{@pw.id}}" rel="tooltip" title="{{@L.edit}}" data-placement="bottom"><i class="fa fa-pencil-square-o"></i></a>&nbsp;
-	      <a data-toggle="confirmation" style="cursor:pointer;color:#000;" data-placement="bottom"><i class="fa fa-trash-o"></i></a>
+	      <a data-toggle="confirmation" style="cursor:pointer;color:#000;"><i class="fa fa-trash-o"></i></a>
 	    </td>
           </tr>
           </repeat>	
@@ -80,19 +80,17 @@
 </div>
 </repeat>
 
-<repeat group="{{ @passwords }}" value="{{ @pw }}">
-<div class="modal fade" id="pw-modal-{{ @pw.id }}" role="dialog" aria-hidden="true">
+<div class="modal fade" id="pw-modal" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body"> 
         <a style="cursor:pointer;float:right;" data-dismiss="modal"><i class="fa fa-times"></i></a>
 	<h3>{{ @L.yourpassword }}</h3>
-	<input class="form-control" value="{{ @pw->getDecryptedPassword() }}">
+	<input class="form-control" id="pw-modal-value" value="">
       </div>
     </div>
   </div>
 </div>
-</repeat>
 
 <div class="modal fade" id="passwordform" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
@@ -234,10 +232,23 @@ function Padlock() {
       window.prompt( '{{ @L.copypaste }}', pwinput.data('password') );
     });
 
+    /*if ( ! $('.pwinput').is( ':visible' ) ) */
+    if ( $( window ).width() < 960) {
+      $( '.pwinput' ).hide();
+      $( '.pw-buttons' ).addClass( "pw-mobile" );
+      $( '.pwshow' ).on( "click", function() {
+	$( '#pw-modal-value' ).val( decodeURIComponent( $( this ).parent().prev().data( 'password' ) ) );
+	$( '#pw-modal' ).modal( 'show' );
+      });
+    }
+    else {
+      $( '.pwinput' ).show();
+    }
+
     <check if="{{@SESSION.treeUpdateTrigger == 'true'}}">
       <true>var treeUpdateTrigger = true;</true>
       <false>var treeUpdateTrigger = false; </false>
-      </check>
+    </check>
 
       if( ! sessionStorage.getItem( 'padlock_tree' ) || sessionStorage.getItem( 'padlock_tree' ) == '' || treeUpdateTrigger ) {
 	console.log( 'updatetree completely');
@@ -253,16 +264,4 @@ app.init();
 </script>
 
 <script type="text/javascript">
-if ($(window).width() < 960) {
-  $( '.pwinput' ).hide();
-  $( '.input-group-addon' ).addClass( "pw-mobile" );
-  <repeat group="{{ @passwords }}" value="{{ @pw }}">
-  $( '#pw-{{@pw.id}}' ).on( "click", function() {
-    $( '#pw-modal-{{ @pw.id }}' ).modal( 'toggle' );
-  });
-  </repeat>
-}
-else {
-  $( '.pwinput' ).show();
-}
 </script>

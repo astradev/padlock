@@ -18,6 +18,10 @@ return array(
   //Login ----------------------
   'loginfailed' => 'Login fehlgeschlagen. Dein Benutzername oder Passwort war falsch.',
   'loginexists' => 'Benutzername existiert bereits. Wähle einen anderen.',
+
+  'createaccountsuccess' => 'Das Administrator Konto wurde erfolgreich angelegt!',
+  'createaccountfailed' => 'Beim erstellen des Kontos ist ein Fehler aufgetreten. Bitte prüfe den Benutzernamen und das Passwort.',
+  'bademailformat' => 'Bitte überprüfen das Format deiner E-Mail Addresse',
   //----------------------------
   
   //Folder ---------------------
@@ -151,6 +155,7 @@ return array(
   'roles' => 'Gruppe',
   'admin' => 'Administrator',
   'showpw' => 'Passwort anzeigen',
+  'changewarning' => 'Änderungen führen zu Fehlern',
   
   //Values
   'yes' => 'Ja',

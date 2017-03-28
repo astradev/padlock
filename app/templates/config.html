@@ -58,7 +58,8 @@
 	  <div class="form-group">
 	    <label for="input" class="col-lg-2 control-label">{{ @L.securitysalt }}</label>
 	    <div class="col-lg-10">
-	      <input type="text" value="{{@value}}" name="{{@section}}[{{@key}}]" class="form-control">
+	      <input type="text" value="{{@value}}" name="{{@section}}[{{@key}}]" class="form-control" disabled>
+	      <h6 class="pull-right">{{ @L.changewarning }}</h6>
 	    </div>
 	  </div>
 	  </true>

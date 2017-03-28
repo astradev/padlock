@@ -10,25 +10,25 @@ $f3 = require( '../lib/base.php' );
 // load config
 $padlock_config = '../config/default.ini';
 if( file_exists( $padlock_config ) ) {
-	if( is_readable( $padlock_config ) ) {
-		$f3->config( $padlock_config );
-	} else {
-		trigger_error( 'Could not load configuration: ' . dirname( __FILE__) . $padlock_config );
-	}
+  if( is_readable( $padlock_config ) ) {
+    $f3->config( $padlock_config );
+  } else {
+    trigger_error( 'Could not load configuration: ' . dirname( __FILE__) . $padlock_config );
+  }
 } else {
-	$f3->route( 'GET|POST /install', 'System->install' );
-	$f3->route( 'GET|POST /syscheck', 'System->syscheck' );
-	$f3->reroute( '/install' );
+  $f3->route( 'GET|POST /install', 'System->install' );
+  $f3->route( 'GET|POST /syscheck', 'System->syscheck' );
+  $f3->reroute( '/install' );
 }
 
 // language switch
 if( $f3->get( 'COOKIE.padlock_language' ) ) {
-	    $f3->set( 'LANGUAGE', $f3->get( 'COOKIE.padlock_language' ) );
+  $f3->set( 'LANGUAGE', $f3->get( 'COOKIE.padlock_language' ) );
 }
-$f3->route( 'GET /lang/@lang', 
-  function($f3) { 
-      $f3->set( 'COOKIE.padlock_language', $f3->get( 'PARAMS.lang' ), time() + (86400 *30) );
-      $f3->reroute( '/dashboard' );
+$f3->route( 'GET */@lang/back/@URI', 
+  function($f3, $params) { 
+    $f3->set( 'COOKIE.padlock_language', $f3->get( 'PARAMS.lang' ), time() + (86400 *30) );
+    $f3->reroute( $f3->get( 'DEFAULT_URL' ) . urldecode( str_replace( " ", "/", $f3->get( 'PARAMS.URI' ) ) ) );
   }
 );
 

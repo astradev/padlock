@@ -42,8 +42,8 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> {{@L.language}} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="{{@BASE}}/lang/de">{{@L.german}}</a></li>
-              <li><a href="{{@BASE}}/lang/en">{{@L.english}}</a></li>
+	      <li><a href="{{@URI}}/de/back/{{ strtr( @URI, array( '/' => '+' ) ) }}">{{@L.german}}</a></li>
+	      <li><a href="{{@URI}}/en/back/{{ strtr( @URI, array( '/' => '+' ) ) }}">{{@L.english}}</a></li>
             </ul>
           </li>
 	  <li><a href="{{@BASE}}/logout">{{ @SESSION.user.login}} {{@L.logout}}</a></li>

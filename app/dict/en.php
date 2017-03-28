@@ -18,6 +18,10 @@ return array(
   //Login ----------------------
   'loginfailed' => 'Login failed. Your username or password was wrong.',
   'loginexists' => 'Login name exist. Choose another.',
+
+  'createaccountsuccess' => 'The administrator account has been successfully created!',
+  'createaccountfailed' => 'An error occurred while creating the account. Please check the username and password.',
+  'bademailformat' => 'Please check the format of your e-mail address',
   //----------------------------
   
   //Folder ---------------------
@@ -155,6 +159,7 @@ return array(
   'users' => 'Users',
   'admin' => 'Admin',
   'showpw' => 'Show password',
+  'changewarning' => 'Changes cause errors',
   
   //Values
   'yes' => 'Yes',
