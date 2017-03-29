@@ -17,6 +17,7 @@
 			<form action="{{@BASE}}/settings/role/add" method="post">
 		</false>
 	</check>
+  <label class="control-label">{{@L.rolename}}</label>
   <input type="text" name="name" class="form-control" style="color:#000;" value="{{@formRole.name}}" placeholder="{{@L.roles}}">
   <br>
   <button type="submit" class="btn btn-default btn-block">
@@ -30,9 +31,3 @@
 	</check>
   </button>
 </form>
-<check if="{{@formRole.id}}">
-	<form action="{{@BASE}}/settings/role/delete/{{@formRole.id}}" method="post" name="deleterole">
-		<input type="hidden" name="id" value="{{@formRole.id}}">
-		<button type="submit" class="btn btn-danger btn-delete" name="delete"><i class="fa fa-trash-o"></i></button>
-	</form>
-</check>

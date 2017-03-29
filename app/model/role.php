@@ -16,4 +16,9 @@ class Role extends Base {
 	  return $f3->DB->exec( "SELECT roles.id, roles.name, anzusers.users FROM roles LEFT JOIN ( SELECT COUNT(user_id) as users, role_id FROM users_roles GROUP BY role_id ) anzusers ON anzusers.role_id = roles.id" );
   }
 
+  public function delete( $roleid ) {
+    $f3 = \BASE::instance();
+    return $f3->DB->exec( "DELETE FROM roles WHERE id = ". $roleid );
+  }
+
 }

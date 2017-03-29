@@ -37,6 +37,7 @@ return array(
   'unknownfolderdeleteerr' => 'Could not delete folder: No valid folder id given.',
   
   //Normal messages
+  'underfolder' => 'Save folder as',
   'foldername' => 'Folder name',
   'addfolder' => 'Add folder',
   'toggleall' => 'Toggle all',
@@ -52,11 +53,15 @@ return array(
   //Error messages
   'rolesaveerr' => 'Role could not be saved.',
   'roleexists' => 'Role name exists.',
+  'roledeletesucceerror' => 'An error occurred while deleting the group.',
   
   //Success messages
-  'rolesaved' => 'Role was saved successfully.',
+  'rolesaved' => 'Group successfully saved.',
+  'roledeletesuccessful' => 'Group successfully deleted.',
   
   //Normal messages
+  'rolename' => 'Groupname',
+  'undergroup' => 'Add user to group',
   'editrole' => 'Edit role',
   'newrole' => 'New role',
   'members' => 'Members',
@@ -66,13 +71,16 @@ return array(
   //Password -------------------
   //Error messages
   'nopasswordset' => 'No password was set. This is mandatory.',
-  'nolabelset' => 'No label was set. This is mandatory.', 
+  'nolabelset' => 'No label was set. This is mandatory.',  
+  'deletepassworderr' => 'An error occurred while deleting the password.',
   
   //Success messages
   'passwordsaved' => 'Password was saved successfully.',
   'passwordsaveerr' => 'Password could not be saved.',
+  'deletepasswordok' => 'The password has been successfully deleted.',
   
   //Normal messages
+  'folderto' => 'Save password to folder',
   'addpassword' => 'Add password',
   'newpassword' => 'New password',
   'passwordrepeat' => 'Repeat Password',

@@ -21,8 +21,8 @@
             <td>{{ @role.name }}</td>
             <td>{{ @role.users }}</td>
             <td>
-	      <a data-toggle="modal" data-target="#roleform-{{ @role.id }}" style="cursor:pointer;color:#000;" rel="tooltip" title="{{@L.edit}}" data-placement="bottom"><i class="fa fa-pencil-square-o"></i></a>&nbsp;
-              <a rel="tooltip" title="{{@L.delete}}" style="cursor:pointer;color:#000;" data-placement="bottom"><i class="fa fa-trash-o"></i></a>
+	      <a data-toggle="modal" data-target="#roleform-{{ @role.id }}" rel="tooltip" title="{{@L.edit}}" data-placement="bottom" class="nav-link"><i class="fa fa-pencil-square-o"></i></a>&nbsp;
+	      <a data-toggle="modal" data-target="#deleterole-{{ @role.id }}" rel="tooltip" title="{{@L.delete}}" data-placement="bottom" class="nav-link"><i class="fa fa-trash-o"></i></a>
             </td>
           </tr>
         </repeat>
@@ -50,6 +50,27 @@
       <div class="modal-body">
         <a style="cursor:pointer;float:right;" data-dismiss="modal"><i class="fa fa-times"></i></a>        
         <include href="roleform.html">
+      </div>
+    </div>
+  </div>
+</div>
+</repeat>
+
+<repeat group="{{ @roles }}" value="{{ @role }}">
+<div class="modal fade" id="deleterole-{{ @role.id }}" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <a style="cursor:pointer;float:right;" data-dismiss="modal"><i class="fa fa-times"></i></a>        
+	<h3>{{@L.role}} {{@L.delete}}: {{@role.name}}</h3>
+	<hr>
+	<form action="{{@BASE}}/settings/role/delete" method="post" name="deletefolder">
+	<div class="btn-group">
+	  <input type="hidden" name="id" value="{{@role.id}}">
+	  <button type="submit" class="btn btn-danger btn-sm" name="delete"><i class="fa fa-trash-o"></i>i {{@L.yesdelete}}</button>
+	  <button type="button" data-dismiss="modal" class="btn btn-sm btn-success">{{@L.nodelete}}</button>
+	</div>
+	</form>
       </div>
     </div>
   </div>

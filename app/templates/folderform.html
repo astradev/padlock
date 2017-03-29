@@ -1,44 +1,46 @@
 <h3 class="text-left">
-	<check if="{{@formFolder.name}}">
-		<true>
-			{{@L.editfolder}}
-		</true>
-		<false>
-			{{@L.newfolder}}
-		</false>
-	</check>
+  <check if="{{@formFolder.name}}">
+    <true>
+      {{@L.editfolder}}
+    </true>
+    <false>
+      {{@L.newfolder}}
+    </false>
+  </check>
 </h3>
-	<check if="{{@formFolder.id}}">
-		<true>
-			<form action="{{@BASE}}/folder/edit/{{@formFolder.id}}" method="post">
-			<input type="hidden" name="id" value="{{@formFolder.id}}">
-		</true>
-		<false>
-			<form action="{{@BASE}}/folder/add" method="post">
-		</false>
-	</check>
-	<input type="text" name="name" class="form-control" placeholder="{{@L.foldername}}" value="<?php if( isset($formFolder['name']) ) echo $formFolder['name']; ?>"><br>
-	<select class="form-control selectpicker" data-toggle="dropdown" data-live-search="true" data-size="15" name="parent_id">
-		<option value="0">---</option>
-		{{ @optionFolders | raw }}
-	</select>
-	<br><br>
-	<button type="submit" name="new_folder" class="btn btn-default btn-block">
-	<check if="{{@formFolder.name}}">
-		<true>
-			{{@L.editfolder}}
-		</true>
-		<false>
-			{{@L.newfolder}}
-		</false>
-	</check>
-	</button>
+<check if="{{@formFolder.id}}">
+  <true>
+    <form action="{{@BASE}}/folder/edit/{{@formFolder.id}}" method="post">
+    <input type="hidden" name="id" value="{{@formFolder.id}}">
+  </true>
+  <false>
+    <form action="{{@BASE}}/folder/add" method="post">
+  </false>
+</check>
+<label class="control-label">{{@L.foldername}}:</label>
+<input type="text" name="name" class="form-control" placeholder="{{@L.foldername}}" value="<?php if( isset($formFolder['name']) ) echo $formFolder['name']; ?>"><br>
+    <label class="control-label">{{@L.underfolder}}:</label>
+    <select class="form-control selectpicker" data-toggle="dropdown" data-live-search="true" data-size="15" name="parent_id">
+      <option value="0">---</option>
+      {{ @optionFolders | raw }}
+    </select>
+    <br><br>
+    <button type="submit" name="new_folder" class="btn btn-default btn-block">
+    <check if="{{@formFolder.name}}">
+      <true>
+	{{@L.editfolder}}
+      </true>
+      <false>
+	{{@L.newfolder}}
+      </false>
+    </check>
+    </button>
 </form>
 <check if="{{@formFolder.name}}">
-	<check if="{{@formFolder.id}}">
-	<form action="{{@BASE}}/folder/delete" method="post" name="deletefolder">
-		<input type="hidden" name="id" value="{{@formFolder.id}}">
-		<button type="submit" class="btn btn-danger btn-delete" name="delete"><i class="fa fa-trash-o"></i></button>
-	</form>
-	</check>
+  <check if="{{@formFolder.id}}">
+    <form action="{{@BASE}}/folder/delete" method="post" name="deletefolder">
+      <input type="hidden" name="id" value="{{@formFolder.id}}">
+      <button type="submit" class="btn btn-danger btn-delete" name="delete"><i class="fa fa-trash-o"></i></button>
+    </form>
+  </check>
 </check>

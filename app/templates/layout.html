@@ -35,18 +35,18 @@
       </div>
       <div class="navbar-collapse collapse" id="navbar">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="{{@BASE}}/dashboard">{{@L.home}}</a></li>
+          <li><a class="nav-link" href="{{@BASE}}/dashboard">{{@L.home}}</a></li>
 	  <check if="{{@SESSION.user.superuser}}">
-	  <li><a href="{{@BASE}}/settings">{{@L.settings}}</a></li>
+	  <li><a class="nav-link" href="{{@BASE}}/settings">{{@L.settings}}</a></li>
 	  </check>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> {{@L.language}} <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-expanded="false"> {{@L.language}} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-	      <li><a href="{{@URI}}/de/back/{{ strtr( @URI, array( '/' => '+' ) ) }}">{{@L.german}}</a></li>
-	      <li><a href="{{@URI}}/en/back/{{ strtr( @URI, array( '/' => '+' ) ) }}">{{@L.english}}</a></li>
+	      <li><a class="nav-link" href="{{@URI}}/de/back/{{ strtr( @URI, array( '/' => '+' ) ) }}">{{@L.german}}</a></li>
+	      <li><a class="nav-link" href="{{@URI}}/en/back/{{ strtr( @URI, array( '/' => '+' ) ) }}">{{@L.english}}</a></li>
             </ul>
           </li>
-	  <li><a href="{{@BASE}}/logout">{{ @SESSION.user.login}} {{@L.logout}}</a></li>
+	  <li><a class="nav-link" href="{{@BASE}}/logout">{{ @SESSION.user.login}} {{@L.logout}}</a></li>
         </ul>
       </div>
     </div>
@@ -62,9 +62,7 @@
   <div class="container">
     <div class="row">
       <include href="notifications.html">  
-
       <include href="{{@content}}">  
-
     </div>
   </div>
 
@@ -74,18 +72,6 @@
   }, 5000);
 
   $('[rel="tooltip"]').tooltip();
-
-  $('[data-toggle=confirmation]').confirmation({
-    rootSelector: '[data-toggle=confirmation]',
-    title: '{{ @L.delete }}',
-    btnOkLabel: '{{ @L.yes }}',
-    btnCancelLabel: '{{ @L.no }}',
-    btnOkClass: 'btn-xs btn-success',
-    btnCancelClass: 'btn-xs btn-danger',
-    onConfirm: function() {
-      deletePw();
-    },
-  });
   </script>
 
 </body>

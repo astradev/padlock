@@ -37,6 +37,7 @@ return array(
   'unknownfolderdeleteerr' => 'Ordner konnte nicht gelöscht werden: Es wurde keine gültige Ordner-ID angegeben.',
   
   //Normal messages
+  'underfolder' => 'Ordner speichern unter',
   'foldername' => 'Ordner Name',
   'addfolder' => 'Ordner hinzufügen',
   'toggleall' => 'Alle aufklappen',
@@ -52,11 +53,15 @@ return array(
   //Error messages
   'rolesaveerr' => 'Gruppe konnte nicht gespeichert werden.',
   'roleexists' => 'Gruppenname existiert bereits.',
+  'roledeletesucceerror' => 'Es ist ein Fehler beim löschen der Gruppe aufgetreten.',
   
   //Success messages
   'rolesaved' => 'Gruppe wurde erfolgreich gespeichert.',
+  'roledeletesuccessful' => 'Gruppe wurde erfolgreich gelöscht.',
   
   //Normal messages
+  'rolename' => 'Gruppenname',
+  'undergroup' => 'Benutzer zu Gruppe hinzufügen',
   'editrole' => 'Gruppe bearbeiten',
   'newrole' => 'Gruppe hinzufügen',
   //----------------------------
@@ -65,12 +70,14 @@ return array(
   //Password -------------------
   //Error messages
   'nopasswordset' => 'Es wurde kein Passwort angegeben. Das ist ein Pflichtfeld.',
-  'nolabelset' => 'Es wurde keine Bezeichnung angegeben. Das ist ein Pflichtfeld.', 
+  'nolabelset' => 'Es wurde keine Bezeichnung angegeben. Das ist ein Pflichtfeld.',
+  'deletepassworderr' => 'Es ist ein Fehler beim löschen des Passworts aufgetreten.',
   
   //Success messages
-
+  'deletepasswordok' => 'Das Passwort wurde erfolgreich gelöscht.',
   
   //Normal messages
+  'folderto' => 'Passwort in Ordner speichern',
   'addpassword' => 'Passwort hinzufügen',
   'newpassword' => 'Neues Passwort',
   'passwordrepeat' => 'Passwort wiederholen',

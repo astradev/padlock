@@ -56,15 +56,15 @@ class Roles extends Backend {
 	public function delete( $f3, $params ) {
 		if( $f3->exists( 'POST.id' ) && is_numeric( $f3->get( 'POST.id' ) ) ) {
 			$role = new \Model\Role( $f3->get( 'POST.id' ) );
-			if( ! $role->dry() && $role->delete() ) {
-				$f3->SESSION->messages[] = array( "L.roledeletesuccessful", 0 );
+			if( ! $role->dry() && $role->delete( $f3->get( 'POST.id' ) ) ) {
+				$f3->push( 'SESSION.messages', array( $f3->get( "L.roledeletesuccessful" ), 0 ) );
 			} else {
-				$f3->SESSION->messages[] = array( "L.roledeleteerror", 1 );
+				$f3->push( 'SESSION.messages', array( $f3->get( "L.roledeleteerror" ), 1 ) );
 			}
 		} else {
-			$f3->SESSION->messages[] = array( "L.roledeleteerror", 1 );
+			$f3->push( 'SESSION.messages', array( $f3->get( "L.roledeleteerror" ), 1 ) );
 		}
-		$f3->reroute( '/settings/role' );
+		$f3->reroute( '/settings/roles' );
 	}
 
 	public function show( \Base $f3, $params ) {

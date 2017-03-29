@@ -17,14 +17,19 @@
 			<form action="{{@BASE}}/settings/user/add" method="post">
 		</false>
 	</check>
+  <label class="control-label">{{@L.username}}:</label>
   <input type="text" name="login" class="form-control" style="color:#000;" value="{{@formUser.login}}" placeholder="{{@L.username}}">
   <br>
+  <label class="control-label">{{@L.name}}:</label>
   <input type="text" name="name" class="form-control" value="{{@formUser.name}}" placeholder="{{@L.name}}">
   <br>
+  <label class="control-label">{{@L.password}}:</label>
   <input type="password" name="newpassword" class="form-control" value="" placeholder="{{@L.password}}">
   <br>
+  <label class="control-label">{{@L.email}}:</label>
   <input type="email" name="email" class="form-control" value="{{@formUser.email}}" placeholder="{{@L.email}}">
   <br>
+  <label class="control-label">{{@L.undergroup}}:</label>
   <select class="form-control selectpicker" multiple data-toggle="dropdown" data-live-search="true" data-size="15" name="newroles[]">
   <repeat group="{{@allRoles}}" value="{{@curRole}}">
   	<check if="in_array( {{@curRole.id}}, array_column( {{@formUser.roles}}, 'id' ) )">
@@ -38,6 +43,7 @@
   </repeat>
   </select>
   <br><br>
+  <label class="control-label">{{@L.adminrights}}:</label>
       <select class="form-control selectpicker" name="superuser">
 	  <check if="{{@formUser.superuser}}">
 		  <true>
