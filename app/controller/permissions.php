@@ -23,6 +23,7 @@ class Permissions extends Backend {
 	}
 
 	public function add( \Base $f3, $params ) {
+		$f3->set( 'section', 'permissionsform.html' );
 		$folder = new \Model\Folder( $f3->get( 'POST.folder' ) );
 		if( $folder->dry() ) {
 			$f3->push( 'SESSION.messages', array( "Folder does not exist.", 1 ) );

@@ -18,7 +18,7 @@
 		</false>
 	</check>
   <label class="control-label">{{@L.username}}:</label>
-  <input type="text" name="login" class="form-control" style="color:#000;" value="{{@formUser.login}}" placeholder="{{@L.username}}">
+  <input type="text" name="login" class="form-control" value="{{@formUser.login}}" placeholder="{{@L.username}}">
   <br>
   <label class="control-label">{{@L.name}}:</label>
   <input type="text" name="name" class="form-control" value="{{@formUser.name}}" placeholder="{{@L.name}}">
@@ -68,11 +68,3 @@
 	</check>
   </button>
 </form>
-<check if="{{@formUser.id}}">
-	<check if="{{@formUser.id}}">
-	<form action="{{@BASE}}/settings/user/delete" method="post" name="deleteuser">
-		<input type="hidden" name="id" value="{{@formUser.id}}">
-		<button type="submit" class="btn btn-danger btn-delete" name="delete"><i class="fa fa-trash-o"></i></button>
-	</form>
-	</check>
-</check>

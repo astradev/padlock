@@ -4,6 +4,23 @@
   }
 }
 
+@media (max-width: 440px) {
+  .nav {
+    font-size: 11px !important;
+    line-height: 22px;
+    font-weight: 500;
+    text-transform: inherit !important;
+  }
+
+  .nav-tabs > li > a {
+    margin-right: 0px !important;
+  }
+
+  .nav > li > a {
+    padding: 10px 10px !important;
+  }
+}
+
 .mobile-overflow {
   overflow: auto;
 }
@@ -30,6 +47,10 @@
 
 .nav-link {
   cursor: pointer;
+}
+
+.badge {
+  background-color: #325d88 !important;
 }
 
 

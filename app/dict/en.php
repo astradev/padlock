@@ -121,7 +121,10 @@ return array(
 
   
   //Normal messages
-
+  'addpermissions' => 'Add permissions',
+  'rolerights' => 'Rights of the group',
+  'fromroles' => 'Select group or groups',
+  'tofolder' => 'Select Folder',
   //----------------------------  
 
 
@@ -168,6 +171,9 @@ return array(
   'admin' => 'Admin',
   'showpw' => 'Show password',
   'changewarning' => 'Changes cause errors',
+  'read' => 'Read',
+  'write' => 'Write',
+  'noreadwrite' => 'No permissions',
   
   //Values
   'yes' => 'Yes',

@@ -1,0 +1,36 @@
+<h3 class="text-left">{{@L.addpermissions}}</h3>
+<form action="{{@BASE}}/settings/permissions/add" method="post">
+<label class="control-label">{{@L.fromroles}}</label>
+<fieldset>
+  <select class="form-control selectpicker" name="role"  data-toggle="dropdown" data-live-search="true" data-size="15" data-selected-text-format="count" >
+    <repeat group="{{@roles}}" value="{{@r}}">
+    <option value="{{@r.id}}">{{@r.name}}</option>
+    </repeat>
+  </select>
+</fieldset>
+
+<br>
+
+<label class="control-label">{{@L.tofolder}}</label>
+<fieldset>
+  <select class="form-control selectpicker" data-toggle="dropdown" data-live-search="true" data-size="15" data-selected-text-format="count" name="folder">
+    {{ @optionFolders | raw }}
+  </select>
+</fieldset>
+
+<br>
+
+<label class="control-label">{{@L.rolerights}}</label>
+<fieldset>
+  <select class="form-control selectpicker" data-toggle="dropdown" name="perm">
+    <option value="0">{{@L.noreadwrite}}</option>
+    <option value="1">{{@L.read}}</option>
+    <option value="2">{{@L.read}} + {{@L.write}}</option>
+  </select>
+</fieldset>
+
+<br>
+
+<button type="submit" class="form-control btn btn-default btn-block" style="border-radius: 4px;">{{@L.addpermissions}}</button>
+</fieldset>
+</form>

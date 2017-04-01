@@ -60,6 +60,7 @@ return array(
   'roledeletesuccessful' => 'Gruppe wurde erfolgreich gelöscht.',
   
   //Normal messages
+  'members' => 'Mitglieder',
   'rolename' => 'Gruppenname',
   'undergroup' => 'Benutzer zu Gruppe hinzufügen',
   'editrole' => 'Gruppe bearbeiten',
@@ -117,7 +118,10 @@ return array(
 
   
   //Normal messages
-
+  'addpermissions' => 'Rechte hinzufügen',
+  'rolerights' => 'Rechte der Gruppe',
+  'fromroles' => 'Gruppe oder Gruppen wählen',
+  'tofolder' => 'Ordner wählen',
   //----------------------------  
 
   
@@ -163,6 +167,9 @@ return array(
   'admin' => 'Administrator',
   'showpw' => 'Passwort anzeigen',
   'changewarning' => 'Änderungen führen zu Fehlern',
+  'read' => 'Lesen',
+  'write' => 'Schreiben',
+  'noreadwrite' => 'Keine Rechte',
   
   //Values
   'yes' => 'Ja',

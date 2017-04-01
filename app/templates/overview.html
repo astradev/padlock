@@ -34,7 +34,7 @@
           <tr>
 	    <td class="col-lg-2">{{ @pw.label }}</td>
 	    <td class="col-lg-2">{{ @pw.login }}</td>
-	    <td class="col-lg-4 pwcol">
+	    <td class="col-lg-3 pwcol">
 	      <div class="input-group">
 		<input type="password" class="form-control pwinput" data-password="{{ urlencode( @pw->getDecryptedPassword() ) }}" value="**********" readonly>
 		<div class="pw-buttons input-group-addon">
@@ -44,9 +44,9 @@
 	      </div>
 	    </td>
 	    <td class="col-lg-3 hidden-xs hidden-sm">{{ @pw.description }}</td>
-	    <td class="col-lg-1">
-	      <a data-toggle="modal" class="nav-link" data-target="#passwordform-{{@pw.id}}" rel="tooltip" title="{{@L.edit}}" data-placement="bottom"><i class="fa fa-pencil-square-o"></i></a>&nbsp;
-	      <a data-toggle="modal" class="nav-link" data-target="#deletepw-{{@pw.id}}" rel="tooltip" title="{{@L.delete}}" data-placement="bottom"><i class="fa fa-trash-o"></i></a>
+	    <td class="col-lg-2">
+	      <a data-toggle="modal" class="nav-link btn btn-sm btn-default" data-target="#passwordform-{{@pw.id}}" rel="tooltip" title="{{@L.edit}}" data-placement="bottom"><i class="fa fa-pencil-square-o"></i></a>&nbsp;
+	      <a data-toggle="modal" class="nav-link btn btn-sm btn-danger" data-target="#deletepw-{{@pw.id}}" rel="tooltip" title="{{@L.delete}}" data-placement="bottom"><i class="fa fa-trash-o"></i></a>
 	    </td>
           </tr>
           </repeat>	
