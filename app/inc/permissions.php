@@ -57,7 +57,25 @@ class Permissions {
 	public function getAllPermissionsByFolder() {
 		$f3 = \BASE::instance();
 		$query = "SELECT permissions.folder_id AS folder_id, folders.name AS folder_name, permissions.role_id AS role_id, roles.name AS role_name, permissions.perm AS perm FROM permissions LEFT JOIN folders ON folders.id=permissions.folder_id LEFT JOIN roles ON roles.id=permissions.role_id ORDER BY folder_id, role_id";
-		return $f3->DB->exec( $query );
+		$items = $f3->DB->exec( $query );
+		$return = array();
+		$currentRole = array( 'id' => 0, 'name' => '' );
+		$fl = array();
+
+		foreach( $items as $item ) {
+			if( $currentRole['id'] != $item['folder_id'] ) {
+				if( $currentRole['id'] != 0 )
+					array_push( $return, array( 'folder_id' => $currentRole['id'], 'folder_name' => $currentRole['name'], 'perms' => $fl ) );
+				$fl = array();
+				$currentRole['id'] = $item['folder_id'];
+				$currentRole['name'] = $item['folder_name'];
+			}
+			array_push( $fl, array( 'id' => $item['role_id'], 'name' => $item['role_name'], 'perm' => $item['perm'] ) );
+		}
+		if( count( $fl ) > 0 )
+			array_push( $return, array( 'folder_id' => $currentRole['id'], 'folder_name' => $currentRole['name'], 'perms' => $fl ) );
+		$f3->logger->write("permission arr: ".print_r( $return, true ));
+		return $return;
 	}
 
 	public static function instance()

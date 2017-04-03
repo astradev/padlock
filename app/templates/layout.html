@@ -58,6 +58,7 @@
   <script src="{{@BASE}}/ui/js/jquery.cookie.js"></script>
   <script src="{{@BASE}}/ui/js/bootstrap-confirmation.js"></script>
   <script src="{{@BASE}}/ui/js/bootstrap-select.js"></script>
+  <script src="{{@BASE}}/ui/js/jquery.hideseek.js"></script>
 
   <div class="container">
     <div class="row">
@@ -72,6 +73,11 @@
   }, 5000);
 
   $('[rel="tooltip"]').tooltip();
+
+  $('.search-text').hideseek({
+    highlight: true,
+    nodata: 'Kein Ergebnis gefunden',
+  });
   </script>
 
 </body>

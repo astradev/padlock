@@ -9,6 +9,7 @@ $f3 = require( '../lib/base.php' );
 
 // load config
 $padlock_config = '../config/default.ini';
+$f3->config( "../config/sort.ini" );
 if( file_exists( $padlock_config ) ) {
   if( is_readable( $padlock_config ) ) {
     $f3->config( $padlock_config );

@@ -35,6 +35,18 @@
   z-index: 1;
 }
 
+.special-search {
+  height: 35px;
+}
+
+.more-right {
+  margin-left: 21px;
+}
+
+.more-right-settings {
+  margin-left: 38px;
+}
+
 .easytree-expander { float: left; }
 
 .treecog { display: block; }

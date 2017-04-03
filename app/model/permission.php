@@ -8,4 +8,13 @@ class Permission extends Base {
     parent::__construct();
   }
 
+  public function sort( $file, $content ) {
+    if( ! $handle = fopen( $file, "w" ) ) {
+      $f3->push( 'SESSION.messages', array( $f3->get( 'L.configupdatederr' ), 1 ) );
+      return false;
+    }
+
+    $success = fwrite( $handle, $content );
+    fclose( $handle );
+  }
 }

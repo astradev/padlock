@@ -17,6 +17,7 @@ class Permissions extends Backend {
 		$role = new \Model\Role();
 
 		$f3->set( 'permissions', \Permissions::instance()->getAllPermissionsByRole() );
+		$f3->set( 'permfolder', \Permissions::instance()->getAllPermissionsByFolder() );
 		$f3->set( 'roles', $role->find() );
 		$f3->set( 'optionFolders', \Treebuilder::instance()->generateOptionTree() );
 		$f3->set( 'section', 'permissions.html' );
@@ -67,6 +68,22 @@ class Permissions extends Backend {
 				$f3->reroute( '/settings/permissions' );
 			}
 		}
+	}
+
+	public function perm_sort( \Base $f3, $params ) {
+	  if( $f3->get( 'VERB' ) == "POST" ) {
+	    if( $f3->get( 'POST.sort' ) != '' ) {
+	      $file = "../config/sort.ini";
+
+	      $content .= "[globals]\n";
+	      $content .= "SORTPERM = ".$f3->get( 'POST.sort' );
+
+	      $config = new \Model\Permission();
+	      $update = $config->sort( $file, $content );
+
+	      $f3->reroute( '/settings/permissions' );
+	    }
+	  }
 	}
 
 }

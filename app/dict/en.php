@@ -121,9 +121,10 @@ return array(
 
   
   //Normal messages
+  'permsort' => 'Sort rights by',
   'addpermissions' => 'Add permissions',
   'rolerights' => 'Rights of the group',
-  'fromroles' => 'Select group or groups',
+  'fromroles' => 'Select group',
   'tofolder' => 'Select Folder',
   //----------------------------  
 
@@ -174,6 +175,8 @@ return array(
   'read' => 'Read',
   'write' => 'Write',
   'noreadwrite' => 'No permissions',
+  'sort' => 'Sort by',
+  'search' => 'Search',
   
   //Values
   'yes' => 'Yes',
