@@ -1,4 +1,3 @@
-<div class="list">
 <check if="{{@SORTPERM == 'role'}}">
 <true>
 
@@ -95,7 +94,7 @@
     </false>
     </check>
     <td align="right">
-      <a data-target="#deleteperm-{{ @permission.role_id }}-{{@cF.id}}" data-toggle="modal" class="nav-link btn btn-sm btn-danger" rel="tooltip" title="{{@L.delete}}" data-placement="bottom"><i class="fa fa-trash-o"></i></a>
+      <a data-target="#deleteperm-{{ @perm.folder_id }}-{{@cF.id}}" data-toggle="modal" class="nav-link btn btn-sm btn-danger" rel="tooltip" title="{{@L.delete}}" data-placement="bottom"><i class="fa fa-trash-o"></i></a>
     </td>
   </tr>
   </repeat>
@@ -107,4 +106,3 @@
 
 </false>
 </check>
-</div>
