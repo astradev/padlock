@@ -75,7 +75,7 @@ class Permissions extends Backend {
 	    if( $f3->get( 'POST.sort' ) != '' ) {
 	      $file = "../config/sort.ini";
 
-	      $content .= "[globals]\n";
+	      $content = "[globals]\n";
 	      $content .= "SORTPERM = ".$f3->get( 'POST.sort' );
 
 	      $config = new \Model\Permission();
